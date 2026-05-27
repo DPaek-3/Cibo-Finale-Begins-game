@@ -1,13 +1,20 @@
 ﻿
 
 define mr = Character("Mozzy")
+define mr_thought = Character("Mozzy", what_italic=True)
 define mt = Character("Mira")
 define pc = Character("Pitaya")
 define hd = Character("Honey")
 define ss = Character("Stirling")
 define jp = Character("Jazz")
 define sp = Character("Smith")
-
+default twin_int = False
+default ss_int = False
+default hd_int = False
+default pc_int = False
+default pitaya_guilt = False
+default twin_guilt = False
+default stirling_guilt = False
 
 label start:
 
@@ -43,95 +50,98 @@ label start:
         "No, I feel like I've done this before.":
             jump skip_tut
     
-    label interrogate_tut:
-        show mozzy excited
-        mr "Alright!"
-        mr "Bring it on!"
-        scene bg interrogation
-        show mira smile at right
-        show mira smile at default
-        with move
-        "INTERROGATE: Mira Tisu"
-        menu: 
-            mt "Well, Mozzy? Ask away."
+label interrogate_tut:
+    show mozzy excited
+    mr "Alright!"
+    mr "Bring it on!"
+    scene bg interrogation
+    show mira smile at right
+    show mira smile at default
+    with move
+    "INTERROGATE: Mira Tisu"
+    menu: 
+        mt "Well, Mozzy? Ask away."
+        "What colour is the house?":
+            jump house_colour
+        "What is the address?": 
+            jump house_address
+        "Who is the owner of the house?":
+            jump house_owner
+
+    label house_colour:
+        mt "Well, my dear friend adores the colour pink."
+        mt "That’s why the house is a sort of reddish pink colour."
+        mt "The roof, however, is covered in black shingles."
+        jump question_list
+
+    label house_address:
+        show mira default
+        mt "That’s a good question."
+        show mira smile
+        mt "But where’s the fun in just telling you the answer?"
+        mr "(Mira, quit trolling me…!)"
+        jump question_list
+        
+label house_owner:
+    show mira default
+    mt "The owner of the house…? Odd question to ask in this scenario."
+    mt "Well, it is none other than my dear friend, Stirling Strawberry."
+    mt "But that really doesn’t seem like a question that will help you."
+    mr "Huh? O-oh!"
+    mr_thought "(Dang…she’s right!)"
+    mt "It’s quite alright, but just remember that others aren’t so forgiving as I am when you ask irrelevant questions."
+    jump question_list
+
+    label question_list:
+        menu:
+            mt "Any other questions?"
             "What colour is the house?":
                 jump house_colour
             "What is the address?": 
                 jump house_address
             "Who is the owner of the house?":
                 jump house_owner
+            "No, no more questions.":
+                jump tutorial_end
 
-        label house_colour:
-            mt "Well, my dear friend adores the colour pink."
-            mt "That’s why the house is a sort of reddish pink colour."
-            mt "The roof, however, is covered in black shingles."
-            jump question_list
+label skip_tut:
+    mr "Mira, you know I usually would, but..."
+    mr "I'm getting a lot of deja vu. I think I can find the house without any help."
+    mt "I will never understand your strange sixth sense."
+    mr_thought "(We talked about some of our coworkers for the rest of the bus ride.)"
+    jump tutorial_end
 
-        label house_address:
-            show mira default
-            mt "That’s a good question."
-            show mira smile
-            mt "But where’s the fun in just telling you the answer?"
-            mr "(Mira, quit trolling me…!)"
-            jump question_list
-        
-        label house_owner:
-            show mira default
-            mt "The owner of the house…? Odd question to ask in this scenario."
-            mt "Well, it is none other than my dear friend, Stirling Strawberry."
-            mt "But that really doesn’t seem like a question that will help you."
-            mr "Huh? O-oh!"
-            mr "(Dang…she’s right!)"
-            mt "It’s quite alright, but just remember that others aren’t so forgiving as I am when you ask irrelevant questions."
-            jump question_list
+label tutorial_end:
+    scene bg bus
+    show mozzy default at left
+    show mira default at right
+    mr "Right…I think that’s all the information need."
+    mt "Hm, and just in time too."
+    mt "This is where we get off."
+    mr_thought "Mira and I thanked the bus driver and jumped off the bus."
+    scene bg rich street
+    with dissolve
+    show mozzy default at left
+    show mira default at right
+    mt "Alright Mozzy, time to put the clues you gathered to good use."
+    mt "Can you find the house now?"
+    show mozzy excited
+    mr "Of course!"
+    show mozzy default
+    mr "But, uh, Mira…?"
+    show mira default #curious, but we don't have the time for that as of now
+    mt "?"
+    mr "How much time do I have?"
+    show mira surprise
+    mt "!"
+    show mira smile
+    mt "That’s what you’re worried about? Don’t worry, take all the time you need. We’re in no hurry."
+    show mozzy excited
+    mr "Phew! Thanks, Mira!"
 
-        label question_list:
-            menu:
-                mt "Any other questions?"
-                "What colour is the house?":
-                    jump house_colour
-                "What is the address?": 
-                    jump house_address
-                "Who is the owner of the house?":
-                    jump house_owner
-                "No, no more questions.":
-                    jump tutorial_end
+#insert HOG here
 
-    label skip_tut:
-        mr "Mira, you know I usually would, but..."
-        mr "I'm getting a lot of deja vu. I think I can find the house without any help."
-        mt "I will never understand your strange sixth sense."
-        "We talked about some of our coworkers for the rest of the bus ride."
-        jump tutorial_end
-
-    label tutorial_end:
-        scene bg bus
-        show mozzy default at left
-        show mira default at right
-        mr "Right…I think that’s all the information need."
-        mt "Hm, and just in time too."
-        mt "This is where we get off."
-        "Mira and I thanked the bus driver and jumped off the bus."
-        scene bg rich street
-        with dissolve
-        show mozzy default at left
-        show mira default at right
-        mt "Alright Mozzy, time to put the clues you gathered to good use."
-        mt "Can you find the house now?"
-        show mozzy excited
-        mr "Of course!"
-        show mozzy default
-        mr "But, uh, Mira…?"
-        show mira default #curious, but we don't have the time for that as of now
-        mt "?"
-        mr "How much time do I have?"
-        show mira surprise
-        mt "!"
-        show mira smile
-        mt "That’s what you’re worried about? Don’t worry, take all the time you need. We’re in no hurry."
-        show mozzy excited
-        mr "Phew! Thanks, Mira!"
-
+label continue_story1:
     scene gates
     "{i}One hidden object tutorial later...{/i}"
     show mozzy excited at left
@@ -148,7 +158,7 @@ label start:
     mr "The gates…are locked!"
     mt "Of course they are! Stirling kept them locked so that the thief couldn’t get out."
     show mozzy damage
-    mr "{i}(Can’t a thief just climb over the gates though?){/i}"
+    mr_thought "(Can’t a thief just climb over the gates though?)"
     show mira default
     show mozzy default
     mt "I’ll let Stirling know that we’re here."
@@ -158,13 +168,13 @@ label start:
     mt "…"
     mt "Investigative partner, Stirling. I’m not dating anyone at the moment. I still don’t have time for that. Besides, he’s far too young–"
     mr "Hey! I’m only 23!, I can definitely vote….legally."
-    "{i}Mira simply ignored me.{/i}"
+    mr_thought "Mira simply ignored me."
     show mira hide
     mt "…"
     mt "Stirling Strawberry, you will let us in right this moment or I will tell those cousins of yours that you ate the last cookie."
     show mozzy shock
     mr "Eep!"
-    mr "{i}(Mira can be so scary sometimes…){/i}"
+    mr_thought "(Mira can be so scary sometimes…)"
     mt "…"
     show mira smile
     mt "Thanks. I’ll see you soon."
@@ -173,21 +183,22 @@ label start:
     mt "Sorry, did I scare you?"
     show mozzy excited
     mr "Um…I don’t know what you’re talking about! A great detective is never scared!"
-    "{i}For some reason, Mira doesn’t seem to believe that.{/i}"
+    mr_thought "For some reason, Mira doesn’t seem to believe that."
     mt "…If you insist."
     show mozzy default
     mr "…"
     mt "…"
     mr "Your friend is taking a while."
-    "{i}Lo and behold, just as I said those words, the gates opened.{/i}"
+    mr_thought "Lo and behold, just as I said those words, the gates opened."
     show mozzy damage
     mr "Are you kidding me?"
     show mira smile
     mt "I must say Mozzy, you have impeccable timing at times."
     mr "Let’s…let’s just go in."
     scene garden
-    "{i}I fixed up my hat, and we walked through the gates.{/i}"
-    "{i}Suddenly, I heard a familiar voice shouting…a lot of things I won’t repeat.{/i}"
+    mr_thought "I fixed up my hat, and we walked through the gates."
+    mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses"
+    mr_thought "Suddenly, I heard a familiar voice shouting…a lot of things I won’t repeat."
     show pitaya angry
     pc "That’s it, you people deal with this yourself! I’m outta here!"
     mr "Pitaya!"
@@ -195,14 +206,14 @@ label start:
     pc "…?"
     show pitaya default
     pc "Mozzy! Hey, man!"
-    "{i}Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not.{/i}"
-    "{i}…Okay, so MAYBE he was on trial for murder like a hundred times, but he’s never actually committed any of them!{/i}"
+    mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not.{/i}"
+    mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he’s never actually committed any of them!{/i}"
     show pitaya disgust
     pc "Mozzy you’re spacing out again."
     pc "Are you doing that thing where you introduce people in your head completely out of character?"
-    mr "{i}Ack. Guilty.{/i}"
+    mr_thought "Ack. Guilty."
     menu:
-        mr "{i}Quick, Mozzy, deflect!{/i}"
+        mr_thought "Quick, Mozzy, deflect!"
         "Actually, I'm thinking about koalas.":
             jump koalas
         "No, I'm thinking about you.":
@@ -212,7 +223,7 @@ label start:
         mr "No, I'm thinking about you."
         show pitaya damage
         pc "W-W-What?!"
-        "{i}Hehe, that always catches him off guard.{/i}"
+        mr_thought "Hehe, that always catches him off guard."
         jump enter_house
 
     label koalas:
@@ -233,13 +244,14 @@ label start:
         pc "oh my gosh you oblivious swiss cheese…"
         mt "…my goodness."
 
+    scene bg stirling home
     pc "Well people, we have our detective and everyone’s favourite lawyer."
     "???" "...He looks like a dud. "
     mr "how dare you!, you…you…gremlin?, sorry you’re just extremely short. "
     "???" "And? We’re literally fourteen."
     "???" "If anything, you’re the short one."
     mr "HEY!!"
-    "{i}Mira sighs.{/i}"
+    mt "*sigh*"
     mt "Jazz, Smith, meet Mozzy. I met him on one of my cases."
     mt "Mozzy, these are the Pale twins, Jazz and Smith. Jazz is the red one, Smith is green."
     jp "We met her when Stirling introduced his girlfriend to his family."
@@ -257,7 +269,7 @@ label start:
     mr "…twenty, right?"
     mt "I’m thirty-eight."
     mr "Oh."
-    "Stirling intro, after everyone else." 
+    #Stirling intro, after everyone else.
     mr "Thank you, good madam!"
     ss "Huh? I–uh–I’m not–"
     mr "Huh? What’s wrong?"
@@ -281,6 +293,199 @@ label start:
     ss "Well…I guess that’s a me problem."
     mt "Speaking of problems…I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
+    jp "Is he always like this?"
+    mr "Hey, what's that supposed to mean."
+    "anyways, some exposition later, after finding evidence, we move on to the interrogation"
 
+    menu:
+        mr "Who should I interrogate first?"
+        "Pitaya":
+            jump int_pitaya
+        "Honey Dew":
+            jump int_honey
+        "The Twins":
+            jump int_twins
+        "Stirling":
+            jump int_stirling
+
+label int_pitaya:
+    $ pc_int = True
+    scene bg interrogation
+    show pitaya default at default
+    pc "Wazzup?"
+    jump interrogate
+
+label int_honey:
+    $ hd_int = True
+    scene bg interrogation
+    show honey default at default
+    hd "Hm? Can I help you?"
+    jump interrogate
+
+label int_twins:
+    $ twin_int = True
+    scene bg interrogation
+    show jazz default at left
+    show smith default at right
+    jp "What do you want?"
+    jump interrogate
+
+label int_stirling:
+    $ ss_int = True
+    scene bg interrogation
+    show stirling default at default
+    ss "Heyo!"
+    jump interrogate
+    #ask
+
+label interrogate:
+    if pc_int:
+        if ss_int:
+            if twin_int:
+                if hd_int:
+                    menu:
+                        mr "Who should I interrogate first?"
+                        "Pitaya":
+                            jump int_pitaya
+                        "Honey Dew":
+                            jump int_honey
+                        "The Twins":
+                            jump int_twins
+                        "Stirling":
+                            jump int_stirling
+                        "Mira":
+                            jump int_mira
+                else:
+                    menu:
+                        mr "Who should I interrogate first?"
+                        "Pitaya":
+                            jump int_pitaya
+                        "Honey Dew":
+                            jump int_honey
+                        "The Twins":
+                            jump int_twins
+                        "Stirling":
+                            jump int_stirling
+            else:
+                menu:
+                    mr "Who should I interrogate first?"
+                    "Pitaya":
+                        jump int_pitaya
+                    "Honey Dew":
+                        jump int_honey
+                    "The Twins":
+                        jump int_twins
+                    "Stirling":
+                        jump int_stirling
+        else:
+            menu:
+                mr "Who should I interrogate first?"
+                "Pitaya":
+                    jump int_pitaya
+                "Honey Dew":
+                    jump int_honey
+                "The Twins":
+                    jump int_twins
+                "Stirling":
+                    jump int_stirling
+    else:
+        menu:
+            mr "Who should I interrogate first?"
+            "Pitaya":
+                jump int_pitaya
+            "Honey Dew":
+                jump int_honey
+            "The Twins":
+                jump int_twins
+            "Stirling":
+                jump int_stirling
+
+label int_mira:
+    scene bg interrogation
+    show mira default
+    mt "Me? Why do you want to interrogate me? I wasn't here for the incident."
+    menu:
+        mr "Who should I interrogate first?"
+        "Pitaya":
+            jump int_pitaya
+        "Honey Dew":
+            jump int_honey
+        "The Twins":
+            jump int_twins
+        "Stirling":
+            jump int_stirling
+        "Mira":
+            jump int_mira
+        "That's all":
+            jump continue_story2
+
+label continue_story2:
+    menu:
+        mr "And the culprit is..."
+        "Pitaya":
+            jump culprit_pc
+        "Honey Dew":
+            jump culprit_hd
+        "The Twins":
+            jump culprit_pale
+        "Stirling": 
+            jump culprit_ss
+
+label culprit_pc:
+    $ pitaya_guilt = True
+    show pitaya guilty
+    pc "Wh-WHAT?!"
+    jump wrong_end
+
+label culprit_hd:
+    show honey guilty
+    hd "I...don't understand."
+    jump good_end
+
+label culprit_pale:
+    $ twin_guilt = True
+    show twin guilty
+    jp "You foolish..."
+    sp "Putrid..."
+    jp "Yammering..."
+    sp "Blumbering..."
+    "Jazz and Pale" "{i}ARSHLOCH{/i}, OBSOLETE, SCUM OF THE EARTH!!"
+    jump wrong_end
+
+label culprit_ss:
+    $ stirling_guilt = True
+    show stirling guilty
+    pc "What? Me?"
+    jump wrong_end
+
+label wrong_end:
+    if pitaya_guilt:
+        mr_thought "We searched through Pitaya's bags, and we found the Melon Baller stuffed in his makeup bag."
+        mr_thought "He denied putting it there, but the evidence is clear."
+    
+    if twin_guilt:
+        mr_thought "We searched through their bags, and we found the Melon Baller stuffed in a game pouch."
+        mr_thought"They denied putting it there, but the evidence is clear."
+
+    if stirling_guilt:
+        mr_thought "We searched through his room, and we found the Melon Baller stuffed in a pillow."
+        mr_thought "He denied putting it there, but the evidence is clear."
+
+    mr_thought "Luckily, Miss Dew was just glad that she got the necklace back, and insisted that we just forget about the incident."
+    mr_thought "We stayed at Stirling's place for another week as both Honey and Stirling insisted on getting to know me better...although I think they just wanted more time with Mira."
+    mr_thought "And so ends the tale of \"The Disappearance of the Melon Baller\""
+    mr_thought "..."
+    mr_thought "The name is a work in progress."
+    "{b}End?{/b}"
+
+    return
+
+label good_end:
+    mr_thought "Miss Dew apologised for making such a mess, but everyone was quick to forgive her."
+    mr_thought "...Okay that's a lie but honestly Pitaya and the twins don't really forgive easily so it's a win!"
+    mr_thought "And so ends the tale of \"The Melon Conspiracy\""
+    mr_thought "..."
+    mr_thought "Does this count as a conspiracy?"
+    "{b}End.{/b}"
 
     return
