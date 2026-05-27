@@ -77,7 +77,7 @@ label interrogate_tut:
     label house_address:
         show mira default
         mt "That’s a good question."
-        show mira smile
+        show mira smug
         mt "But where’s the fun in just telling you the answer?"
         mr "(Mira, quit trolling me…!)"
         jump question_list
