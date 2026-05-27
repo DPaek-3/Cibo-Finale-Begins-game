@@ -294,7 +294,7 @@ label continue_story1:
     mt "Speaking of problems…I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
     jp "Is he always like this?"
-    mr "Hey, what's that supposed to mean."
+    mr "Hey, what's that supposed to mean?"
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
 
     menu:
@@ -355,6 +355,8 @@ label interrogate:
                             jump int_stirling
                         "Mira":
                             jump int_mira
+                        "That's all":
+                            jump continue_story2
                 else:
                     menu:
                         mr "Who should I interrogate first?"
@@ -366,6 +368,8 @@ label interrogate:
                             jump int_twins
                         "Stirling":
                             jump int_stirling
+                        "That's all":
+                            jump continue_story2
             else:
                 menu:
                     mr "Who should I interrogate first?"
@@ -377,6 +381,8 @@ label interrogate:
                         jump int_twins
                     "Stirling":
                         jump int_stirling
+                    "That's all":
+                        jump continue_story2
         else:
             menu:
                 mr "Who should I interrogate first?"
@@ -388,6 +394,8 @@ label interrogate:
                     jump int_twins
                 "Stirling":
                     jump int_stirling
+                "That's all":
+                    jump continue_story2
     else:
         menu:
             mr "Who should I interrogate first?"
@@ -399,6 +407,8 @@ label interrogate:
                 jump int_twins
             "Stirling":
                 jump int_stirling
+            "That's all":
+                jump continue_story2
 
 label int_mira:
     scene bg interrogation
