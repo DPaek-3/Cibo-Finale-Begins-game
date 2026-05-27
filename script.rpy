@@ -77,7 +77,7 @@ label interrogate_tut:
     label house_address:
         show mira default
         mt "That’s a good question."
-        show mira smug
+        show mira smile
         mt "But where’s the fun in just telling you the answer?"
         mr "(Mira, quit trolling me…!)"
         jump question_list
@@ -445,11 +445,11 @@ label culprit_hd:
 label culprit_pale:
     $ twin_guilt = True
     show twin guilty
-    jp "You foolish..."
+    jp "You brutish..."
     sp "Putrid..."
     jp "Yammering..."
     sp "Blumbering..."
-    "Jazz and Pale" "{i}ARSHLOCH{/i}, OBSOLETE, SCUM OF THE EARTH!!"
+    "Jazz and Pale" "FOOLISH, OBSOLETE, BASTARD!!"
     jump wrong_end
 
 label culprit_ss:
