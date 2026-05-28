@@ -16,8 +16,26 @@ default pitaya_guilt = False
 default twin_guilt = False
 default stirling_guilt = False
 
-label start:
 
+label start:
+    "Hi."
+    "This game is made for the 2026 NZ schools game jam."
+    "But apparently, our teacher doesn't want to go through 30 minutes of dialogue."
+    "I mean, fair enough, I guess."
+    "So I'm adding an option where you can skip the dialogue and get to the juicy gameplay."
+    menu:
+        "So, which will it be?"
+        "I just want to try the minigames":
+            "Alright."
+            "Off we go!"
+            jump hidden_object
+        "I'd like to play the story too":
+            "Alright."
+            "Off we go!"
+            jump story
+
+
+label story:
     scene bg bus
     with dissolve
 
@@ -79,7 +97,7 @@ label interrogate_tut:
         mt "That’s a good question."
         show mira smile
         mt "But where’s the fun in just telling you the answer?"
-        mr "(Mira, quit trolling me…!)"
+        mr_thought "(Mira, quit trolling me…!)"
         jump question_list
         
 label house_owner:
@@ -206,8 +224,8 @@ label continue_story1:
     pc "…?"
     show pitaya default
     pc "Mozzy! Hey, man!"
-    mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not.{/i}"
-    mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he’s never actually committed any of them!{/i}"
+    mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not."
+    mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he’s never actually committed any of them!"
     show pitaya disgust
     pc "Mozzy you’re spacing out again."
     pc "Are you doing that thing where you introduce people in your head completely out of character?"
@@ -295,6 +313,23 @@ label continue_story1:
     mr "Please hold your applause, I know I'm glamorous!"
     jp "Is he always like this?"
     mr "Hey, what's that supposed to mean?"
+
+label hidden_object:
+    scene bg honey room
+    "So, there's nothing in here as of now."
+    "this is a placeholder for the actual hidden object game"
+
+label hidden_object:
+    scene bg honey room
+
+    label honeysroom:
+        call screen honeysroom 
+    label Jewelbox:
+        mr "This box is really neatly organised."
+        mt "Honey has a lot of jewellery, she likes to be able to see all of them and make sure they’re there."
+        mr "You’d think a thief would rummage through the jewellery box too."
+
+        
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
 
     menu:
@@ -430,6 +465,7 @@ label int_mira:
             jump continue_story2
 
 label continue_story2:
+    scene bg dining room
     menu:
         mr "And the culprit is..."
         "Pitaya":
