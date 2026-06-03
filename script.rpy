@@ -8,6 +8,7 @@ define hd = Character("Honey")
 define ss = Character("Stirling")
 define jp = Character("Jazz")
 define sp = Character("Smith")
+define int_box = Character(None, what_xalign=0.5, what_text_align=0.5)
 default twin_int = False
 default ss_int = False
 default hd_int = False
@@ -76,7 +77,7 @@ label interrogate_tut:
     show mira smile at right
     show mira smile at default
     with move
-    "INTERROGATE: Mira Tisu"
+    int_box "INTERROGATE: Mira Tisu"
     menu: 
         mt "Well, Mozzy? Ask away."
         "What colour is the house?":
@@ -319,17 +320,6 @@ label hidden_object:
     "So, there's nothing in here as of now."
     "this is a placeholder for the actual hidden object game"
 
-label hidden_object:
-    scene bg honey room
-
-    label honeysroom:
-        call screen honeysroom 
-    label Jewelbox:
-        mr "This box is really neatly organised."
-        mt "Honey has a lot of jewellery, she likes to be able to see all of them and make sure they’re there."
-        mr "You’d think a thief would rummage through the jewellery box too."
-
-        
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
 
     menu:
@@ -347,6 +337,7 @@ label int_pitaya:
     $ pc_int = True
     scene bg interrogation
     show pitaya default at default
+    int_box "INTERROGATE: Pitaya Crim"
     pc "Wazzup?"
     jump interrogate
 
@@ -354,6 +345,7 @@ label int_honey:
     $ hd_int = True
     scene bg interrogation
     show honey default at default
+    int_box "INTERROGATE: Honey Dew"
     hd "Hm? Can I help you?"
     jump interrogate
 
@@ -362,6 +354,7 @@ label int_twins:
     scene bg interrogation
     show jazz default at left
     show smith default at right
+    int_box "INTERROGATE: the Twins"
     jp "What do you want?"
     jump interrogate
 
@@ -369,6 +362,7 @@ label int_stirling:
     $ ss_int = True
     scene bg interrogation
     show stirling default at default
+    int_box "INTERROGATE: Stirling Strawberry"
     ss "Heyo!"
     jump interrogate
     #ask
@@ -448,6 +442,7 @@ label interrogate:
 label int_mira:
     scene bg interrogation
     show mira default
+    int_box "INTERROGATE: Mira Tisu"
     mt "Me? Why do you want to interrogate me? I wasn't here for the incident."
     menu:
         mr "Who should I interrogate first?"
