@@ -13,6 +13,14 @@ default twin_int = False
 default ss_int = False
 default hd_int = False
 default pc_int = False
+#default pc_testimony = False
+#default ss_testimony = False
+#default hd_testimony = False
+#default twin_testimony = False
+#default pc_alibi = False
+#default hd_alibi = False
+#default ss_alibi = False
+#default twin_alibi = False
 default pitaya_guilt = False
 default twin_guilt = False
 default stirling_guilt = False
@@ -339,6 +347,37 @@ label int_pitaya:
     show pitaya default at default
     int_box "INTERROGATE: Pitaya Crim"
     pc "Wazzup?"
+    mr "Mr Crim–"
+    pc "Ooh, we’re doing this PROFESSIONALLY, okay, this oughta be good!"
+    mr "Aw thanks! Anyways, please give us your version of the events–"
+    pc "Yeah, yeah, witness testimony, I got it."
+    pc "Don’t worry, I was the defendant for like half of Mira’s cases, I know how this stuff works."
+    mr "Wait, you guys knew each other before this?!"
+    mt "Yes, Stirling hired me as Pitaya’s lawyer."
+    mt "But we’re getting sidetracked. You two, lock in already."
+    pc "Mira, please, never use those words again."
+    label pc_ask:
+        menu:
+            "Testimony, please?":
+                pc "I was just minding my own business, really!"
+                pc "We were expecting more people, but apparently there was a flight delay, so they couldn’t come. But whatever, that’s not important."
+                pc "So yeah, I was just minding my own business, waiting for dinner to be done, and checking out Stirling’s videogames when Little Miss Drama Queen runs in screaming about how her necklace got stolen."
+                pc "Yeah, that’s all I can think of."
+                pc "By the way, I found the latest edition of that lawyer game you like so much in his collection, maybe we could play it together someday?"
+                jump pc_ask
+            "What is your alibi?":
+                pc "I mean, I was in the living room the whole time. Although, I don't know if anyone can confirm that."
+                pc "I did see the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my presence."
+                pc "But I swear on Old Mrs Frap's life, I did not go anywhere near Dew's room"
+                jump pc_ask
+            "That's all"
+
+    mr "Okay...thank you Mr Crim."
+            
+
+
+
+
     jump interrogate
 
 label int_honey:
@@ -517,7 +556,7 @@ label wrong_end:
     mr_thought "And so ends the tale of \"The Disappearance of the Melon Baller\""
     mr_thought "..."
     mr_thought "The name is a work in progress."
-    "{b}End?{/b}"
+    "{b}NOT GUILTY{/b}"
 
     return
 
@@ -527,6 +566,6 @@ label good_end:
     mr_thought "And so ends the tale of \"The Melon Conspiracy\""
     mr_thought "..."
     mr_thought "Does this count as a conspiracy?"
-    "{b}End.{/b}"
+    "{b}GUILTY{/b}"
 
     return
