@@ -21,6 +21,8 @@ default pc_int = False
 #default hd_alibi = False
 #default ss_alibi = False
 #default twin_alibi = False
+default successful_gaydar = False
+default failed_gaydar = False
 default pitaya_guilt = False
 default twin_guilt = False
 default stirling_guilt = False
@@ -51,25 +53,25 @@ label story:
     show mira default at right
     show mozzy default at left 
 
-    mr "I just don’t get it, Mira!"
+    mr "I just don't get it, Mira!"
     mt "Hm?"
-    mr "I mean, I know I’m an ace detective and all, but why are WE on our way to investigate a robbery here?"
-    mr "It’s the richest neighbourhood as well! Shouldn’t someone a bit more higher-up take the case?"
+    mr "I mean, I know I'm an ace detective and all, but why are WE on our way to investigate a robbery here?"
+    mr "It's the richest neighbourhood as well! Shouldn't someone a bit more higher-up take the case?"
     show mira hide
     mt "…"
     show mira default
-    mt "This isn’t actually an official case yet."
+    mt "This isn't actually an official case yet."
     mr "…"
     show mozzy shock
     mr "h-hUH?!"
     show mira smile
     mt "A dear friend of mine asked me to help investigate before there is a scandal."
-    mt "And, well, you haven’t had a case in a while either, so I decided to bring you along."
+    mt "And, well, you haven't had a case in a while either, so I decided to bring you along."
     show mira default
     show mozzy default
-    mt "Speaking of which, let’s run over how to do investigations and interrogations."
-    mt "You’ll notice that I haven’t told you which house we’re heading to."
-    mt "Your goal is to try and pull information out of me. Then, when we arrive at our stop, you’ll use the information you received to find the correct house."
+    mt "Speaking of which, let's run over how to do investigations and interrogations."
+    mt "You'll notice that I haven't told you which house we're heading to."
+    mt "Your goal is to try and pull information out of me. Then, when we arrive at our stop, you'll use the information you received to find the correct house."
     menu:
         mt "Do I interrogate Mira?"
         "Yeah, we need information!":
@@ -97,27 +99,27 @@ label interrogate_tut:
 
     label house_colour:
         mt "Well, my dear friend adores the colour pink."
-        mt "That’s why the house is a sort of reddish pink colour."
+        mt "That's why the house is a sort of reddish pink colour."
         mt "The roof, however, is covered in black shingles."
         jump question_list
 
     label house_address:
         show mira default
-        mt "That’s a good question."
+        mt "That's a good question."
         show mira smile
-        mt "But where’s the fun in just telling you the answer?"
+        mt "But where's the fun in just telling you the answer?"
         mr_thought "(Mira, quit trolling me…!)"
         jump question_list
         
-label house_owner:
-    show mira default
-    mt "The owner of the house…? Odd question to ask in this scenario."
-    mt "Well, it is none other than my dear friend, Stirling Strawberry."
-    mt "But that really doesn’t seem like a question that will help you."
-    mr "Huh? O-oh!"
-    mr_thought "(Dang…she’s right!)"
-    mt "It’s quite alright, but just remember that others aren’t so forgiving as I am when you ask irrelevant questions."
-    jump question_list
+    label house_owner:
+        show mira default
+        mt "The owner of the house…? Odd question to ask in this scenario."
+        mt "Well, it is none other than my dear friend, Stirling Strawberry."
+        mt "But that really doesn't seem like a question that will help you."
+        mr "Huh? O-oh!"
+        mr_thought "(Dang…she's right!)"
+        mt "It's quite alright, but just remember that others aren't so forgiving as I am when you ask irrelevant questions."
+        jump question_list
 
     label question_list:
         menu:
@@ -142,7 +144,7 @@ label tutorial_end:
     scene bg bus
     show mozzy default at left
     show mira default at right
-    mr "Right…I think that’s all the information need."
+    mr "Right…I think that's all the information need."
     mt "Hm, and just in time too."
     mt "This is where we get off."
     mr_thought "Mira and I thanked the bus driver and jumped off the bus."
@@ -162,11 +164,11 @@ label tutorial_end:
     show mira surprise
     mt "!"
     show mira smile
-    mt "That’s what you’re worried about? Don’t worry, take all the time you need. We’re in no hurry."
+    mt "That's what you're worried about? Don't worry, take all the time you need. We're in no hurry."
     show mozzy excited
     mr "Phew! Thanks, Mira!"
 
-#insert HOG here
+#insert HOG tutorial here
 
 label continue_story1:
     scene gates
@@ -177,24 +179,24 @@ label continue_story1:
     mt "That was quick. Well done."
     mr "Of course! It was a piece of pie for the Great Detective Mozzy Rella!"
     mt "Hm…of course."
-    mr "Well, what are we waiting for? Let’s go!"
+    mr "Well, what are we waiting for? Let's go!"
     show mira surprise
     mt "Mozzy, wait–!"
     show mozzy shock #surprise
     mr "…!"
     mr "The gates…are locked!"
-    mt "Of course they are! Stirling kept them locked so that the thief couldn’t get out."
+    mt "Of course they are! Stirling kept them locked so that the thief couldn't get out."
     show mozzy damage
-    mr_thought "(Can’t a thief just climb over the gates though?)"
+    mr_thought "(Can't a thief just climb over the gates though?)"
     show mira default
     show mozzy default
-    mt "I’ll let Stirling know that we’re here."
+    mt "I'll let Stirling know that we're here."
     "{i}(insert ringtone){/i}"
     mt "…"
     mt "Hey Stirling. My partner and I are outside your gates. Do you mind letting us in?"
     mt "…"
-    mt "Investigative partner, Stirling. I’m not dating anyone at the moment. I still don’t have time for that. Besides, he’s far too young–"
-    mr "Hey! I’m only 23!, I can definitely vote….legally."
+    mt "Investigative partner, Stirling. I'm not dating anyone at the moment. I still don't have time for that. Besides, he's far too young–"
+    mr "Hey! I'm only 23!, I can definitely vote….legally."
     mr_thought "Mira simply ignored me."
     show mira hide
     mt "…"
@@ -204,13 +206,13 @@ label continue_story1:
     mr_thought "(Mira can be so scary sometimes…)"
     mt "…"
     show mira smile
-    mt "Thanks. I’ll see you soon."
+    mt "Thanks. I'll see you soon."
     show mira default
     mt "…"
     mt "Sorry, did I scare you?"
     show mozzy excited
-    mr "Um…I don’t know what you’re talking about! A great detective is never scared!"
-    mr_thought "For some reason, Mira doesn’t seem to believe that."
+    mr "Um…I don't know what you're talking about! A great detective is never scared!"
+    mr_thought "For some reason, Mira doesn't seem to believe that."
     mt "…If you insist."
     show mozzy default
     mr "…"
@@ -221,22 +223,22 @@ label continue_story1:
     mr "Are you kidding me?"
     show mira smile
     mt "I must say Mozzy, you have impeccable timing at times."
-    mr "Let’s…let’s just go in."
+    mr "Let's…let's just go in."
     scene garden
     mr_thought "I fixed up my hat, and we walked through the gates."
     mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses"
-    mr_thought "Suddenly, I heard a familiar voice shouting…a lot of things I won’t repeat."
+    mr_thought "Suddenly, I heard a familiar voice shouting…a lot of things I won't repeat."
     show pitaya angry
-    pc "That’s it, you people deal with this yourself! I’m outta here!"
+    pc "That's it, you people deal with this yourself! I'm outta here!"
     mr "Pitaya!"
     show pitaya curious
     pc "…?"
     show pitaya default
     pc "Mozzy! Hey, man!"
     mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not."
-    mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he’s never actually committed any of them!"
+    mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he's never actually committed any of them!"
     show pitaya disgust
-    pc "Mozzy you’re spacing out again."
+    pc "Mozzy you're spacing out again."
     pc "Are you doing that thing where you introduce people in your head completely out of character?"
     mr_thought "Ack. Guilty."
     menu:
@@ -272,11 +274,11 @@ label continue_story1:
         mt "…my goodness."
 
     scene bg stirling home
-    pc "Well people, we have our detective and everyone’s favourite lawyer."
+    pc "Well people, we have our detective and everyone's favourite lawyer."
     "???" "...He looks like a dud. "
-    mr "how dare you!, you…you…gremlin?, sorry you’re just extremely short. "
-    "???" "And? We’re literally fourteen."
-    "???" "If anything, you’re the short one."
+    mr "how dare you!, you…you…gremlin?, sorry you're just extremely short. "
+    "???" "And? We're literally fourteen."
+    "???" "If anything, you're the short one."
     mr "HEY!!"
     mt "*sigh*"
     mt "Jazz, Smith, meet Mozzy. I met him on one of my cases."
@@ -288,36 +290,36 @@ label continue_story1:
     sp "Yeah, you deserve better anyways."
     "???" "Hey, I heard that!"
     "Some more exposition later..."
-    ss "And I’m Stirling Strawberry, besties with Mira since we met in college ten years ago!"
+    ss "And I'm Stirling Strawberry, besties with Mira since we met in college ten years ago!"
     mr "I see. "
     mr "…"
     mr "Wait Mira you went to college when you were 10?"
     mt "…How old do you think I am? "
     mr "…twenty, right?"
-    mt "I’m thirty-eight."
+    mt "I'm thirty-eight."
     mr "Oh."
     #Stirling intro, after everyone else.
     mr "Thank you, good madam!"
-    ss "Huh? I–uh–I’m not–"
-    mr "Huh? What’s wrong?"
+    ss "Huh? I–uh–I'm not–"
+    mr "Huh? What's wrong?"
     pc "Oh, man–"
     "Jazz and Smith" "And another one bites the dust!"
     mt "Mozzy…"
-    mt "Stirling’s a man."
+    mt "Stirling's a man."
     mr "GAH!"
     mr "ajkfbldashfircids I am SO sorry!"
-    ss "It-it’s fine…it happens a lot…"
+    ss "It-it's fine…it happens a lot…"
     ss "Do I really look that much like a girl…?"
     pc "Yup."
     jp "You do."
     sp "You really look like a girl."
-    pc "Hey, YOU can’t say anything! You and your sister look identical!"
+    pc "Hey, YOU can't say anything! You and your sister look identical!"
     jp "What part of “identical twins” do you not understand…?"
-    sp "It’s only fair, I mean, she looked identical to me a few years ago, so now I’m identical to her."
+    sp "It's only fair, I mean, she looked identical to me a few years ago, so now I'm identical to her."
     pc "I know, I know, I was there when you guys announced the change to the family!"
     hd "…"
-    hd "I personally don’t think you look like a girl Stirling…but I can see why people think so!"
-    ss "Well…I guess that’s a me problem."
+    hd "I personally don't think you look like a girl Stirling…but I can see why people think so!"
+    ss "Well…I guess that's a me problem."
     mt "Speaking of problems…I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
     jp "Is he always like this?"
@@ -348,21 +350,21 @@ label int_pitaya:
     int_box "INTERROGATE: Pitaya Crim"
     pc "Wazzup?"
     mr "Mr Crim–"
-    pc "Ooh, we’re doing this PROFESSIONALLY, okay, this oughta be good!"
+    pc "Ooh, we're doing this PROFESSIONALLY, okay, this oughta be good!"
     mr "Aw thanks! Anyways, please give us your version of the events–"
     pc "Yeah, yeah, witness testimony, I got it."
-    pc "Don’t worry, I was the defendant for like half of Mira’s cases, I know how this stuff works."
+    pc "Don't worry, I was the defendant for like half of Mira's cases, I know how this stuff works."
     mr "Wait, you guys knew each other before this?!"
-    mt "Yes, Stirling hired me as Pitaya’s lawyer."
-    mt "But we’re getting sidetracked. You two, lock in already."
+    mt "Yes, Stirling hired me as Pitaya's lawyer."
+    mt "But we're getting sidetracked. You two, lock in already."
     pc "Mira, please, never use those words again."
     label pc_ask:
         menu:
             "Testimony, please?":
                 pc "I was just minding my own business, really!"
-                pc "We were expecting more people, but apparently there was a flight delay, so they couldn’t come. But whatever, that’s not important."
-                pc "So yeah, I was just minding my own business, waiting for dinner to be done, and checking out Stirling’s videogames when Little Miss Drama Queen runs in screaming about how her necklace got stolen."
-                pc "Yeah, that’s all I can think of."
+                pc "We were expecting more people, but apparently there was a flight delay, so they couldn't come. But whatever, that's not important."
+                pc "So yeah, I was just minding my own business, and waiting for dinner to be done. I was also checking out Stirling's videogames when Little Miss Drama Queen runs in screaming about how her necklace got stolen."
+                pc "Yeah, that's all I can think of."
                 pc "By the way, I found the latest edition of that lawyer game you like so much in his collection, maybe we could play it together someday?"
                 jump pc_ask
             "What is your alibi?":
@@ -370,13 +372,173 @@ label int_pitaya:
                 pc "I did see the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my presence."
                 pc "But I swear on Old Mrs Frap's life, I did not go anywhere near Dew's room"
                 jump pc_ask
-            "That's all"
+            "That's all":
+                mr "Okay...thank you Mr Crim."
+    
+    mr "That's all we need for interrogating Pitaya."
+    menu:
+        mt "Well, Mozzy? Can you find any contradictions?"
+        "YES!":
+            mr "Well, I don't know if it's really a contradiction…"
+            mr "But I want more information on something."
+            mt "Well, then, go right ahead."
+            mt "Slaughter his defenses and put his castle under siege until he has to surrender!"
+            pc "Good lord, she's a lawyer again."
+            pc "Okay, go on. Cross examine me."
+            jump pc_evidence
+        "No?": 
+            mt "Well then, we should move on."
+            jump interrogate
 
-    mr "Okay...thank you Mr Crim."
-            
+label pc_evidence:
+    menu:
+        mr "What evidence do I present?"
+        "Brass knuckles":                    
+            mr "Do you know anyone who uses brass knuckles?"
+            pc "Brass knuckles…?"
+            pc "Can't say for sure, but I heard Dew takes self-defense."
+            pc "That surprised me, I mean, she's got the strength of a hundred men, what would she be trying to defend herself against?"
+            mr "And you don't use brass knuckles?"
+            pc "Nah, haven't beaten anyone up since we graduated."
+            pc "And besides, I liked the feeling of my oppenent's skull crushing beneath my fist."
+            mt "..."
+            mr "..."
+            pc "..."
+            pc "Too dark?"
+            mt "Pitaya, this is why people always think you're the murderer."
+            show pitaya damage
+            pc "F-fair enough."
+            jump pc_evidence
+        "Broken picture":
+            mr "Can I see your knuckles?"
+            pc "...Weird, but okay."
+            mr "..."
+            mr "Okay, all done."
+            pc "Great. Now, {nw}{w=.5}"
+            show pitaya awkward
+            extend "WHAT THE HECK WAS THAT ALL ABOUT?!"
+            mr "There was a broken picture in Honey's room, so I was checking to see if you broke it."
+            mr "But your knuckles are clean, so, no worries."
+            mr "Don't punch glass by the way, it's dangerous."
+            pc "Says the guy who ate an entire necklace of it."
+            mr "Will you guys please let me forget that?"
+            jump pc_evidence
+        "Pillow": 
+            mt "...Mozzy, please don't tell me you actually put the pillow in as evidence."
+            mr "It had feathers poking out of it like the hat!"
+            mt "...They're different colours?"
+            mr "...Oh. They looked the same in the lighting."
+            pc "Are those the feather pillows?"
+            mr "Oh yeah, you have them in your room too, right?"
+            pc "I guess? I mean, sure, they're meant to be there, but I don't use them."
+            pc "They're {i}too{/i} soft to be comfortable, if you get what I mean."
+            jump pc_evidence
+        "Testimony: \"I was also checking out Stirling's videogames\"":
+            mr "Why were you looking at the game collection?"
+            show pitaya smile
+            pc "What do you mean? I was bored, that's all."
+            mr "That's the thing."
+            mr "You don't like playing videogames. Not on your own, anyways."
+            show pitaya shock
+            pc "!"
+            mt "That's right..."
+            mt "You only play if someone asks you to play with them, never on your own."
+            mr "Yeah! So, my question to you, Mr Crim..."
+            mr "...is why were  looking at Mr Strawberry's game collection on your own?"
+            if failed_gaydar:
+                mr "Could it be...that you are lying about your alibi?"
+                pc "..."
+                show pitaya laugh
+                pc "Th-that's it?"
+                mr "...Huh?"
+                pc "Man, I was worried...you were so confident too."
+                mr "W-did I get it wrong?"
+                pc "Nothing to worry about man, nothing to worry about!"
+                pc "I swear, on our friendship, my alibi is true."
+                mr "Then...why were you looking through his videogames?"
+                show pitaya embarrassed
+                mr_thought "For some reason, Pitaya blushes and looks away."
+                mt "I think that is a question you should ask another time."
+                jump pc_evidence
+            else:
+                if successful_gaydar:
+                    mr "Could it be...that you were looking for someone else?"
+                    pc "..."
+                    show pitaya nervous
+                    pc "Wh-what do you mean? Looking for someone in a videogame collection?"
+                    mr "NOT WHAT I MEANT!"
+                    mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
+                    mr "Someone like-"
+                    mr "..."
+                    mr "!"
+                    mr "Wait, Pitaya-"
+                    mr "Were you looking through the games...for me?"
+                    show pitaya damage
+                    mr "Y-yikes!"
+                    mr_thought "Did he just fall to the floor?"
+                    show pitaya smile
+                    pc "Y-yeah. Yeah, I was."
+                    pc "That was...wow. That was impressive."
+                    pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                    pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                    pc "So, yeah. Here I am. And for the record..."
+                    pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
+                    mr "Pitaya..."
+                    mt "As much as I don't want to interrupt this adorable moment..."
+                    mt "The twins are glaring at you two. I think you need to start wrapping up."
+                    show pitaya embarrassed
+                    mr "Dangit!"
+                    pc "O-okay!"
+                else:
+                    menu:
+                        mr "Could it be..."
+                        "That you are lying about your alibi?":
+                            $ failed_gaydar = True
+                            pc "..."
+                            show pitaya laugh
+                            pc "Th-that's it?"
+                            mr "...Huh?"
+                            pc "Man, I was worried...you were so confident too."
+                            mr "W-did I get it wrong?"
+                            pc "Nothing to worry about man, nothing to worry about!"
+                            pc "I swear, on our friendship, my alibi is true."
+                            mr "Then...why were you looking through his videogames?"
+                            show pitaya embarrassed
+                            mr_thought "For some reason, Pitaya blushes and looks away."
+                            mt "I think that is a question you should ask another time."
+                            jump pc_evidence
+                        "That you were looking for someone else?":
+                            $ successful_gaydar = True
+                            pc "..."
+                            show pitaya nervous
+                            pc "Wh-what do you mean? Looking for someone in a videogame collection?"
+                            mr "NOT WHAT I MEANT!"
+                            mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
+                            mr "Someone like-"
+                            mr "..."
+                            mr "!"
+                            mr "Wait, Pitaya-"
+                            mr "Were you looking through the games...for me?"
+                            show pitaya damage
+                            mr "Y-yikes!"
+                            mr_thought "Did he just fall to the floor?"
+                            show pitaya smile
+                            pc "Y-yeah. Yeah, I was."
+                            pc "That was...wow. That was impressive."
+                            pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                            pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                            pc "So, yeah. Here I am. And for the record..."
+                            pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
+                            mr "Pitaya..."
+                            mt "As much as I don't want to interrupt this adorable moment..."
+                            mt "The twins are glaring at you two. I think you need to start wrapping up."
+                            show pitaya embarrassed
+                            mr "Dangit!"
+                            pc "O-okay!"
 
-
-
+        "Nevermind":
+            mr "I don't know what I was going to say."
+            mt "Then let's move on."
 
     jump interrogate
 
@@ -412,7 +574,7 @@ label interrogate:
             if twin_int:
                 if hd_int:
                     menu:
-                        mr "Who should I interrogate first?"
+                        mr "Who should I interrogate?"
                         "Pitaya":
                             jump int_pitaya
                         "Honey Dew":
@@ -427,7 +589,7 @@ label interrogate:
                             jump continue_story2
                 else:
                     menu:
-                        mr "Who should I interrogate first?"
+                        mr "Who should I interrogate?"
                         "Pitaya":
                             jump int_pitaya
                         "Honey Dew":
@@ -440,7 +602,7 @@ label interrogate:
                             jump continue_story2
             else:
                 menu:
-                    mr "Who should I interrogate first?"
+                    mr "Who should I interrogate?"
                     "Pitaya":
                         jump int_pitaya
                     "Honey Dew":
@@ -453,7 +615,7 @@ label interrogate:
                         jump continue_story2
         else:
             menu:
-                mr "Who should I interrogate first?"
+                mr "Who should I interrogate?"
                 "Pitaya":
                     jump int_pitaya
                 "Honey Dew":
@@ -466,7 +628,7 @@ label interrogate:
                     jump continue_story2
     else:
         menu:
-            mr "Who should I interrogate first?"
+            mr "Who should I interrogate?"
             "Pitaya":
                 jump int_pitaya
             "Honey Dew":
