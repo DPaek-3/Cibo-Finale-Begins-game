@@ -345,9 +345,7 @@ label hidden_object:
 
 label int_pitaya:
     $ pc_int = True
-    scene bg interrogation
     show pitaya default at default
-    int_box "INTERROGATE: Pitaya Crim"
     pc "Wazzup?"
     mr "Mr Crim–"
     pc "Ooh, we're doing this PROFESSIONALLY, okay, this oughta be good!"
@@ -358,6 +356,10 @@ label int_pitaya:
     mt "Yes, Stirling hired me as Pitaya's lawyer."
     mt "But we're getting sidetracked. You two, lock in already."
     pc "Mira, please, never use those words again."
+    scene bg interrogation
+    with dissolve
+    show pitaya default
+    int_box "INTERROGATE: Pitaya Crim"
     label pc_ask:
         menu:
             "Testimony, please?":
@@ -433,7 +435,7 @@ label pc_evidence:
             pc "I guess? I mean, sure, they're meant to be there, but I don't use them."
             pc "They're {i}too{/i} soft to be comfortable, if you get what I mean."
             jump pc_evidence
-        "Testimony: \"I was also checking out Stirling's videogames\"":
+        "Pitaya's Testimony: \"I was also checking out Stirling's videogames\"":
             mr "Why were you looking at the game collection?"
             show pitaya smile
             pc "What do you mean? I was bored, that's all."
@@ -528,7 +530,7 @@ label pc_evidence:
                             pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
                             pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
                             pc "So, yeah. Here I am. And for the record..."
-                            pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
+                            pc "Playing those lawyer games with you are always fun. There's a reason they're the only videogames I play, after all!"
                             mr "Pitaya..."
                             mt "As much as I don't want to interrupt this adorable moment..."
                             mt "The twins are glaring at you two. I think you need to start wrapping up."
@@ -544,35 +546,85 @@ label pc_evidence:
 
 label int_honey:
     $ hd_int = True
-    scene bg interrogation
     show honey default at default
-    int_box "INTERROGATE: Honey Dew"
     hd "Hm? Can I help you?"
     jump interrogate
+    scene bg interrogation
+    with dissolve
+    show honey default
+    int_box "INTERROGATE: Honey Dew"
 
 label int_twins:
     $ twin_int = True
-    scene bg interrogation
     show jazz default at left
     show smith default at right
-    int_box "INTERROGATE: the Twins"
     jp "What do you want?"
+    mt "Just a routine inspection, nothing more. We need all the information we can get if we want to solve this case, so would you be willing to cooperate?"
+    jp "..."
+    sp "..."
+    sp "Does...he have to be here too?"
+    mt "Well, two heads are better than one."
+    jp "But he's so…blond. I don't see what help he could be."
+    mr_thought "Aren't you guys also blond?"
+    mt "Jazz, what did I say about saying stuff like that?"
+    jp "…If you don't have anything nice to say, don't say anything at all."
+    mt "That's right."
+    mt "I understand that you insult those close to you as a way to show affection, but you do need to be mindful of what is banter and what is actually hurtful."
+    mt "That applies to you too, Smith. Do you two understand?"
+    sp "...Yeah."
+    mt "Great. Let's begin."
+    scene bg interrogation
+    with dissolve
+    int_box "INTERROGATE: the Twins"
+    show jazz default at left
+    show smith default at right
+    label twin_ask:
+        menu:
+            "Testimony, please?":
+                jp "Surely you don't think we were the ones who stole that tacky necklace."
+                sp "I mean, seriously, who wears a jewel THAT big?"
+                show jazz aloof
+                jp "I personally wouldn't steal something like that, so you better go find someone with horrible taste."
+                show smith smug
+                sp "Hey, maybe this\"detective\" stole it! He certainly fits the bill for horrible taste!"
+                mr "Hey! I don't have horrible taste!"
+                jump twin_ask
+            "What is your alibi?":
+                jp "Seriously? You still think we did it? Ugh."
+                show jazz aloof
+                show smith smug
+                jp "But whatever. I was with Smith the whole time."
+                jp "I never even went near Dew's room."
+                sp "I can say the same...for obvious reasons. We stayed in the kitchen and the garden since lunch."
+                sp "Besides, that watermelon scent is too strong for us."
+                sp "What reason would we have to go there?"
+                jp "Is that all, you cretins?"
+                jump twin_ask
+            "That's all":
+                mr "Okay...thanks, guys."
+                mr_thought "I guess."
     jump interrogate
 
 label int_stirling:
     $ ss_int = True
-    scene bg interrogation
     show stirling default at default
-    int_box "INTERROGATE: Stirling Strawberry"
     ss "Heyo!"
+    scene bg interrogation
+    with dissolve
+    show stirling default
+    int_box "INTERROGATE: Stirling Strawberry"
     jump interrogate
     #ask
 
 label interrogate:
     if pc_int:
+        scene living room
         if ss_int:
+            scene living room
             if twin_int:
+                scene living room
                 if hd_int:
+                    scene living room
                     menu:
                         mr "Who should I interrogate?"
                         "Pitaya":
@@ -588,6 +640,7 @@ label interrogate:
                         "That's all":
                             jump continue_story2
                 else:
+                    scene living room
                     menu:
                         mr "Who should I interrogate?"
                         "Pitaya":
@@ -601,6 +654,7 @@ label interrogate:
                         "That's all":
                             jump continue_story2
             else:
+                scene living room
                 menu:
                     mr "Who should I interrogate?"
                     "Pitaya":
@@ -614,6 +668,7 @@ label interrogate:
                     "That's all":
                         jump continue_story2
         else:
+            scene living room
             menu:
                 mr "Who should I interrogate?"
                 "Pitaya":
@@ -627,6 +682,7 @@ label interrogate:
                 "That's all":
                     jump continue_story2
     else:
+        scene living room
         menu:
             mr "Who should I interrogate?"
             "Pitaya":
@@ -641,24 +697,13 @@ label interrogate:
                 jump continue_story2
 
 label int_mira:
+    show mira default
+    mt "Me? Why do you want to interrogate me? I wasn't here for the incident."
     scene bg interrogation
+    with dissolve
     show mira default
     int_box "INTERROGATE: Mira Tisu"
-    mt "Me? Why do you want to interrogate me? I wasn't here for the incident."
-    menu:
-        mr "Who should I interrogate first?"
-        "Pitaya":
-            jump int_pitaya
-        "Honey Dew":
-            jump int_honey
-        "The Twins":
-            jump int_twins
-        "Stirling":
-            jump int_stirling
-        "Mira":
-            jump int_mira
-        "That's all":
-            jump continue_story2
+    jump interrogate
 
 label continue_story2:
     scene bg dining room
@@ -675,7 +720,7 @@ label continue_story2:
 
 label culprit_pc:
     $ pitaya_guilt = True
-    show pitaya guilty
+    show pitaya shock
     pc "Wh-WHAT?!"
     jump wrong_end
 
