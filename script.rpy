@@ -108,7 +108,7 @@ label interrogate_tut:
         mt "That's a good question."
         show mira smile
         mt "But where's the fun in just telling you the answer?"
-        mr_thought "(Mira, quit trolling me…!)"
+        mr_thought "Mira, quit trolling me…!"
         jump question_list
         
     label house_owner:
@@ -117,7 +117,7 @@ label interrogate_tut:
         mt "Well, it is none other than my dear friend, Stirling Strawberry."
         mt "But that really doesn't seem like a question that will help you."
         mr "Huh? O-oh!"
-        mr_thought "(Dang…she's right!)"
+        mr_thought "Dang…she's right!"
         mt "It's quite alright, but just remember that others aren't so forgiving as I am when you ask irrelevant questions."
         jump question_list
 
@@ -289,7 +289,24 @@ label continue_story1:
     jp"Fair point."
     sp "Yeah, you deserve better anyways."
     "???" "Hey, I heard that!"
-    "Some more exposition later..."
+    jp "Oh, you're here? Whoops." 
+    mr_thought "That was the most unsincere apology I have ever heard."
+    mr_thought "And I went to school with Pitaya."
+    "???" "Stirling, I would love to come to your defense, but to be honest, I do think Mira does deserve better."
+    ss "So someone like you?"
+    "???" "..."
+    "???" "Oh, no. But certainly not you."
+    ss "Honeyyy, why are you like this?"
+    "???" "Well, someone has to be a responsible adult when dear Mira's not around."
+    "???" "I can hardly compare with her, but I do my best!"
+    mr_thought "Wow, these guys really like Mira, huh?"
+    mt "Hi, honey."
+    mr_thought "Mira using pet names? Is the world ending?"
+    mt "I don't know what you're thinking, but cut it out."
+    mt "Honey, this is Mozzy. Mozzy, meet Honey Dew. I know her from university."
+    hd "Pleasure to meet you."
+    mr_thought "Oh, so Honey's her name, not a term of affection."
+    mr_thought "Probably should have figured that out."
     ss "And I'm Stirling Strawberry, besties with Mira since we met in college ten years ago!"
     mr "I see. "
     mr "…"
@@ -299,10 +316,10 @@ label continue_story1:
     mt "I'm thirty-eight."
     mr "Oh."
     #Stirling intro, after everyone else.
-    mr "Thank you, good madam!"
-    ss "Huh? I–uh–I'm not–"
+    mr "Well, in any case, thank you, good madam!"
+    ss "Huh? I-uh-I'm not-"
     mr "Huh? What's wrong?"
-    pc "Oh, man–"
+    pc "Oh, man-"
     "Jazz and Smith" "And another one bites the dust!"
     mt "Mozzy…"
     mt "Stirling's a man."
@@ -324,12 +341,61 @@ label continue_story1:
     mr "Please hold your applause, I know I'm glamorous!"
     jp "Is he always like this?"
     mr "Hey, what's that supposed to mean?"
+    mt "So if we could start our investigation soon, that would be great."
+    ss "Aww, come on, Mira! All the suspects are here, can't it wait?"
+    mt "No. The faster we get this done, the less we have to worry about it."
+    pc "Lawyers are scarily efficient."
+    hd "Alright."
+    hd "Stirling called you because..."
+    hd "The Melon Baller went missing!"
+    mr "The what?"
+    ss "The Melon Baller. It's Honey's favourite necklace."
+    jp "Favourite? She's only had it for the past week."
+    hd "Still, it means a lot to me!"
+    hd "I'll show you my room. It's a bit of a mess since I was looking through everything, but you might be able to find some clues."
+
+screen honeysroom():
+    add "bg honey room"
+    modal True
+
+   
+    imagebutton auto "Jewel_box_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "Jewel_box_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Jewel")
+
+    imagebutton auto "door_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "door_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Leave")
 
 label hidden_object:
-    scene bg honey room
-    "So, there's nothing in here as of now."
-    "this is a placeholder for the actual hidden object game"
+    label honeys_room:
+        call screen honeysroom
+    
+    label Jewel:
+        scene bg honey room
+        mr "This box is really neatly organised."
+        mt "Honey has a lot of jewellery, she likes to be able to see all of them and make sure they're there."
+        mr "You'd think a thief would rummage through the jewellery box too."
+        jump honeys_room
+    
+    label Leave:
+        scene bg honey room
+        menu:
+            mt "Are we done investigating?"
+            "Yes, we're done":
+                mr "Yeah, let's go."
+                jump continue_story2
+            "No, we still have stuff to find":
+                jump honeys_room
 
+
+label continue_story2:
+    "As of 9/6/2026, 2:27pm, we don't have the full evidence list. So, here it is:"
+    "Jewellery box; Graduation banner; Brass knuckles; Mira plushie; Mira photo; Mannequin; Pillow; Stirling's smashed picture; Stirling's earring; Candles; Gem"
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
 
     menu:
@@ -417,7 +483,7 @@ label pc_evidence:
             mr "..."
             mr "Okay, all done."
             pc "Great. Now, {nw}{w=.5}"
-            show pitaya awkward
+            show pitaya nervous
             extend "WHAT THE HECK WAS THAT ALL ABOUT?!"
             mr "There was a broken picture in Honey's room, so I was checking to see if you broke it."
             mr "But your knuckles are clean, so, no worries."
@@ -429,7 +495,7 @@ label pc_evidence:
             mt "...Mozzy, please don't tell me you actually put the pillow in as evidence."
             mr "It had feathers poking out of it like the hat!"
             mt "...They're different colours?"
-            mr "...Oh. They looked the same in the lighting."
+            mr "...Oh. They looked the same in the room."
             pc "Are those the feather pillows?"
             mr "Oh yeah, you have them in your room too, right?"
             pc "I guess? I mean, sure, they're meant to be there, but I don't use them."
@@ -537,6 +603,7 @@ label pc_evidence:
                             show pitaya embarrassed
                             mr "Dangit!"
                             pc "O-okay!"
+                            jump pc_evidence
 
         "Nevermind":
             mr "I don't know what I was going to say."
@@ -569,7 +636,7 @@ label int_twins:
     mt "Jazz, what did I say about saying stuff like that?"
     jp "…If you don't have anything nice to say, don't say anything at all."
     mt "That's right."
-    mt "I understand that you insult those close to you as a way to show affection, but you do need to be mindful of what is banter and what is actually hurtful."
+    mt "I know that you insult those close to you as a way to show affection, but you do need to be mindful of what is banter and what is actually hurtful."
     mt "That applies to you too, Smith. Do you two understand?"
     sp "...Yeah."
     mt "Great. Let's begin."
@@ -583,6 +650,7 @@ label int_twins:
             "Testimony, please?":
                 jp "Surely you don't think we were the ones who stole that tacky necklace."
                 sp "I mean, seriously, who wears a jewel THAT big?"
+                mr_thought "After hearing that insults are their love language, I genuinely can't tell if they hate Honey or not."
                 show jazz aloof
                 jp "I personally wouldn't steal something like that, so you better go find someone with horrible taste."
                 show smith smug
@@ -603,6 +671,19 @@ label int_twins:
             "That's all":
                 mr "Okay...thanks, guys."
                 mr_thought "I guess."
+    menu:
+        mt "Well, Mozzy? Can you find any contradictions?"
+        "YES!":
+            mr "Well, I don't know if it's really a contradiction…"
+            mr "But I want more information on something."
+            mt "Well, then, go right ahead."
+            mt "Slaughter his defenses and put his castle under siege until he has to surrender!"
+            pc "Good lord, she's a lawyer again."
+            pc "Okay, go on. Cross examine me."
+            jump twin_evidence
+        "No?": 
+            mt "Well then, we should move on."
+            jump interrogate
     jump interrogate
 
 label int_stirling:
@@ -638,7 +719,7 @@ label interrogate:
                         "Mira":
                             jump int_mira
                         "That's all":
-                            jump continue_story2
+                            jump continue_story3
                 else:
                     scene living room
                     menu:
@@ -652,7 +733,7 @@ label interrogate:
                         "Stirling":
                             jump int_stirling
                         "That's all":
-                            jump continue_story2
+                            jump continue_story3
             else:
                 scene living room
                 menu:
@@ -666,7 +747,7 @@ label interrogate:
                     "Stirling":
                         jump int_stirling
                     "That's all":
-                        jump continue_story2
+                        jump continue_story3
         else:
             scene living room
             menu:
@@ -680,7 +761,7 @@ label interrogate:
                 "Stirling":
                     jump int_stirling
                 "That's all":
-                    jump continue_story2
+                    jump continue_story3
     else:
         scene living room
         menu:
@@ -694,7 +775,7 @@ label interrogate:
             "Stirling":
                 jump int_stirling
             "That's all":
-                jump continue_story2
+                jump continue_story3
 
 label int_mira:
     show mira default
@@ -705,7 +786,7 @@ label int_mira:
     int_box "INTERROGATE: Mira Tisu"
     jump interrogate
 
-label continue_story2:
+label continue_story3:
     scene bg dining room
     menu:
         mr "And the culprit is..."
@@ -742,7 +823,7 @@ label culprit_pale:
 label culprit_ss:
     $ stirling_guilt = True
     show stirling guilty
-    pc "What? Me?"
+    ss "What? Me?"
     jump wrong_end
 
 label wrong_end:
