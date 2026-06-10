@@ -45,7 +45,6 @@ label start:
             "Off we go!"
             jump story
 
-
 label story:
     scene bg bus
     with dissolve
@@ -237,7 +236,7 @@ label continue_story1:
     pc "Mozzy! Hey, man!"
     mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not."
     mr_thought "…Okay, so MAYBE he was on trial for murder like a hundred times, but he's never actually committed any of them!"
-    show pitaya disgust
+    show pitaya angry
     pc "Mozzy you're spacing out again."
     pc "Are you doing that thing where you introduce people in your head completely out of character?"
     mr_thought "Ack. Guilty."
@@ -331,7 +330,7 @@ label continue_story1:
     jp "You do."
     sp "You really look like a girl."
     pc "Hey, YOU can't say anything! You and your sister look identical!"
-    jp "What part of “identical twins” do you not understand…?"
+    jp "What part of \"identical twins\" do you not understand…?"
     sp "It's only fair, I mean, she looked identical to me a few years ago, so now I'm identical to her."
     pc "I know, I know, I was there when you guys announced the change to the family!"
     hd "…"
@@ -344,15 +343,14 @@ label continue_story1:
     mt "So if we could start our investigation soon, that would be great."
     ss "Aww, come on, Mira! All the suspects are here, can't it wait?"
     mt "No. The faster we get this done, the less we have to worry about it."
-    pc "Lawyers are scarily efficient."
+    pc "Man, lawyers are scarily efficient."
     hd "Alright."
-    hd "Stirling called you because..."
-    hd "The Melon Baller went missing!"
+    hd "Stirling called you because the Melon Baller was stolen!"
     mr "The what?"
     ss "The Melon Baller. It's Honey's favourite necklace."
     jp "Favourite? She's only had it for the past week."
-    hd "Still, it means a lot to me!"
-    hd "I'll show you my room. It's a bit of a mess since I was looking through everything, but you might be able to find some clues."
+    hd "Would it kill you kids to have some tact?"
+    hd "Hmph. I'll show you my room. It's a bit of a mess since I was looking through everything, but you might be able to find some clues."
 
 screen honeysroom():
     add "bg honey room"
@@ -372,6 +370,12 @@ screen honeysroom():
         action Jump ("Leave")
 
 label hidden_object:
+    mr "W-wow! You weren't kidding when you said it was a mess!"
+    hd "Yes, I practically turned it inside out."
+    hd "You see, I first thought I misplaced it, but when I couldn't find it anywhere, I realised someone must have stolen it!"
+    mt "Understood. Honey, could you step out and join everyone else? It's easier to investigate with just the two of us."
+    hd "...Fine. If you say so."
+    
     label honeys_room:
         call screen honeysroom
     
@@ -386,12 +390,11 @@ label hidden_object:
         scene bg honey room
         menu:
             mt "Are we done investigating?"
-            "Yes, we're done":
+            "Yes":
                 mr "Yeah, let's go."
                 jump continue_story2
             "No, we still have stuff to find":
                 jump honeys_room
-
 
 label continue_story2:
     "As of 9/6/2026, 2:27pm, we don't have the full evidence list. So, here it is:"
@@ -413,9 +416,9 @@ label int_pitaya:
     $ pc_int = True
     show pitaya default at default
     pc "Wazzup?"
-    mr "Mr Crim–"
+    mr "Mr Crim-"
     pc "Ooh, we're doing this PROFESSIONALLY, okay, this oughta be good!"
-    mr "Aw thanks! Anyways, please give us your version of the events–"
+    mr "Aw thanks! Anyways, please give us your version of the events-"
     pc "Yeah, yeah, witness testimony, I got it."
     pc "Don't worry, I was the defendant for like half of Mira's cases, I know how this stuff works."
     mr "Wait, you guys knew each other before this?!"
@@ -437,7 +440,7 @@ label int_pitaya:
                 jump pc_ask
             "What is your alibi?":
                 pc "I mean, I was in the living room the whole time. Although, I don't know if anyone can confirm that."
-                pc "I did see the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my presence."
+                pc "I know for a fact that I saw the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my presence."
                 pc "But I swear on Old Mrs Frap's life, I did not go anywhere near Dew's room"
                 jump pc_ask
             "That's all":
@@ -654,7 +657,7 @@ label int_twins:
                 show jazz aloof
                 jp "I personally wouldn't steal something like that, so you better go find someone with horrible taste."
                 show smith smug
-                sp "Hey, maybe this\"detective\" stole it! He certainly fits the bill for horrible taste!"
+                sp "Hey, maybe this \"detective\" stole it! He certainly fits the bill for horrible taste!"
                 mr "Hey! I don't have horrible taste!"
                 jump twin_ask
             "What is your alibi?":
@@ -674,16 +677,54 @@ label int_twins:
     menu:
         mt "Well, Mozzy? Can you find any contradictions?"
         "YES!":
-            mr "Well, I don't know if it's really a contradiction…"
+            mr "Well, I don't know if it's really a contradiction..."
             mr "But I want more information on something."
             mt "Well, then, go right ahead."
-            mt "Slaughter his defenses and put his castle under siege until he has to surrender!"
-            pc "Good lord, she's a lawyer again."
-            pc "Okay, go on. Cross examine me."
+            mt "Leave no stone of their testimony unturned and unveil the truth for all to see!"
+            jp "Can we make fun of her for that?"
+            sp "Are you insane!? No!"
             jump twin_evidence
         "No?": 
             mt "Well then, we should move on."
             jump interrogate
+
+label twin_evidence:
+    menu:
+        mr "What evidence do I present?"
+        "Stirling's earring":
+            mr "Do either of you guys wear earrings?"
+            sp "No."
+            mr "..."
+            mr "Does anyone else wear earrings?"
+            jp "Yeah, Stirling does."
+            sp "And he wonders why people mistake him for a her."
+            jump twin_evidence
+        "Pitaya's testimony":
+            mr "Are you sure you were in the kitchen the whole time?"
+            jp "Didn't we literally say that we were also in the garden too?"
+            mr "No! I mean, I have evidence that you went other places too!"
+            mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
+            mr "The hallway...where the rooms are!"
+            jump twin_evidence
+        "Candles":
+            mr "You said you never went near Ms. Dew's room, correct?"
+            jp "Yeah...? I think I was pretty clear when I said that."
+            mr "If that's the case...then how did you know it smelt like watermelon?"
+            jp "Ngh!"
+            sp "Gh?!"
+            jp "I-well, isn't it obvious? The smell was so strong that we could smell it from outside the hallway!"
+            sp "Y-yeah! It is quite strong, after all!"
+            mr "Hm...Mira?"
+            mt "Yes? What is it, Mozzy?"
+            mr "Can you go check if the candles can be smelt from outside the hallway like they said?"
+            mt "Of course."
+            mr "And while we wait..."
+            mr "I'll just let you know: the windows were closed, as well as the doors all day!"
+            jp "Who-who said we smelt watermelons today? We're just talking about what we smelt on...Wednesday! Yeah!"
+            mr_thought "... No way for me to disprove that, but that was such an obvious lie that even I can catch it."
+            jump twin_evidence
+
+    
     jump interrogate
 
 label int_stirling:
@@ -813,11 +854,11 @@ label culprit_hd:
 label culprit_pale:
     $ twin_guilt = True
     show twin guilty
-    jp "You brutish..."
+    jp "You stupid..."
     sp "Putrid..."
     jp "Yammering..."
     sp "Blumbering..."
-    "Jazz and Pale" "FOOLISH, OBSOLETE, BASTARD!!"
+    "Jazz and Smith" "MEDDLING, NO GOOD, BASTARD!!"
     jump wrong_end
 
 label culprit_ss:
