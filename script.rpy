@@ -13,16 +13,12 @@ default twin_int = False
 default ss_int = False
 default hd_int = False
 default pc_int = False
-#default pc_testimony = False
-#default ss_testimony = False
-#default hd_testimony = False
-#default twin_testimony = False
-#default pc_alibi = False
-#default hd_alibi = False
-#default ss_alibi = False
-#default twin_alibi = False
+default pc_testimony = False
+default twin_testimony = False
 default successful_gaydar = False
 default failed_gaydar = False
+default hat = False
+default gem = False
 default pitaya_guilt = False
 default twin_guilt = False
 default stirling_guilt = False
@@ -370,6 +366,7 @@ screen honeysroom():
         action Jump ("Leave")
 
 label hidden_object:
+    scene bg honey room
     mr "W-wow! You weren't kidding when you said it was a mess!"
     hd "Yes, I practically turned it inside out."
     hd "You see, I first thought I misplaced it, but when I couldn't find it anywhere, I realised someone must have stolen it!"
@@ -400,7 +397,7 @@ label continue_story2:
     "As of 9/6/2026, 2:27pm, we don't have the full evidence list. So, here it is:"
     "Jewellery box; Graduation banner; Brass knuckles; Mira plushie; Mira photo; Mannequin; Pillow; Stirling's smashed picture; Stirling's earring; Candles; Gem"
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
-
+    scene living room
     menu:
         mr "Who should I interrogate first?"
         "Pitaya":
@@ -432,6 +429,7 @@ label int_pitaya:
     label pc_ask:
         menu:
             "Testimony, please?":
+                $ pc_testimony = True
                 pc "I was just minding my own business, really!"
                 pc "We were expecting more people, but apparently there was a flight delay, so they couldn't come. But whatever, that's not important."
                 pc "So yeah, I was just minding my own business, and waiting for dinner to be done. I was also checking out Stirling's videogames when Little Miss Drama Queen runs in screaming about how her necklace got stolen."
@@ -440,8 +438,9 @@ label int_pitaya:
                 jump pc_ask
             "What is your alibi?":
                 pc "I mean, I was in the living room the whole time. Although, I don't know if anyone can confirm that."
-                pc "I know for a fact that I saw the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my presence."
-                pc "But I swear on Old Mrs Frap's life, I did not go anywhere near Dew's room"
+                pc "I know for a fact that I saw the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my alibi."
+                pc "But I swear on Old Mrs Frap, I did not go anywhere near Dew's room."
+                pc "Seriously, she'd whup my butt if I lied to you!"
                 jump pc_ask
             "That's all":
                 mr "Okay...thank you Mr Crim."
@@ -464,8 +463,11 @@ label int_pitaya:
 label pc_evidence:
     menu:
         mr "What evidence do I present?"
-        "Brass knuckles":                    
-            mr "Do you know anyone who uses brass knuckles?"
+        "Brass knuckles":
+            mr "Do you still wear Fuschia Breeze No.9?"
+            pc "What sort of question is that? Of course I do!"
+            pc "It was a gift from you, after all."
+            mr "Cool, cool. Do you know anyone who uses brass knuckles?"
             pc "Brass knuckles…?"
             pc "Can't say for sure, but I heard Dew takes self-defense."
             pc "That surprised me, I mean, she's got the strength of a hundred men, what would she be trying to defend herself against?"
@@ -504,7 +506,7 @@ label pc_evidence:
             pc "I guess? I mean, sure, they're meant to be there, but I don't use them."
             pc "They're {i}too{/i} soft to be comfortable, if you get what I mean."
             jump pc_evidence
-        "Pitaya's Testimony: \"I was also checking out Stirling's videogames\"":
+        "Pitaya's Testimony":
             mr "Why were you looking at the game collection?"
             show pitaya smile
             pc "What do you mean? I was bored, that's all."
@@ -545,9 +547,13 @@ label pc_evidence:
                     mr "Wait, Pitaya-"
                     mr "Were you looking through the games...for me?"
                     show pitaya damage
+                    pc "Gh-?!"
+                    hide pitaya damage
+                    with dissolve
                     mr "Y-yikes!"
                     mr_thought "Did he just fall to the floor?"
                     show pitaya smile
+                    with dissolve
                     pc "Y-yeah. Yeah, I was."
                     pc "That was...wow. That was impressive."
                     pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
@@ -591,9 +597,13 @@ label pc_evidence:
                             mr "Wait, Pitaya-"
                             mr "Were you looking through the games...for me?"
                             show pitaya damage
+                            pc "Gh-?!"
+                            hide pitaya damage
+                            with dissolve
                             mr "Y-yikes!"
                             mr_thought "Did he just fall to the floor?"
                             show pitaya smile
+                            with dissolve
                             pc "Y-yeah. Yeah, I was."
                             pc "That was...wow. That was impressive."
                             pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
@@ -618,11 +628,150 @@ label int_honey:
     $ hd_int = True
     show honey default at default
     hd "Hm? Can I help you?"
-    jump interrogate
+    mr "Ms Dew, we know that it was your necklace that was stolen, but can we still ask for your version of the events?"
+    hd "My, my! You're talking so professionally! Mira taught you well."
+    mr "Mozzy worked as a detective before meeting me."
+    hd "...Oh. That's…a surprise."
+    mr_thought "Is it?"
     scene bg interrogation
     with dissolve
     show honey default
     int_box "INTERROGATE: Honey Dew"
+    menu:
+        "Testimony, please":
+            hd "Why, of course."
+            hd "I showed everyone the Melon Baller during lunch. It is quite a beautiful necklace, and I got it for quite the steal!"
+            hd "After lunch, I put it back on the mannequin in my room."
+            hd "You know, Mira, I'm glad Stirling gave the two of us permanent rooms in his house. Saves the hassle of packing unnecessary luggage!"
+            hd "But anyways! I then went to the garden, and I spent about two hours reading my book."
+            hd "Then I went back through the living room back to my room when I noticed that the Melon Baller wasn't on the mannequin."
+            hd "I thought perhaps I put it somewhere else, so I searched through my room, but it still wasn't anywhere! My apologies for the mess, by the way, it must have been hard to investigate with everything thrown about. "
+            hd "I ran back to the living room to let everyone else know of the theft, and…"
+            hd "Now you're here, Mira."
+            mr_thought "Did I just get ignored?"
+        "Alibi?":
+            hd "My alibi? Why do I need an alibi, it's my necklace that got stolen!"
+            hd "You don't think I'm that much of an attention seeker, do you?"
+        "That's all":
+            mr "Right! Thank you for your help, Ms Dew!"
+    menu: 
+        mt "Well, Mozzy? Can you find any contradictions?"
+        "YES!":
+            mr "Well, I don't know if it's really a contradiction…"
+            mr "But I want more information on something."
+            mt "Well, then, go right ahead."
+            mt "But be careful. Honey has more bite than I do."
+            hd "Yes, I do."
+            jump hd_evidence
+        "No?":
+            mt "Well then, we should move on."
+            jump interrogate
+
+label hd_evidence:
+    menu:
+        mr "What evidence do I present?"
+        "Hat":
+            $ hat = True
+            hd "Hm? Where did that come from?"
+            mr "On the mannequin, where you said you kept the Melon Baller."
+            mt "Why is it named that anyways?"
+            hd "I'm not sure. It was labelled that way when I bought it."
+            hd "In any case, what do you want to know about the hat?"
+            mr "Do you wear it often?"
+            hd "Of course! It's such a precious item, and I love it so much!"
+            hd "It means so much to me, and it looks fabulous!"
+            mt "...I'm glad, Honey."
+            mr "Cool!"
+            mr "So where did you get such a cheap hat that looks so good?"
+            mt "Ng-?!"
+            hd "What?"
+            mr "There's a feather missing from the hat, and I can see a glue strip here. But it also looks like it would be a really good quality hat."
+            mr "My question is where did you get such a cheap hat?"
+            mt "Mozzy, the truth is that I-"
+            hd "Oh, YOU WANNA FIGHT, BOY?! YOU WANT TO FIGHT ME?!"
+            mt "Aaand here we go again. Oh boy."
+            hd "MIRA BOUGHT THAT FOR ME, OKAY?! YOU THINK IT'S CHEAP BEING A UNIVERSITY STUDENT?! STIRLING MAY BE A NEPO BABY, AND MY PARENTS MAY BE PRETTY WELL OFF, BUT MIRA WAS DOING THE BEST SHE COULD TO GET HER LAW DEGREE!"
+            if gem:
+                mr "Didn't we do this before?!"
+            hd "The fact that despite ALL of that, she bought that hat as a gift for ME! ME! She got the best hat she could find within her budget, despite all her tight schedules, despite all her student loans! Got it? GOT IT?!"
+            mt "Yes, yes, we get it, Honey! Please, calm down!"
+            hd "..."
+            hd "Oh, of course! I'm so sorry. Let's forget this, shall we?"
+            jump hd_evidence
+        "Brass knuckles":
+            hd "Oh, those? They must be that punks'."
+            mr "...You mean Pitaya?"
+            hd "Yes, him."
+            jump hd_evidence
+        "The twins' testimony":
+            if twin_testimony:
+                mr "The twins were also in the garden. Did you see them?"
+                hd "They were? I'm afraid I didn't notice."
+                hd "Though, I was reading a rather interesting book. Would you like to read it?"
+                mr "...{i}Bejewelled Jaws{/i} by Constance Dew?"
+                hd "My sister wrote it. She's a botanist, you see. She specializes in carnivorous plants."
+                mt "Yes, I remember that."
+                mt "I didn't know Sun's name was actually Constance."
+                hd "Yes, well, our parents weren't the best at naming us. There's a reason I changed my name."
+                mr "...Cool."
+            else:
+                hd "Oh, the heirs to the Pale family? What about them?"
+                mr "...That is a very good question."
+                mt "Mozzy, remember to get the testimony first before using it as evidence."
+            jump hd_evidence
+        "Mira plushie":
+            mr "Where did you get this?"
+            mt "Ng-!"
+            hd "Oh, that? I commissioned it myself!"
+            hd "I can't see you these days because of how busy our schedules are! So I commissioned a plushie of you that I can talk to when I'm not with you!"
+            mr "Ms Dew, have you considered maybe giving her a phone call like a normal person?"
+            hd "But that's boring!"
+            mt "Can we please stop talking about this?!"
+            jump hd_evidence
+        "Gem":
+            $ gem = True
+            mr "What can you tell us about this gem?"
+            hd "Ah, this must be from the Melon Baller. Where did you find it?"
+            mr "On the bed. It's really neat, by the way. Why's that?"
+            hd "I like keeping my bed neat. And well, since it's so neat, I saw no reason to look through it as I'd be able to see if there's anything underneath anyways."
+            menu: 
+                mr_thought "Should I ask her why there's glue on this?"
+                "Yes":
+                    hd "What."
+                    mr "I was just curious, since you said you got this for a steal."
+                    mr "Did you get scammed, by any chance?"
+                    hd "I. Don't. Know. What. You're. Talking. About."
+                    mr "I mean, getting it for a steal implies that you got a expensive thing for cheap."
+                    mr "But the glue here suggests otherwise."
+                    mt "Mozzy, you really shouldn't-"
+                    mr "So I was just wondering if you got scammed or if you were lying about how valuable it is."
+                    mt "Mozzy, I think you need to stop-"
+                    hd "CURSE YOU!"
+                    mr "Gah!?"
+                    hd "FIRST, you DARE interrupt my time with Mira. THEN, you ask for my alibi even though I'M THE VICTIM. And NOW, YOU JUDGE ME FOR BUYING CHEAP JEWELLERY?!"
+                    if hat:
+                        mr "Didn't we do this before?!"
+                    mt "Honey, please, calm down-"
+                    hd "WHO CARES?! WHO CARES IF I BUY CHEAP JEWELLERY?! IT DOES ITS JOB SO LONG AS IT LOOKS PRETTY, NO?! WHO ARE YOU TO JUDGE ME?!"
+                    hd "I HAVE BETTER THINGS TO SPEND MY MONEY ON THAN RIDICULOUSLY EXPENSIVE JEWELLERY."
+                    mt "Honey-"
+                    hd "You know what? FINE! I SAID IT WAS VALUABLE SO THOSE BRATS WOULDN'T MAKE FUN OF ME! OKAY?! SO SHUT THAT STUPID TRAP OF YOURS AND-"
+                    mt "Honey Dew, calm down! Now!"
+                    hd "..."
+                    hd "Ah, sorry. My temper went out of hand there, didn't it?"
+                    hd "This is embarrassing. I apologize."
+                    hd "Shall we move on?"
+                    mt "..."
+                    mt "Honey, we're going to talk about this later."
+                    hd "Hm? Oh. Alright."
+                    jump hd_evidence
+                "No":
+                    jump hd_evidence
+        "Nevermind":
+            mr "I don't know what I was going to say."
+            mt "Then let's move on."
+        
+    jump interrogate
 
 label int_twins:
     $ twin_int = True
@@ -639,8 +788,8 @@ label int_twins:
     mt "Jazz, what did I say about saying stuff like that?"
     jp "…If you don't have anything nice to say, don't say anything at all."
     mt "That's right."
-    mt "I know that you insult those close to you as a way to show affection, but you do need to be mindful of what is banter and what is actually hurtful."
-    mt "That applies to you too, Smith. Do you two understand?"
+    mt "I know that you insult those close to you as a love language, but you do need to be mindful of what is banter and what is actually hurtful."
+    mt "That applies to you too, Smith. Do you understand?"
     sp "...Yeah."
     mt "Great. Let's begin."
     scene bg interrogation
@@ -651,6 +800,7 @@ label int_twins:
     label twin_ask:
         menu:
             "Testimony, please?":
+                $ twin_testimony = True
                 jp "Surely you don't think we were the ones who stole that tacky necklace."
                 sp "I mean, seriously, who wears a jewel THAT big?"
                 mr_thought "After hearing that insults are their love language, I genuinely can't tell if they hate Honey or not."
@@ -664,12 +814,11 @@ label int_twins:
                 jp "Seriously? You still think we did it? Ugh."
                 show jazz aloof
                 show smith smug
-                jp "But whatever. I was with Smith the whole time."
-                jp "I never even went near Dew's room."
-                sp "I can say the same...for obvious reasons. We stayed in the kitchen and the garden since lunch."
-                sp "Besides, that watermelon scent is too strong for us."
-                sp "What reason would we have to go there?"
-                jp "Is that all, you cretins?"
+                jp "But whatever. I was with Smith the whole time. I never even went near Dew's room."
+                sp "I can say the same...for obvious reasons." 
+                sp "We were in the kitchen and the garden since lunch."
+                sp "Besides, that watermelon scent is too strong for us. What reason would we have to go there?"
+                jp "Is that all, you cretin?"
                 jump twin_ask
             "That's all":
                 mr "Okay...thanks, guys."
@@ -696,16 +845,23 @@ label twin_evidence:
             sp "No."
             mr "..."
             mr "Does anyone else wear earrings?"
-            jp "Yeah, Stirling does."
+            jp "Yeah, that punk loser named after a fruit does. So does Stirling."
             sp "And he wonders why people mistake him for a her."
             jump twin_evidence
         "Pitaya's testimony":
-            mr "Are you sure you were in the kitchen the whole time?"
-            jp "Didn't we literally say that we were also in the garden too?"
-            mr "No! I mean, I have evidence that you went other places too!"
-            mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
-            mr "The hallway...where the rooms are!"
-            jump twin_evidence
+            if pc_testimony:
+                mt "What do you mean, Pitaya's testimony?"
+                mr "What? My gut instinct tells me that this is important! And that's why-"
+                mr "..."
+                mr "I just remembered we haven't actually talked to him yet."
+                jump twin_evidence
+            else:
+                mr "Are you sure you were in the kitchen the whole time?"
+                jp "Didn't we literally say that we were also in the garden too?"
+                mr "No! I mean, I have evidence that you went other places too!"
+                mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
+                mr "The hallway...where the rooms are!"
+                jump twin_evidence
         "Candles":
             mr "You said you never went near Ms. Dew's room, correct?"
             jp "Yeah...? I think I was pretty clear when I said that."
@@ -714,15 +870,14 @@ label twin_evidence:
             sp "Gh?!"
             jp "I-well, isn't it obvious? The smell was so strong that we could smell it from outside the hallway!"
             sp "Y-yeah! It is quite strong, after all!"
-            mr "Hm...Mira?"
-            mt "Yes? What is it, Mozzy?"
-            mr "Can you go check if the candles can be smelt from outside the hallway like they said?"
-            mt "Of course."
-            mr "And while we wait..."
-            mr "I'll just let you know: the windows were closed, as well as the doors all day!"
+            mr "Hm"
+            mt "I'll just let you know: the windows, as well as the door, were closed all day."
             jp "Who-who said we smelt watermelons today? We're just talking about what we smelt on...Wednesday! Yeah!"
             mr_thought "... No way for me to disprove that, but that was such an obvious lie that even I can catch it."
             jump twin_evidence
+        "Nevermind":
+            mr "I don't know what I was going to say."
+            mt "Then, let's move on."
 
     
     jump interrogate
@@ -847,7 +1002,7 @@ label culprit_pc:
     jump wrong_end
 
 label culprit_hd:
-    show honey guilty
+    show honey surprise
     hd "I...don't understand."
     jump good_end
 
