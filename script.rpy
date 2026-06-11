@@ -162,12 +162,29 @@ label tutorial_end:
     mt "That's what you're worried about? Don't worry, take all the time you need. We're in no hurry."
     show mozzy excited
     mr "Phew! Thanks, Mira!"
+    label hidden_object_tut:
+        call screen richstreet
+    
+    label Found:
+        mr "There it is!"
+        jump continue_story1
+
+screen richstreet():
+    add "bg rich street"
+    modal True
+
+   
+    imagebutton auto "houseST_%s.jpg":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "houseST_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Found")
 
 #insert HOG tutorial here
 
 label continue_story1:
     scene gates
-    "{i}One hidden object tutorial later...{/i}"
+    with dissolve 
     show mozzy excited at left
     show mira smile at right
     mr "Okay! Made it!"
@@ -850,17 +867,62 @@ label twin_evidence:
             jump twin_evidence
         "Pitaya's testimony":
             if pc_testimony:
-                mt "What do you mean, Pitaya's testimony?"
-                mr "What? My gut instinct tells me that this is important! And that's why-"
-                mr "..."
-                mr "I just remembered we haven't actually talked to him yet."
-                jump twin_evidence
-            else:
                 mr "Are you sure you were in the kitchen the whole time?"
                 jp "Didn't we literally say that we were also in the garden too?"
                 mr "No! I mean, I have evidence that you went other places too!"
                 mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
                 mr "The hallway...where the rooms are!"
+                sp "What?! No way, we didn't see him-"
+                jp "Shut up!"
+                mt "Too late."
+                jp "M-Mira?"
+                mt "I'm sorry, I'm aware that I'm being a bit harsh on you. But I do have to do my job."
+                mr "And it seems you two just admitted that you went to the living room!"
+                jp "W-you're forgetting something! We may have gone to the living room, but we didn't see that punk loser anywhere! "
+                sp "Yeah! He's lying about seeing us come from the hallway!"
+                mt "That can also be explained."
+                mt "Pitaya was looking at the videogame collection."
+                jp "Aha! More proof! He hates videogames!"
+                mt "Indeed he does. I cannot explain why he was looking through the collection without speculation, but I do have proof that he was there. "
+                mt "Tell me, when did Pitaya arrive here?"
+                sp "This morning. Why?"
+                mt "That's what I thought."
+                mt "You see, he mentioned a certain lawyer game. I know for a fact that the game he was referring to was only bought after his last visit to Stirling." 
+                mt "He wouldn't have had time to look through it this morning as he only just arrived. So the only way he could have known that Stirling bought that game…"
+                mr "...Is if his alibi is true!"
+                mt "Precisely. And if he was looking through the collection, he would probably be down on the ground, and anyone walking in wouldn't see him because he was covered by the couch."
+                mr "But if you're behind the couch like this…"
+                pc "What? Mozzy, what are you-"
+                mr "You can still see the door to the hallway!"
+                mr "What do you say to that?"
+                jp "Argh!"
+                sp "Impossible...!"
+                jp "You're telling us..."
+                sp "That you figured all of that out..."
+                "Jazz and Pale" "Just by one man's word?!"
+                mr "That's Mira for you!"
+                mt "Well, to be honest, you also slipped up when you mentioned that the watermelon scent would be too strong for you."
+                jp "...This is your fault."
+                sp "My fault?! Why is it my fault?!"
+                jp "You're the one that slipped up! Now they know that we were in that diva's room!"
+                mt "I mean, we didn't quite know that yet. Thank you for the confirmation."
+                jp "...Miercoles."
+                sp "See?! You messed too!"
+                sp "Oh, and also, you said a naughty word!"
+                jp "Nuh uh! I said \"Wednesday\"!"
+                sp "Yuh huh!"
+                jp "Nuh uh!"
+                mr "Will you two stop so we can carry on our investigation?"
+                "Jazz and Pale" "CALLATE!"
+                mr "Yikes!"
+                mt "Jazz. Smith."
+                "Jazz and Pale" "Sorry."
+                jump twin_evidence
+            else:
+                mt "What do you mean, Pitaya's testimony?"
+                mr "What? My gut instinct tells me that this is important! And that's why-"
+                mr "..."
+                mr "I just remembered we haven't actually talked to him yet."
                 jump twin_evidence
         "Candles":
             mr "You said you never went near Ms. Dew's room, correct?"
