@@ -20,6 +20,8 @@ default failed_gaydar = False
 default hat = False
 default gem = False
 default honey_doll = False
+default hd_hospital = False
+default ss_hospital = False
 default pitaya_guilt = False
 default twin_guilt = False
 default stirling_guilt = False
@@ -482,7 +484,6 @@ label int_pitaya:
         "No?": 
             mt  "Well then, we should move on."
             jump interrogate
-
 label pc_evidence:
     menu:
         mr "What evidence do I present?"
@@ -665,7 +666,6 @@ label int_honey:
         "No?":
             mt  "Well then, we should move on."
             jump interrogate
-
 label hd_evidence:
     menu:
         mr "What evidence do I present?"
@@ -696,11 +696,6 @@ label hd_evidence:
             mt  "Yes, yes, we get it, Honey! Please, calm down!"
             hd "..."
             hd "Oh, of course! I'm so sorry. Let's forget this, shall we?"
-            jump hd_evidence
-        "Brass knuckles":
-            hd "Oh, those? They must be that punks'."
-            mr "...You mean Pitaya?"
-            hd "Yes, him."
             jump hd_evidence
         "The twins' testimony":
             if twin_testimony:
@@ -828,7 +823,6 @@ label int_twins:
         "No?": 
             mt  "Well then, we should move on."
             jump interrogate
-
 label twin_evidence:
     menu:
         mr "What evidence do I present?"
@@ -1005,7 +999,6 @@ label int_stirling:
         "No?":
             mt "Well then, let's move on."
             jump interrogate
-
 label ss_evidence:
     menu:
         mr "What evidence do I present?"
@@ -1158,15 +1151,182 @@ label interrogate:
 
 label int_mira:
     mt  "Me? Why do you want to interrogate me? I wasn't here for the incident."
+    mr "I know...listen, Mira-"
+    mr "..."
+    mr "Can I talk to you in private?"
+    mt "..."
+    mt "Alright."
+    mr_thought "We moved as far as we could from the rest of the party."
+    mt "What do you need?"
+    mr "I just wanted to know more about our suspects."
+    mt "..."
+    mt "I see. I'll do my best."
     scene bg interrogation
     with dissolve
     int_box "INTERROGATE: Mira Tisu"
-    jump interrogate
+    label mira_ask:
+        menu:
+            mt "Who do you need me to talk about?"
+            "Honey Dew":
+                mr "How well do you know Ms Dew?"
+                mt "...Is that how you start all interrogations?"
+                mt "No, 'Hey, Hello, How are you?'"
+                mr "This is very important to the case, Ms Tisu!"
+                mt "Very well, I've known her since uni, she was a film acting major while I took law. We were flatmates with Stirling as well."
+                mt "Funnily enough the law classes and the film acting classes were right next to each other. "
+                mr "I see...How about her personality?"
+                mt "Well, she always did have a tendency to start a little drama, a fake stolen pencil here and there but it was always for a good reason. "
+                mt "...Well in her eyes anyway."
+                mt "She is also really kind and loyal towards her friends."
+                mt "...Maybe not towards outsiders though."
+                label ask_about_hd:
+                    menu:
+                        mt "Anything else?"
+                        "Ask about starting drama":
+                            mt "You mentioned starting drama, can you elaborate?"
+                            mt "Honey is known to blame someone for something they didn't do."
+                            mt "It's mostly people who wrong her or our old group in any way."
+                            mt "I swear she means well, but her 'end justifies the means' mindset is rather concerning sometimes."
+                            mr "I see..."
+                            mr_thought "Seems like something I should remember..."
+                            jump ask_about_hd
+                        "Ask about her loyalty":
+                            $ hd_hospital = True
+                            mr "How can you prove that she is as Loyal as you say she is?"
+                            mt "Well...I can't prove it because it's more of a feeling."
+                            mt "She and stirling were both there when i got stabbed once-"
+                            mr "Woah can we cycle back to the stabbing?!"
+                            mt "-I woke up in the hospital with hysterical crying from..."
+                            mt "...Stirling, surprisingly. Honey never cries aloud anyways-"
+                            mr "So...are we ignoring the stabbed comment or...?"
+                            jump ask_about_hd
+                        "Ask about the hospital" if hd_hospital:
+                            mr "Okay..."
+                            mr "CAN WE NOW CIRCLE BACK TO THE STABBING?!"
+                            mt "Fine, just because you asked so nicely."
+                            mt "...I got stabbed."
+                            mr "...That's it?!"
+                            mt "I don't remember why I got stabbed, I was just...stabbed."
+                            mt "And you don't know who did it?"
+                            mt "I..."
+                            mt "Gh-!"
+                            mr "M-Mira? Are you okay?"
+                            mt "I-no, I don't know. Please...don't ask me about this again."
+                            mr "That's enough then..."
+                            jump ask_about_hd
+                        "No":
+                            jump mira_ask
+            "Stirling Strawberry":
+                mr "How well do you know Mr Strawberry?"
+                mt "Around the same time as I have known Honey. We went to university together. He took a musical theatre degree. In fact, we were all flatmates."
+                mt "It was a bit strange how the law classes were closer to the film acting classes than the musical theatre classes were."
+                mr "Okay...and his personality?"
+                mt "I know he acts a bit childish sometimes, but he is a responsible person. In fact, he's been taking care of the twins ever since their parents died."
+                mt "To take care of two young children even while he suffered the same tragedy...his mental strength really is something."
+                mt "Ah, and he's incredibly loyal as well! It's quite easy to tell, he wears his heart on his sleeve."
+                label ask_about_ss:
+                    menu:
+                        mt "Anything else?"
+                        "Ask about his loyalty":
+                            $ ss_hospital = True
+                            mt "There was a time during our last years of university when I suffered from major blood loss."
+                            mt "He and Honey were both there when I woke up at the hospital. I could already tell that he had been crying heavily, but somehow he managed to cry even more when I woke up."
+                            mt "I felt terrible for making them worry like that, but it was actually rather nice to see how much they cared. "
+                            mt "That's something I haven't had in a while."
+                            mr "Why were you losing blood though?"
+                            mt "Oh. I was stabbed."
+                            mr "WHAT?!"
+                            mt "In the neck."
+                            mr "THAT'S EVEN WORSE!!!"
+                            mt "Um...I don't quite remember how though, so I ask that you don't ask any further."
+                            jump ask_about_ss
+                        "Ask about the tragedy":
+                            mt "Ahh...that's a rather sensitive topic. I don't think I should talk about it."
+                            mt "But just so you can tell how severe it was...there's a reason why Stirling is the one taking care of the twins now."
+                            mr "...Oh."
+                            mt "Yeah. I suggest not bringing it up anytime soon."
+                            jump ask_about_ss
+                        "Ask about the hospital" if ss_hospital:
+                            mr "Okay..."
+                            mr "CAN WE NOW CIRCLE BACK TO THE STABBING?!"
+                            mt "Fine, just because you asked so nicely."
+                            mt "...I got stabbed."
+                            mr "...That's it?!"
+                            mt "I don't remember why I got stabbed, I was just...stabbed."
+                            mt "And you don't know who did it?"
+                            mt "I..."
+                            mt "Gh-!"
+                            mr "M-Mira? Are you okay?"
+                            mt "I-no, I don't know. Please...don't ask me about this again."
+                            mr "That's enough then..."
+                            jump ask_about_ss
+                        "No":
+                            jump mira_ask
+            "The Pale Twins":
+                mt "...You mean the twins?"
+                mr "That's what I said."
+                mt "They've been living with Stirling for around six years now ever since their parents passed away."
+                mt "You'll have noticed that they insult people rather frequently. In fact, the only people I haven't seem them insult are each other and myself. Don't take it to heart though, they don't always mean it."
+                mt "And yes, while they do insult Stirling on a daily basis, they do care for him. They actually care for most people around them. You'll simply never catch them dead admitting it."
+                mt "I hope they grow to be kinder. It's not exactly a good thing to act like they do."
+                label ask_about_twins:
+                    menu:
+                        mt "Anything else?"
+                        "Ask about their insults":
+                            mt "They're very creative with them. They've got quite the brilliant minds, if only they'd use them in a different context…"
+                            mt "I've seen them curse someone out in Spanish. Or was it French? I'm afraid I only know Italian so I don't know for sure."
+                            mt "I believe the rough translation of an insult they gave a bigot is \"I see they have succeeded in reanimating corpses and giving them intelligent speech\"."
+                            mt "That one was actually quite fun."
+                        "Ask about their parents":
+                            mt "Ahh...that's a rather sensitive topic. I don't think I should talk about it."
+                            mt "But just so you can tell how severe it was...there's a reason why Stirling is the one taking care of the twins now."
+                            mr "...Oh."
+                            mt "Yeah. I suggest not bringing it up anytime soon. "
+                        "No":
+                            jump mira_ask
+                jump mira_ask
+            "Pitaya Crim":
+                mr "What about Pitaya?"
+                mt "Pitaya…? I can't really tell you much about him."
+                mt "I mean, Stirling knows him better than I do. They are cousins after all."
+                mr "Wait, does that mean STIRLING'S the glimmerous cousin Pitaya always talked about?!"
+                mt "Ah, that's right, you two seemed like you knew each other. May I ask how?"
+                mr "Oh, we were in high school together. I kept him company in detention whenever he beat someone up."
+                mt "Riiight. Stirling did say that his newly adopted cousin was a bit of a troublemaker. Um. If you don't mind me asking, why did he 'beat people up' in your days?"
+                mr "I don't know, he never told me. He just said \"Oh, Mozz man, don't worry about those bullies anymore. I'll make sure they'll think twice about crossing us again\"."
+                mr "I don't know why he called them bullies, they never bullied me."
+                mt "..."
+                mt "Hm. Well, I'm sure he always had good intentions. It's why I've never seen him on the stand for theft. It would only benefit himself and not others."
+                mr "...So how many of his trials did you defend?"
+                mt "Um...let's see...six murder cases, eight acts of vandalism, one case of vigilantism, and five charges of fraud."
+                mr "He wouldn't do any of those! ...except maybe the vigilantism."
+                mt "He never actually did most of those charges. He did accidentally use a forged ID, but it was an accident, so the jury acquitted him. "
+                mr "He's really got horrible luck, huh?"
+                mt "Tell me about it. You don't understand how much of a scolding I would have given him on his last trial for murder if I hadn't passed out from the stress."
+                mr "...Mira, are you okay?"
+                mt "I'm a criminal lawyer in this universe, of course not."
+                jump mira_ask
+            "Nevermind":
+                mr "That's all I need. Thank you, Ms Tisu."
+                jump interrogate
 
 label continue_story3:
     scene bg dining room
+    mr "Alright! I've got all the information I need!"
+    mt "And I believe we can name a culprit now."
+    hd "Oh, that's wonderful!"
+    jp "Finally. Took you long enough. "
+    sp "I still think you're a dud."
+    mr "Hey!"
+    ss "Al-already? I knew you were brilliant, Mira, but this is fast even for you!"
+    mr_thought "Yeah, actually...I thought Mira would give me some time first. Was this case really so simple for her?"
+    hd "So who is it? Tell me!"
+    mt "Well, Mozzy? Go ahead."
+    mr "Oh, okay..."
+    mr_thought "Let's look at all the clues and the testimony."
+    mr_thought "There's a lot of ways this could have gone, but in this instance..."
     menu:
-        mr "And the culprit is..."
+        mr "The culprit is..."
         "Pitaya":
             jump culprit_pc
         "Honey Dew":
@@ -1180,6 +1340,7 @@ label culprit_pc:
     $ pitaya_guilt = True
     show pitaya shock
     pc "Wh-WHAT?!"
+    mt "..."
     jump wrong_end
 
 label culprit_hd:
@@ -1195,12 +1356,14 @@ label culprit_pale:
     jp "Yammering..."
     sp "Blumbering..."
     "Jazz and Smith" "MEDDLING, NO GOOD, BASTARD!!"
+    mt "..."
     jump wrong_end
 
 label culprit_ss:
     $ stirling_guilt = True
-    show stirling guilty
+    show stirling surprise
     ss "What? Me?"
+    mt "..."
     jump wrong_end
 
 label wrong_end:
@@ -1210,7 +1373,7 @@ label wrong_end:
     
     if twin_guilt:
         mr_thought "We searched through their bags, and we found the Melon Baller stuffed in a game pouch."
-        mr_thought"They denied putting it there, but the evidence is clear."
+        mr_thought "They denied putting it there, but the evidence is clear."
 
     if stirling_guilt:
         mr_thought "We searched through his room, and we found the Melon Baller stuffed in a pillow."
@@ -1218,6 +1381,9 @@ label wrong_end:
 
     mr_thought "Luckily, Miss Dew was just glad that she got the necklace back, and insisted that we just forget about the incident."
     mr_thought "We stayed at Stirling's place for another week as both Honey and Stirling insisted on getting to know me better...although I think they just wanted more time with Mira."
+    mr_thought "Speaking of Mira, I saw her talking with Honey in the garden on the day we found the Melon Baller. She looked really disappointed, but also unsurprised."
+    mr_thought "Honey seemed to be apologizing for something, although I couldn't hear what they were saying since I was all the way up in a window."
+    mr_thought "I tried asking Mira about it, but she just told me to look back on my case notes if I wanted to know. But no matter how many times I go over them, I can't see anything else."
     mr_thought "And so ends the tale of \"The Disappearance of the Melon Baller\""
     mr_thought "..."
     mr_thought "The name is a work in progress."
@@ -1230,7 +1396,7 @@ label good_end:
     mr_thought "...Okay that's a lie but honestly Pitaya and the twins don't really forgive easily so it's a win!"
     mr_thought "And so ends the tale of \"The Melon Conspiracy\""
     mr_thought "..."
-    mr_thought "Does this count as a conspiracy?"
+    mr_thought "Does this even count as a conspiracy?"
     "{b}Fin.{/b}"
 
     return
