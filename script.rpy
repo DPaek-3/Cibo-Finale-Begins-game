@@ -946,45 +946,49 @@ label int_stirling:
                 mt "..."
                 ss "...Okay, maybe I'm a bit nervous. "
                 menu:
-                    "Why?":
-                        ss "I don't know."
+                    "Keep pestering him":
                         menu:
-                            "Why?":
-                                ss "What did I just say? I don't know!"
-                                menu:
-                                    "Why?":
-                                        ss "I'm not saying anything."
-                                        menu:
-                                            "Why?":
-                                                ss "I-I just won't! Okay?"
-                                                menu:
-                                                    "Why?":
-                                                        ss "Ngh-do I have the right to silence?"
-                                                        menu:
-                                                            "Why?":
-                                                                ss "I don't want to say it! Alright?"
-                                                                menu:
-                                                                    "Why?":
-                                                                        ss "Stop! Why are you like this?"
-                                                                        menu:
-                                                                            "Why?":
-                                                                                ss "Gh-"
-                                                                                menu:
-                                                                                    "Why?":
-                                                                                        ss "BECAUSE THIS IS THE FIRST TIME I'VE EVER BEEN QUESTIONED AND MIRA'S SO SERIOUS IT'S KINDA SCARY OKAY?!"
-                mt "..."
-                mr "..."
-                ss "..."
-                ss "Ack, didn't mean to say that."
-                mr "Well, that's an easy fix!"
-                mr "Just stop thinking of Mira as scary!"
-                ss "..."
-                mt "..."
-                mt "I don't think it works like that."
-                mt "Am I really that scary?"
-                mr "...So I think we should move on."
-                mt "Why does nobody ever answer that question?"
-                jump ss_ask
+                        "Why?":
+                            ss "I don't know."
+                            menu:
+                                "Why?":
+                                    ss "What did I just say? I don't know!"
+                                    menu:
+                                        "Why?":
+                                            ss "I'm not saying anything."
+                                            menu:
+                                                "Why?":
+                                                    ss "I-I just won't! Okay?"
+                                                    menu:
+                                                        "Why?":
+                                                            ss "Ngh-do I have the right to silence?"
+                                                            menu:
+                                                                "Why?":
+                                                                    ss "I don't want to say it! Alright?"
+                                                                    menu:
+                                                                        "Why?":
+                                                                            ss "Stop! Why are you like this?"
+                                                                            menu:
+                                                                                "Why?":
+                                                                                    ss "Gh-"
+                                                                                    menu:
+                                                                                        "Why?":
+                                                                                            ss "BECAUSE THIS IS THE FIRST TIME I'VE EVER BEEN QUESTIONED AND MIRA'S SO SERIOUS IT'S KINDA SCARY OKAY?!"
+                        mt "..."
+                        mr "..."
+                        ss "..."
+                        ss "Ack, didn't mean to say that."
+                        mr "Well, that's an easy fix!"
+                        mr "Just stop thinking of Mira as scary!"
+                        ss "..."
+                        mt "..."
+                        mt "I don't think it works like that."
+                        mt "Am I really that scary?"
+                        mr "...So I think we should move on."
+                        mt "Why does nobody ever answer that question?"
+                        jump ss_ask
+                    "Move on":
+                        jump ss_ask
             "That's all":
                 mr "Okay... Thank you, Mr Strawberry."
     menu:
@@ -1070,84 +1074,20 @@ label ss_evidence:
             jump interrogate
 
 label interrogate:
-    if pc_int:
-        scene living room
-        if ss_int:
-            scene living room
-            if twin_int:
-                scene living room
-                if hd_int:
-                    scene living room
-                    menu:
-                        mr "Who should I interrogate?"
-                        "Pitaya":
-                            jump int_pitaya
-                        "Honey Dew":
-                            jump int_honey
-                        "The Twins":
-                            jump int_twins
-                        "Stirling":
-                            jump int_stirling
-                        "Mira":
-                            jump int_mira
-                        "That's all":
-                            jump continue_story3
-                else:
-                    scene living room
-                    menu:
-                        mr "Who should I interrogate?"
-                        "Pitaya":
-                            jump int_pitaya
-                        "Honey Dew":
-                            jump int_honey
-                        "The Twins":
-                            jump int_twins
-                        "Stirling":
-                            jump int_stirling
-                        "That's all":
-                            jump continue_story3
-            else:
-                scene living room
-                menu:
-                    mr "Who should I interrogate?"
-                    "Pitaya":
-                        jump int_pitaya
-                    "Honey Dew":
-                        jump int_honey
-                    "The Twins":
-                        jump int_twins
-                    "Stirling":
-                        jump int_stirling
-                    "That's all":
-                        jump continue_story3
-        else:
-            scene living room
-            menu:
-                mr "Who should I interrogate?"
-                "Pitaya":
-                    jump int_pitaya
-                "Honey Dew":
-                    jump int_honey
-                "The Twins":
-                    jump int_twins
-                "Stirling":
-                    jump int_stirling
-                "That's all":
-                    jump continue_story3
-    else:
-        scene living room
-        menu:
-            mr "Who should I interrogate?"
-            "Pitaya":
-                jump int_pitaya
-            "Honey Dew":
-                jump int_honey
-            "The Twins":
-                jump int_twins
-            "Stirling":
-                jump int_stirling
-            "That's all":
-                jump continue_story3
+    menu:
+        mr "Who should I interrogate?"
+        "Pitaya":
+            jump int_pitaya
+        "Honey Dew":
+            jump int_honey
+        "The Twins":
+            jump int_twins
+        "Stirling":
+            jump int_stirling
+        "Mira" if pc_int and ss_int and hd_int and twin_int:
+            jump int_mira
+        "That's all":
+            jump continue_story3
 
 label int_mira:
     mt  "Me? Why do you want to interrogate me? I wasn't here for the incident."
@@ -1273,7 +1213,7 @@ label int_mira:
                     menu:
                         mt "Anything else?"
                         "Ask about their insults":
-                            mt "They're very creative with them. They've got quite the brilliant minds, if only they'd use them in a different context…"
+                            mt "They're very creative with them. They've got quite the brilliant minds, if only they'd use them in a different context..."
                             mt "I've seen them curse someone out in Spanish. Or was it French? I'm afraid I only know Italian so I don't know for sure."
                             mt "I believe the rough translation of an insult they gave a bigot is \"I see they have succeeded in reanimating corpses and giving them intelligent speech\"."
                             mt "That one was actually quite fun."
@@ -1287,7 +1227,7 @@ label int_mira:
                 jump mira_ask
             "Pitaya Crim":
                 mr "What about Pitaya?"
-                mt "Pitaya…? I can't really tell you much about him."
+                mt "Pitaya...? I can't really tell you much about him."
                 mt "I mean, Stirling knows him better than I do. They are cousins after all."
                 mr "Wait, does that mean STIRLING'S the glimmerous cousin Pitaya always talked about?!"
                 mt "Ah, that's right, you two seemed like you knew each other. May I ask how?"
@@ -1341,6 +1281,27 @@ label culprit_pc:
     show pitaya shock
     pc "Wh-WHAT?!"
     mt "..."
+    mr "If I'm perfectly honest..."
+    mr "I don't think you actually did it."
+    mr "I mean, you basically confirmed your alibi when you said you saw the twins enter and when you told us about the new lawyer game."
+    mr "But I genuinely can't tell who did!"
+    mr "So...I'm pointing at you?"
+    pc "..."
+    pc "Y'know what? I'll take that. "
+    pc "So what you're saying is that...there is no culprit?"
+    mr "I guess? Sorry to disappoint."
+    hd "Absolutely not! I cannot accept this!"
+    mr "H-HUH?!"
+    hd "Maybe you don't think so, but it's clear that Mira disagrees with you somehow!"
+    ss "She's right! "
+    ss "...Though I also don't think it was Pitaya. Come on, Mira, speak up!"
+    mt "..."
+    jp "Yeah! Not to mention, we found brass knuckles in her room! Who else would they belong to but that punkish loser named after a fruit?"
+    pc "Oh, is that right, miss drama queen? "
+    pc "Go right ahead then! Search my bags! I assure you, I'm innocent!"
+    hd "As a matter of fact, I believe I will."
+    ss "Honey, WAIT FOR US-!"
+    mr "Dang, she's fast!"
     jump wrong_end
 
 label culprit_hd:
@@ -1357,6 +1318,27 @@ label culprit_pale:
     sp "Blumbering..."
     "Jazz and Smith" "MEDDLING, NO GOOD, BASTARD!!"
     mt "..."
+    jp "How dare you accuse us?!"
+    sp "Under what evidence, huh? I bet this is just a senseless accusation from a stupid FRAUD like you!"
+    mr "Well, in case you forgot..."
+    mr "You two were trying to hide the fact that you were in Ms Dew's room. In fact, you hid it to the point where you denied ever being in the living room! "
+    mr "You could have easily just been in your own rooms if you were innocent, so why did you hide?"
+    mr "Not to mention, you seemed rather reluctant to answer our questions. I had to prompt you so much to get more information!"
+    mr "Rather suspicious, don't you think?"
+    mr "And to top it all off..."
+    mr "YOU TWO ARE THE PETTIEST KIDS I HAVE EVER MET!!! I wouldn't be surprised if you stole it just to spite Ms Dew."
+    jp "Oh, no, we definitely considered that, just not with the necklace."
+    sp "WHY WOULD YOU ADMIT THAT, YOU IDIOT?!"
+    jp "WELL CLEARLY THIS ASININE DETECTIVE IS DETERMINED TO PIN IT ON US, MIGHT AS WELL STOP HIDING HOW MUCH WE HATE THAT DIVA!!"
+    sp "ARGH! EVER HEARD OF INNOCENT UNTIL PROVEN GUILTY?! "
+    mr_thought "...Wow, they've completely given up on hiding it."
+    jp "ACTUALLY, I HAVE!! So, if I may..."
+    jp "I swear on my life, Smith didn't steal it, and neither did I!"
+    sp "That's right! Stick that head of yours down the drain and try to find the intelligence that you clearly lost!"
+    mr_thought "...Nevermind."
+    hd "There is an easier way to confirm their guilt without having this back and forth debate."
+    hd "Excuse me for a moment."
+    ss "Hey, Honey, wait up!"
     jump wrong_end
 
 label culprit_ss:
@@ -1364,9 +1346,24 @@ label culprit_ss:
     show stirling surprise
     ss "What? Me?"
     mt "..."
+    mr "Just at a glance, one would assume that you're innocent."
+    mr "But I can see further! Your nervous behaviour...sure, it might have been because Mira can be a bit scary sometimes-"
+    hd "Mira? Really?"
+    mr "But the thing that really gave you away was your earring!"
+    mr "You claimed that you must have left it behind while cleaning the room, but if you did, how come Ms Dew couldn't find it?"
+    mr "Because surely being such good friends, if she found it, she would have returned it!"
+    ss "...That's a good point. Can't really argue with that."
+    pc "WHAT?!"
+    sp "You can definitely argue with that! Why would you steal that necklace anyways?"
+    jp "It's not like it's your style either! And it looked really cheap anyways!"
+    hd "..."
+    hd "Well, I might as well check, just to make sure."
     jump wrong_end
 
 label wrong_end:
+    mr_thought "Ms Dew charged on in front of us, and the rest of us quickly followed after her."
+    mr_thought "Oddly enough, Mira stayed behind, never even saying a word."
+
     if pitaya_guilt:
         mr_thought "We searched through Pitaya's bags, and we found the Melon Baller stuffed in his makeup bag."
         mr_thought "He denied putting it there, but the evidence is clear."
