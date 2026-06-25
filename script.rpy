@@ -948,32 +948,32 @@ label int_stirling:
                 menu:
                     "Keep pestering him":
                         menu:
-                        "Why?":
-                            ss "I don't know."
-                            menu:
-                                "Why?":
-                                    ss "What did I just say? I don't know!"
-                                    menu:
-                                        "Why?":
-                                            ss "I'm not saying anything."
-                                            menu:
-                                                "Why?":
-                                                    ss "I-I just won't! Okay?"
-                                                    menu:
-                                                        "Why?":
-                                                            ss "Ngh-do I have the right to silence?"
-                                                            menu:
-                                                                "Why?":
-                                                                    ss "I don't want to say it! Alright?"
-                                                                    menu:
-                                                                        "Why?":
-                                                                            ss "Stop! Why are you like this?"
-                                                                            menu:
-                                                                                "Why?":
-                                                                                    ss "Gh-"
-                                                                                    menu:
-                                                                                        "Why?":
-                                                                                            ss "BECAUSE THIS IS THE FIRST TIME I'VE EVER BEEN QUESTIONED AND MIRA'S SO SERIOUS IT'S KINDA SCARY OKAY?!"
+                            "Why?":
+                                ss "I don't know."
+                                menu:
+                                    "Why?":
+                                        ss "What did I just say? I don't know!"
+                                        menu:
+                                            "Why?":
+                                                ss "I'm not saying anything."
+                                                menu:
+                                                    "Why?":
+                                                        ss "I-I just won't! Okay?"
+                                                        menu:
+                                                            "Why?":
+                                                                ss "Ngh-do I have the right to silence?"
+                                                                menu:
+                                                                    "Why?":
+                                                                        ss "I don't want to say it! Alright?"
+                                                                        menu:
+                                                                            "Why?":
+                                                                                ss "Stop! Why are you like this?"
+                                                                                menu:
+                                                                                    "Why?":
+                                                                                        ss "Gh-"
+                                                                                        menu:
+                                                                                            "Why?":
+                                                                                                ss "BECAUSE THIS IS THE FIRST TIME I'VE EVER BEEN QUESTIONED AND MIRA'S SO SERIOUS IT'S KINDA SCARY OKAY?!"
                         mt "..."
                         mr "..."
                         ss "..."
@@ -982,7 +982,7 @@ label int_stirling:
                         mr "Just stop thinking of Mira as scary!"
                         ss "..."
                         mt "..."
-                        mt "I don't think it works like that."
+                        ss "I don't think it works like that."
                         mt "Am I really that scary?"
                         mr "...So I think we should move on."
                         mt "Why does nobody ever answer that question?"
