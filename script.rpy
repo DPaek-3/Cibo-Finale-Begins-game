@@ -1,13 +1,13 @@
 ﻿
 
-define mr = Character("Mozzy")
-define mr_thought = Character("Mozzy", what_italic=True)
-define mt  = Character("Mira")
-define pc = Character("Pitaya")
-define hd = Character("Honey")
-define ss = Character("Stirling")
-define jp = Character("Jazz")
-define sp = Character("Smith")
+define mr = Character("Mozzy", color = "#ffd919")
+define mr_thought = Character("Mozzy", what_italic=True, color = "#ffd919")
+define mt  = Character("Mira", color = "#603000")
+define pc = Character("Pitaya", color = "#c22640")
+define hd = Character("Honey", color = "#018e01")
+define ss = Character("Stirling", color = "#ff70ba")
+define jp = Character("Jazz", color = "#ff1919")
+define sp = Character("Smith", color = "#82f046")
 define int_box = Character(None, what_xalign=0.5, what_text_align=0.5)
 default twin_int = False
 default ss_int = False
@@ -49,7 +49,7 @@ label story:
     with dissolve
 
     show mira default at right
-    show mozzy default at left 
+    show mozzy curious at left 
 
     mr "I just don't get it, Mira!"
     mt  "Hm?"
@@ -66,7 +66,7 @@ label story:
     mt  "A dear friend of mine asked me to help investigate before there is a scandal."
     mt  "And, well, you haven't had a case in a while either, so I decided to bring you along."
     show mira default
-    show mozzy default
+    show mozzy curious
     mt  "Speaking of which, let's run over how to do investigations and interrogations."
     mt  "You'll notice that I haven't told you which house we're heading to."
     mt  "Your goal is to try and pull information out of me. Then, when we arrive at our stop, you'll use the information you received to find the correct house."
@@ -133,6 +133,7 @@ label interrogate_tut:
 
 label skip_tut:
     mr "Mira, you know I usually would, but..."
+    show mozzy default
     mr "I'm getting a lot of deja vu. I think I can find the house without any help."
     mt  "I will never understand your strange sixth sense."
     mr_thought "(We talked about some of our coworkers for the rest of the bus ride.)"
@@ -154,7 +155,7 @@ label tutorial_end:
     mt  "Can you find the house now?"
     show mozzy excited
     mr "Of course!"
-    show mozzy default
+    show mozzy curious
     mr "But, uh, Mira...?"
     show mira default #curious, but we don't have the time for that as of now
     mt  "?"
@@ -195,7 +196,7 @@ label continue_story1:
     mr "Well, what are we waiting for? Let's go!"
     show mira surprise
     mt  "Mozzy, wait-!"
-    show mozzy shock #surprise
+    show mozzy shock 
     mr "...!"
     mr "The gates...are locked!"
     mt  "Of course they are! Stirling kept them locked so that the thief couldn't get out."
@@ -209,10 +210,14 @@ label continue_story1:
     mt  "Hey Stirling. My partner and I are outside your gates. Do you mind letting us in?"
     mt  "..."
     mt  "Investigative partner, Stirling. I'm not dating anyone at the moment. I still don't have time for that. Besides, he's far too young–"
+    show mozzy damage
     mr "Hey! I'm only 23!, I can definitely vote....legally."
     mr_thought "Mira simply ignored me."
+    show mozzy default
     show mira hide
     mt  "..."
+    show mira serious
+    with hpunch
     mt  "Stirling Strawberry, you will let us in right this moment or I will tell those cousins of yours that you ate the last cookie."
     show mozzy shock
     mr "Eep!"
@@ -222,9 +227,11 @@ label continue_story1:
     mt  "Thanks. I'll see you soon."
     show mira default
     mt  "..."
+    show mira sadly
     mt  "Sorry, did I scare you?"
     show mozzy excited
     mr "Um...I don't know what you're talking about! A great detective is never scared!"
+    show mira default
     mr_thought "For some reason, Mira doesn't seem to believe that."
     mt  "...If you insist."
     show mozzy default
@@ -244,13 +251,13 @@ label continue_story1:
     show pitaya angry
     pc "That's it, you people deal with this yourself! I'm outta here!"
     mr "Pitaya!"
-    #show pitaya curious
+    show pitaya surprise
     pc "...?"
     show pitaya default
     pc "Mozzy! Hey, man!"
     mr_thought "Pitaya Crim, I was close with him during High school and college, acts like a big tough guy but he is really just a sweetheart, volunteering at nursing homes and what-not."
     mr_thought "...Okay, so MAYBE he was on trial for murder like a hundred times, but he's never actually committed any of them!"
-    show pitaya angry
+    show pitaya disgust
     pc "Mozzy you're spacing out again."
     pc "Are you doing that thing where you introduce people in your head completely out of character?"
     mr_thought "Ack. Guilty."
@@ -262,108 +269,208 @@ label continue_story1:
             jump gay
 
     label gay:
-        mr "No, I'm thinking about you."
         show pitaya damage
         pc "W-W-What?!"
         mr_thought "Hehe, that always catches him off guard."
         jump enter_house
 
     label koalas:
-        mr "Actually, I'm thinking about koalas."
+        show pitaya surprise
         pc "...Koalas?"
         mr "Yeah! Did you know, a koala could frame someone for a crime!"
         pc "How would a koala-"
         mr "Koalas have fingerprints, just like us! So, if a koala commits a crime and leaves its fingerprints everywhere, you'd think a human did it!"
+        show pitaya smile
         pc "Wow...so they do teach detectives something."
         mr "Oh, nah, I learnt this one myself."
+        show pitaya surprise
         pc "...From where?"
         mr "So, there's this social media site called-"
+        show pitaya deadpan
         pc "Nevermind, I got what you're saying."
         jump enter_house
 
-    label enter_house:
-        mr "Anyways, time to get a move on people!, no time to waste!"
-        pc "oh my gosh you oblivious swiss cheese..."
-        mt  "...my goodness."
-
+label enter_house:
+    mr "Anyways, time to get a move on people!, no time to waste!"
+    pc "oh my gosh you oblivious swiss cheese..."
+    hide pitaya
+    show mira surprise
+    mt  "...my goodness."
     scene bg stirling home
-    "A/N: No sprites from here on out because it makes my head hurt and I don't like the placeholder sprites."
-    "A/N: Feel free to use your imagination."
+    show pitaya smile
     pc "Well people, we have our detective and everyone's favourite lawyer."
+    show smith aloof at left
+    with dissolve
+    show pitaya damage
     "???" "...He looks like a dud."
     mr "how dare you!, you...you...gremlin?, sorry you're just extremely short."
+    show jazz aloof at right 
+    with dissolve
     "???" "And? We're literally fourteen."
     "???" "If anything, you're the short one."
     mr "HEY!!"
+    hide pitaya damage
+    show mira hide
     mt  "*sigh*"
+    show mira default
     mt  "Jazz, Smith, meet Mozzy. I met him on one of my cases."
     mt  "Mozzy, these are the Pale twins, Jazz and Smith. Jazz is the red one, Smith is green."
+    show jazz smug
     jp "We met her when Stirling introduced his girlfriend to his family."
+    show smith smug
     sp "Which is just us."
+    show mira smile
     mt  "Bold of you two to assume that Stirling can last a day dating me."
     jp "Fair point."
     sp "Yeah, you deserve better anyways."
+    hide mira smile
+    hide jazz smug
+    hide smith smug
+    show stirling grumpy
     "???" "Hey, I heard that!"
+    hide stirling grumpy
+    show jazz aloof
     jp "Oh, you're here? Whoops." 
     mr_thought "That was the most unsincere apology I have ever heard."
     mr_thought "And I went to school with Pitaya."
-    "???" "Stirling, I would love to come to your defense, but to be honest, I do think Mira does deserve better."
+    hide jazz aloof
+    show honey default
+    "???" "Stirling, I would love to come to your defense, {nw}{w=.5}" 
+    show honey smile
+    extend "but to be honest, I do think Mira deserves better."
+    hide honey smile
+    show stirling grumpy
     ss "So someone like you?"
+    hide stirling grumpy
+    show honey surprise
     "???" "..."
-    "???" "Oh, no. But certainly not you."
+    show honey smile
+    "???" "Oh, no. But certainly not you, you're too childish."
+    hide honey smile
+    show stirling grumpy
+    ss "Too childish-it's called being optimistic!"
+    hide stirling grumpy
+    show honey smile
+    hd "My apologies, I was only teasing you, silly."
+    hide honey smile
+    show stirling grumpy
     ss "Why are you like thiiis?"
+    hide stirling grumpy
+    show honey default
     "???" "Well, someone has to be a responsible adult when dear Mira's not around."
     "???" "I can hardly compare with her, but I do my best!"
     mr_thought "Wow, these guys really like Mira, huh?"
+    hide honey smile
+    show mira smile
     mt  "Hi, honey."
     mr_thought "Mira using pet names? Is the world ending?"
+    show mira serious
     mt  "I don't know what you're thinking, but cut it out."
+    show mira default
     mt  "Honey, this is Mozzy. Mozzy, meet Honey Dew. I know her from university."
+    hide mira default
+    show honey smile
     hd "Pleasure to meet you."
     mr_thought "Oh, so Honey's her name, not a term of affection."
     mr_thought "Probably should have figured that out."
+    hide honey smile
+    show stirling default
     ss "And I'm Stirling Strawberry, besties with Mira since we met in college ten years ago!"
     mr "I see."
     mr "..."
     mr "Wait Mira you went to college when you were 10?"
+    hide stirling default
+    show mira default
     mt  "...How old do you think I am? "
     mr "...twenty, right?"
+    show mira serious
     mt  "I'm thirty-eight."
     mr "Oh."
     mr "Well, in any case, thank you, good madam!"
+    hide mira serious
+    show stirling shock
     ss "Huh? I-uh-I'm not-"
     mr "Huh? What's wrong?"
+    hide stirling shock
+    show pitaya nervous
     pc "Oh, man-"
+    hide pitaya nervous
+    show jazz default at left
+    show smith default at right
     "Jazz and Smith" "And another one bites the dust!"
+    hide jazz default
+    hide smith default
+    show mira sadly
     mt  "Mozzy..."
+    hide mira sadly
+    show stirling shock
     mt  "Stirling's a man."
     mr "GAH!"
+    show stirling nervous
     mr "ajkfbldashfircids I am SO sorry!"
     ss "It-it's fine...it happens a lot..."
+    show stirling awkward
     ss "Do I really look that much like a girl...?"
+    hide stirling awkward
+    show pitaya deadpan
     pc "Yup."
+    show jazz aloof at left
     jp "You do."
+    show smith aloof at right
     sp "You really look like a girl."
+    show pitaya angry
     pc "Hey, YOU can't say anything! You and your sister look identical!"
     jp "What part of \"identical twins\" do you not understand...?"
+    show smith smug
     sp "It's only fair, I mean, she looked identical to me a few years ago, so now I'm identical to her."
+    show pitaya deadpan
     pc "I know, I know, I was there when you guys announced the change to the family!"
+    hide pitaya deadpan
+    hide smith smug
+    hide jazz aloof
+    show honey surprise
     hd "..."
-    hd "I personally don't think you look like a girl Stirling...but I can see why people think so!"
+    show honey default
+    hd "I personally don't think you look like a girl Stirling...{nw}{w=.5}"
+    show honey smile
+    extend "but I can see why people think so!"
+    hide honey smile
+    show stirling nervous
     ss "Well...I guess that's a me problem."
+    hide stirling nervous
+    show mira default
     mt  "Speaking of problems...I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
+    hide mira default
+    show jazz aloof
     jp "Is he always like this?"
     mr "Hey, what's that supposed to mean?"
+    hide jazz aloof
+    show mira default
     mt  "So if we could start our investigation soon, that would be great."
+    hide mira default
+    show stirling default
     ss "Aww, come on, Mira! All the suspects are here, can't it wait?"
+    hide stirling default
+    show mira serious
     mt  "No. The faster we get this done, the less we have to worry about it."
+    hide mira serious
+    show pitaya deadpan
     pc "Man, lawyers are scarily efficient."
+    hide pitaya deadpan
+    show honey default
     hd "Alright."
+    show honey sadly
     hd "Stirling called you because the Melon Baller was stolen!"
     mr "The what?"
+    hide honey sadly
+    show stirling nervous
     ss "The Melon Baller. It's Honey's favourite necklace."
+    hide stirling nervous
+    show jazz smug
     jp "Favourite? She's only had it for the past week."
+    hide jazz smug
+    show honey grumpy
     hd "Would it kill you kids to have some tact?"
     hd "Hmph. I'll show you my room. It's a bit of a mess since I was looking through everything, but you might be able to find some clues."
 
@@ -386,10 +493,17 @@ screen honeysroom():
 
 label hidden_object:
     scene bg honey room
+    show mozzy shock
     mr "W-wow! You weren't kidding when you said it was a mess!"
+    hide mozzy shock
+    show honey default
     hd "Yes, I practically turned it inside out."
     hd "You see, I first thought I misplaced it, but when I couldn't find it anywhere, I realised someone must have stolen it!"
+    hide honey default
+    show mira default
     mt  "Understood. Honey, could you step out and join everyone else? It's easier to investigate with just the two of us."
+    hide mira default
+    show honey grumpy
     hd "...Fine. If you say so."
     
     label honeys_room:
@@ -416,7 +530,70 @@ label continue_story2:
     "As of 9/6/2026, 2:27pm, we don't have the full evidence list. So, here it is:"
     "Jewellery box; Graduation banner; Brass knuckles; Mira plushie; Mira photo; Mannequin; Pillow; Stirling's smashed picture; Stirling's earring; Candles; Gem"
     "anyways, some exposition later, after finding evidence, we move on to the interrogation"
+    mr "Phew, we're finally done."
+    show honey default
+    hd "Ah, you're back, Mira! I hope the mess didn't trouble you too much."
+    show honey default at left
+    show mira default at right
+    mt "Well-"
+    mr "You have so much weird stuff in there, Ms Dew. Did you dig out that graduation banner from the trash?"
+    show honey surprise
+    show mira surprise
+    hd "..."
+    mt "..."
+    mr "..."
+    mr "Too weird?"
+    show mira hide
+    mt "A bit, yes."
+    show honey grumpy
+    hd "Well it wasn't in the trash when I retrieved it!"
+    show mira serious
+    mt "..."
+    show stirling default
+    ss "Hi! What did I miss?"
+    show mira default
+    show honey default
+    mt "Nothing much."
+    show stirling smile
+    ss "Okay! Did you find who the thief is yet?"
+    mt "No, not yet. We need more than just investigating to find the culprit."
+    show stirling surprise
+    ss "Oh."
+    mr "You know what that means?"
+    show mira smile
+    show honey surprise
+    show stirling default
+    mt "We need to do what a lawyer does best!"
+    "Mozzy and Mira" "IT'S INTERROGATION TIME!"
     scene living room
+    with dissolve
+    show pitaya smile
+    pc "Heyo! Found anything?"
+    mr "Yeah, loads! There was this-"
+    hide pitaya smile
+    show mira serious
+    mt "We can discuss later. For now, we still have a job to do."
+    mr "Oh, yeah. Ahem."
+    mr "We're gonna interrogate all of y'all separately, okay? Just to make sure you guys don't interrupt each other while answering."
+    hide mira default
+    show jazz guilty #read: angry
+    jp "You're not splitting us up."
+    hide jazz guilty
+    show smith guilty #read: angry
+    sp "Yeah! We're ride or die besties, got it?"
+    mr "...Okay, fine. You guys can be interrogated together. But no one else!"
+    hide smith guilty
+    show honey default
+    hd "That sounds fair."
+    show honey smile
+    hd "What do you think, Stirling?"
+    hide honey smile
+    show stirling smile
+    ss "Let's do this!"
+    hide stirling smile
+    show mira smile
+    mt "Then let's begin."
+    hide mira smile
     menu:
         mr "Who should I interrogate first?"
         "Pitaya":
@@ -430,45 +607,60 @@ label continue_story2:
 
 label int_pitaya:
     $ pc_int = True
+    show pitaya smile
     pc "Wazzup?"
     mr "Mr Crim-"
+    show pitaya default
     pc "Ooh, we're doing this PROFESSIONALLY, okay, this oughta be good!"
     mr "Aw thanks! Anyways, please give us your version of the events-"
+    show pitaya smile
     pc "Yeah, yeah, witness testimony, I got it."
     pc "Don't worry, I was the defendant for like half of Mira's cases, I know how this stuff works."
     mr "Wait, you guys knew each other before this?!"
     mt  "Yes, Stirling hired me as Pitaya's lawyer."
     mt  "But we're getting sidetracked. You two, lock in already."
+    show pitaya deadpan
     pc "Mira, please, never use those words again."
-    scene bg interrogation
-    with dissolve
     int_box "INTERROGATE: Pitaya Crim"
     label pc_ask:
         menu:
             mr "What to ask...?"
             "Testimony, please?":
                 $ pc_testimony = True
+                show pitaya default
                 pc "I was just minding my own business, really!"
+                show pitaya curious
                 pc "We were expecting more people, but apparently there was a flight delay, so they couldn't come. But whatever, that's not important."
                 pc "So yeah, I was just minding my own business, and waiting for dinner to be done. I was also checking out Stirling's videogames when Little Miss Drama Queen runs in screaming about how her necklace got stolen."
+                show pitaya default
                 pc "Yeah, that's all I can think of."
+                show pitaya smile
                 pc "By the way, I found the latest edition of that lawyer game you like so much in his collection, maybe we could play it together someday?"
                 jump pc_ask
             "What is your alibi?":
+                show pitaya curious
                 pc "I mean, I was in the living room the whole time. Although, I don't know if anyone can confirm that."
                 pc "I know for a fact that I saw the twins at one point, but they came from the corridor where the rooms are and went to the dining room right after, so they can't confirm my alibi."
+                show pitaya default
                 pc "But I swear on Old Mrs Frap, I did not go anywhere near Dew's room."
                 pc "Seriously, she'd whup my butt if I lied to you!"
                 jump pc_ask
             "What's on the crime agenda this year?":
+                show pitaya default
                 pc "Tax evasion."
                 mr "...That's it?"
+                show pitaya deadpan
                 pc "What? It's a genuine crime."
                 mr "Maybe, but it's also a normal thing for rich people to do."
+                show pitaya curious
                 pc "...Fair point."
+                show pitaya smile
                 pc "Oh well, I can change the annual crime in a few months anyways."
+                show pitaya surprise
                 mt  "What a thing to admit in front of your lawyer."
+                jump pc_ask
             "That's all":
+                show pitaya default
                 mr "Okay...thank you Mr Crim."
     
     mr "That's all we need for interrogating Pitaya."
@@ -479,7 +671,9 @@ label int_pitaya:
             mr "But I want more information on something."
             mt  "Well, then, go right ahead."
             mt  "Slaughter his defenses and put his castle under siege until he has to surrender!"
+            show pitaya deadpan
             pc "Good lord, she's a lawyer again."
+            show pitaya smile
             pc "Okay, go on. Cross examine me."
             jump pc_evidence
         "No?": 
@@ -490,50 +684,66 @@ label pc_evidence:
         mr "What evidence do I present?"
         "Brass knuckles":
             mr "Do you still wear Fuschia Breeze No.9?"
+            show pitaya smile
             pc "What sort of question is that? Of course I do!"
             pc "It was a gift from you, after all."
             mr "Cool, cool. Do you know anyone who uses brass knuckles?"
+            show pitaya curious
             pc "Brass knuckles...?"
             pc "Can't say for sure, but I heard Dew takes self-defense."
             pc "That surprised me, I mean, she's got the strength of a hundred men, what would she be trying to defend herself against?"
             mr "And you don't use brass knuckles?"
+            show pitaya smile
             pc "Nah, haven't beaten anyone up since we graduated."
+            show pitaya default
             pc "And besides, I liked the feeling of my oppenent's skull crushing beneath my fist."
             mt  "..."
             mr "..."
             pc "..."
+            show pitaya deadpan
             pc "Too dark?"
             mt  "Pitaya, this is why people always think you're the murderer."
+            show pitaya nervous
             pc "F-fair enough."
             jump pc_evidence
         "Broken picture":
             mr "Can I see your knuckles?"
+            show pitaya deadpan
             pc "...Weird, but okay."
             mr "..."
+            show pitaya smile
             mr "Okay, all done."
             pc "Great. Now, {nw}{w=.5}"
+            show pitaya nervous
             extend "WHAT THE HECK WAS THAT ALL ABOUT?!"
+            show pitaya curious
             mr "There was a broken picture in Honey's room, so I was checking to see if you broke it."
             mr "But your knuckles are clean, so, no worries."
             mr "Don't punch glass by the way, it's dangerous."
+            show pitaya deadpan
             pc "Says the guy who ate an entire necklace of it."
             mr "Will you guys please let me forget that?"
             jump pc_evidence
-        "Pillow": 
+        "Pillow":
+            show pitaya curious
             mt  "...Mozzy, please don't tell me you actually put the pillow in as evidence."
             mr "It had feathers poking out of it like the hat!"
             mt  "...They're different colours?"
             mr "...Oh. They looked the same in the room."
             pc "Are those the feather pillows?"
             mr "Oh yeah, you have them in your room too, right?"
+            show pitaya deadpan
             pc "I guess? I mean, sure, they're meant to be there, but I don't use them."
+            show pitaya nervous
             pc "They're {i}too{/i} soft to be comfortable, if you get what I mean."
             jump pc_evidence
         "Pitaya's Testimony":
             mr "Why were you looking at the game collection?"
+            show pitaya smile
             pc "What do you mean? I was bored, that's all."
             mr "That's the thing."
             mr "You don't like playing videogames. Not on your own, anyways."
+            show pitaya surprise
             pc "!"
             mt  "That's right..."
             mt  "You only play if someone asks you to play with them, never on your own."
@@ -542,13 +752,18 @@ label pc_evidence:
             if failed_gaydar:
                 mr "Could it be...that you are lying about your alibi?"
                 pc "..."
+                show pitaya nervous
                 pc "Th-that's it?"
                 mr "...Huh?"
+                show pitaya smile
                 pc "Man, I was worried...you were so confident too."
                 mr "W-did I get it wrong?"
+                show pitaya default
                 pc "Nothing to worry about man, nothing to worry about!"
+                show pitaya smile
                 pc "I swear, on our friendship, my alibi is true."
                 mr "Then...why were you looking through his videogames?"
+                show pitaya embarrassed
                 mr_thought "For some reason, Pitaya blushes and looks away."
                 mt  "I think that is a question you should ask another time."
                 jump pc_evidence
@@ -556,25 +771,39 @@ label pc_evidence:
                 if successful_gaydar:
                     mr "Could it be...that you were looking for someone else?"
                     pc "..."
+                    show pitaya nervous
                     pc "Wh-what do you mean? Looking for someone in a videogame collection?"
                     mr "NOT WHAT I MEANT!"
+                    show pitaya surprise
                     mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
                     mr "Someone like-"
                     mr "..."
                     mr "!"
                     mr "Wait, Pitaya-"
                     mr "Were you looking through the games...for me?"
+                    show pitaya damage
                     pc "Gh-?!"
+                    hide pitaya damage
+                    with dissolve
+                    with hpunch
                     mr "Y-yikes!"
                     mr_thought "Did he just fall to the floor?"
+                    show pitaya embarrassed
+                    with dissolve
                     pc "Y-yeah. Yeah, I was."
+                    show pitaya smile
                     pc "That was...wow. That was impressive."
+                    show pitaya nervous
                     pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                    show pitaya smile
                     pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                    show pitaya nervous
                     pc "So, yeah. Here I am. And for the record..."
+                    show pitaya smile
                     pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
                     mr "Pitaya..."
                     mt  "As much as I don't want to interrupt this adorable moment..."
+                    show pitaya surprise
                     mt  "The twins are glaring at you two. I think you need to start wrapping up."
                     mr "Dangit!"
                     pc "O-okay!"
@@ -584,44 +813,63 @@ label pc_evidence:
                         "That you are lying about your alibi?":
                             $ failed_gaydar = True
                             pc "..."
+                            show pitaya nervous
                             pc "Th-that's it?"
                             mr "...Huh?"
+                            show pitaya smile
                             pc "Man, I was worried...you were so confident too."
                             mr "W-did I get it wrong?"
+                            show pitaya default
                             pc "Nothing to worry about man, nothing to worry about!"
+                            show pitaya smile
                             pc "I swear, on our friendship, my alibi is true."
                             mr "Then...why were you looking through his videogames?"
+                            show pitaya embarrassed
                             mr_thought "For some reason, Pitaya blushes and looks away."
                             mt  "I think that is a question you should ask another time."
                             jump pc_evidence
                         "That you were looking for someone else?":
                             $ successful_gaydar = True
                             pc "..."
+                            show pitaya nervous
                             pc "Wh-what do you mean? Looking for someone in a videogame collection?"
                             mr "NOT WHAT I MEANT!"
+                            show pitaya surprise
                             mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
                             mr "Someone like-"
                             mr "..."
                             mr "!"
                             mr "Wait, Pitaya-"
                             mr "Were you looking through the games...for me?"
+                            show pitaya damage
                             pc "Gh-?!"
+                            hide pitaya damage
+                            with dissolve
+                            with hpunch
                             mr "Y-yikes!"
                             mr_thought "Did he just fall to the floor?"
+                            show pitaya embarrassed
+                            with dissolve
                             pc "Y-yeah. Yeah, I was."
+                            show pitaya smile
                             pc "That was...wow. That was impressive."
+                            show pitaya nervous
                             pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                            show pitaya smile
                             pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                            show pitaya nervous
                             pc "So, yeah. Here I am. And for the record..."
-                            pc "Playing those lawyer games with you are always fun. There's a reason they're the only videogames I play, after all!"
+                            show pitaya smile
+                            pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
                             mr "Pitaya..."
                             mt  "As much as I don't want to interrupt this adorable moment..."
+                            show pitaya surprise
                             mt  "The twins are glaring at you two. I think you need to start wrapping up."
                             mr "Dangit!"
                             pc "O-okay!"
                             jump pc_evidence
-
         "Nevermind":
+            show pitaya default
             mr "I don't know what I was going to say."
             mt  "Then let's move on."
 
@@ -629,35 +877,45 @@ label pc_evidence:
 
 label int_honey:
     $ hd_int = True
+    show honey smile
     hd "Hm? Can I help you?"
     mr "Ms Dew, we know that it was your necklace that was stolen, but can we still ask for your version of the events?"
     hd "My, my! You're talking so professionally! Mira taught you well."
-    mr "Mozzy worked as a detective before meeting me."
+    show honey surprise
+    mt "Mozzy worked as a detective before meeting me."
     hd "...Oh. That's...a surprise."
     mr_thought "Is it?"
-    scene bg interrogation
-    with dissolve
+    show honey default
     int_box "INTERROGATE: Honey Dew"
     label hd_ask:
         menu:
             mr "What to ask...?"        
             "Testimony, please":
+                show honey smile
                 hd "Why, of course."
                 hd "I showed everyone the Melon Baller during lunch. It is quite a beautiful necklace, and I got it for quite the steal!"
+                show honey default
                 hd "After lunch, I put it back on the mannequin in my room."
+                show honey smile
                 hd "You know, Mira, I'm glad Stirling gave the two of us permanent rooms in his house. Saves the hassle of packing unnecessary luggage!"
                 hd "But anyways! I then went to the garden, and I spent about two hours reading my book."
+                show honey surprise
                 hd "Then I went back through the living room back to my room when I noticed that the Melon Baller wasn't on the mannequin."
+                show honey sadly
                 hd "I thought perhaps I put it somewhere else, so I searched through my room, but it still wasn't anywhere! My apologies for the mess, by the way, it must have been hard to investigate with everything thrown about. "
+                show honey default
                 hd "I ran back to the living room to let everyone else know of the theft, and..."
+                show honey smile 
                 hd "Now you're here, Mira."
                 mr_thought "Did I just get ignored?"
                 jump hd_ask
             "Alibi?":
+                show honey grumpy
                 hd "My alibi? Why do I need an alibi, it's my necklace that got stolen!"
                 hd "You don't think I'm that much of an attention seeker, do you?"
                 jump hd_ask
             "That's all":
+                show honey default
                 mr "Right! Thank you for your help, Ms Dew!"
     menu: 
         mt  "Well, Mozzy? Can you find any contradictions?"
@@ -666,6 +924,7 @@ label int_honey:
             mr "But I want more information on something."
             mt  "Well, then, go right ahead."
             mt  "But be careful. Honey has more bite than I do."
+            show honey smile
             hd "Yes, I do."
             jump hd_evidence
         "No?":
@@ -679,42 +938,54 @@ label hd_evidence:
             hd "Hm? Where did that come from?"
             mr "On the mannequin, where you said you kept the Melon Baller."
             mt  "Why is it named that anyways?"
+            show honey surprise
             hd "I'm not sure. It was labelled that way when I bought it."
+            show honey default
             hd "In any case, what do you want to know about the hat?"
             mr "Do you wear it often?"
+            show honey smile
             hd "Of course! It's such a precious item, and I love it so much!"
             hd "It means so much to me, and it looks fabulous!"
             mt  "...I'm glad, Honey."
             mr "Cool!"
+            show honey surprise
             mr "So where did you get such a cheap hat that looks so good?"
-            mt  "Ng-?!"
+            mt "Ng-?!"
             hd "What?"
             mr "There's a feather missing from the hat, and I can see a glue strip here. But it also looks like it would be a really good quality hat."
             mr "My question is where did you get such a cheap hat?"
             mt  "Mozzy, the truth is that I-"
+            show honey damage
             hd "Oh, YOU WANNA FIGHT, BOY?! YOU WANT TO FIGHT ME?!"
             mt  "Aaand here we go again. Oh boy."
             hd "MIRA BOUGHT THAT FOR ME, OKAY?! YOU THINK IT'S CHEAP BEING A UNIVERSITY STUDENT?! STIRLING MAY BE A NEPO BABY, AND MY PARENTS MAY BE PRETTY WELL OFF, BUT MIRA WAS DOING THE BEST SHE COULD TO GET HER LAW DEGREE!"
             if gem:
                 mr "Didn't we do this before?!"
-            hd "The fact that despite ALL of that, she bought that hat as a gift for ME! ME! She got the best hat she could find within her budget, despite all her tight schedules, despite all her student loans! Got it? GOT IT?!"
+            hd "The fact stands that despite ALL of that, she bought that hat as a gift for ME! ME! She got the best hat she could find within her budget, despite all her tight schedules, despite all her student loans! Got it? GOT IT?!"
             mt  "Yes, yes, we get it, Honey! Please, calm down!"
             hd "..."
+            show honey smile
             hd "Oh, of course! I'm so sorry. Let's forget this, shall we?"
             jump hd_evidence
         "The twins' testimony":
             if twin_testimony:
                 mr "The twins were also in the garden. Did you see them?"
+                show honey surprise
                 hd "They were? I'm afraid I didn't notice."
+                show honey default
                 hd "Though, I was reading a rather interesting book. Would you like to read it?"
                 mr "...{i}Bejewelled Jaws{/i} by Constance Dew?"
+                show honey smile
                 hd "My sister wrote it. She's a botanist, you see. She specializes in carnivorous plants."
                 mt  "Yes, I remember that."
                 mt  "I didn't know Sun's name was actually Constance."
+                show honey grumpy
                 hd "Yes, well, our parents weren't the best at naming us. There's a reason I changed my name."
                 mr "...Cool."
             else:
+                show honey surprise
                 hd "Oh, the heirs to the Pale family? What about them?"
+                show honey smile
                 mr "...That is a very good question."
                 mt  "Mozzy, remember to get the testimony first before using it as evidence."
             jump hd_evidence
@@ -722,30 +993,38 @@ label hd_evidence:
             $ honey_doll = True
             mr "Where did you get this?"
             mt  "Ng-!"
+            show honey smile
             hd "Oh, that? I commissioned it myself!"
             hd "I can't see you these days because of how busy our schedules are! So I commissioned a plushie of you that I can talk to when I'm not with you!"
             mr "Ms Dew, have you considered maybe giving her a phone call like a normal person?"
+            show honey surprise
             hd "But that's boring!"
             mt  "Can we please stop talking about this?!"
             jump hd_evidence
         "Gem":
             $ gem = True
             mr "What can you tell us about this gem?"
+            show honey default
             hd "Ah, this must be from the Melon Baller. Where did you find it?"
             mr "On the bed. It's really neat, by the way. Why's that?"
+            show honey smile
             hd "I like keeping my bed neat. And well, since it's so neat, I saw no reason to look through it as I'd be able to see if there's anything underneath anyways."
             menu: 
                 mr_thought "Should I ask her why there's glue on this?"
                 "Yes":
+                    show honey surprise
                     hd "What."
                     mr "I was just curious, since you said you got this for a steal."
                     mr "Did you get scammed, by any chance?"
+                    show honey grumpy
                     hd "I. Don't. Know. What. You're. Talking. About."
                     mr "I mean, getting it for a steal implies that you got a expensive thing for cheap."
                     mr "But the glue here suggests otherwise."
                     mt  "Mozzy, you really shouldn't-"
                     mr "So I was just wondering if you got scammed or if you were lying about how valuable it is."
                     mt  "Mozzy, I think you need to stop-"
+                    show honey damage
+                    with hpunch
                     hd "CURSE YOU!"
                     mr "Gah!?"
                     hd "FIRST, you DARE interrupt my time with Mira. THEN, you ask for my alibi even though I'M THE VICTIM. And NOW, YOU JUDGE ME FOR BUYING CHEAP JEWELLERY?!"
@@ -755,14 +1034,19 @@ label hd_evidence:
                     hd "WHO CARES?! WHO CARES IF I BUY CHEAP JEWELLERY?! IT DOES ITS JOB SO LONG AS IT LOOKS PRETTY, NO?! WHO ARE YOU TO JUDGE ME?!"
                     hd "I HAVE BETTER THINGS TO SPEND MY MONEY ON THAN RIDICULOUSLY EXPENSIVE JEWELLERY."
                     mt  "Honey-"
-                    hd "You know what? FINE! I SAID IT WAS VALUABLE SO THOSE BRATS WOULDN'T MAKE FUN OF ME! OKAY?! SO SHUT THAT STUPID TRAP OF YOURS AND-"
+                    hd "You know what? FINE!"
+                    with hpunch
+                    extend " I SAID IT WAS VALUABLE SO THOSE BRATS WOULDN'T MAKE FUN OF ME! OKAY?! SO SHUT THAT STUPID TRAP OF YOURS AND-"
                     mt  "Honey Dew, calm down! Now!"
                     hd "..."
+                    show honey smile
                     hd "Ah, sorry. My temper went out of hand there, didn't it?"
                     hd "This is embarrassing. I apologize."
+                    show honey default
                     hd "Shall we move on?"
                     mt  "..."
                     mt  "Honey, we're going to talk about this later."
+                    show honey smile
                     hd "Hm? Oh. Alright."
                     jump hd_evidence
                 "No":
@@ -790,8 +1074,6 @@ label int_twins:
     mt  "That applies to you too, Smith. Do you understand?"
     sp "...Yeah."
     mt  "Great. Let's begin."
-    scene bg interrogation
-    with dissolve
     int_box "INTERROGATE: the Twins"
     label twin_ask:
         menu:
@@ -929,8 +1211,6 @@ label int_stirling:
     mt "..."
     mt "Are you sure you're alright, Stirling?"
     ss "What? Oh! Yeah, of course, why wouldn't I be? Let's just start the interrogation now, yeah?"
-    scene bg interrogation
-    with dissolve
     int_box "INTERROGATE: Stirling Strawberry"
     label ss_ask:
         menu:
@@ -1197,7 +1477,7 @@ label int_mira:
                             mt "Gh-!"
                             mr "M-Mira? Are you okay?"
                             mt "I-no, I don't know. Please...{nw}{w=.25}"
-                            show mira serious
+                            show mira sadly
                             extend "don't ask me about this again."
                             mr "That's enough then..."
                             jump ask_about_hd
@@ -1261,7 +1541,7 @@ label int_mira:
                             mt "Gh-!"
                             mr "M-Mira? Are you okay?"
                             mt "I-no, I don't know. Please...{nw}{w=.25}"
-                            show mira serious
+                            show mira sadly
                             extend "don't ask me about this again."
                             mr "That's enough then..."
                             jump ask_about_ss
@@ -1322,7 +1602,7 @@ label int_mira:
                 mt "Um...let's see...six murder cases, eight acts of vandalism, one case of vigilantism, and five charges of fraud."
                 mr "He wouldn't do any of those! ...except maybe the vigilantism."
                 show mira default
-                mt "He never actually did most of those charges. He did accidentally use a forged ID, but it was an accident, so the jury acquitted him. "
+                mt "He never actually did most of those charges. He did use a forged ID, but it was an accident, so the jury acquitted him. "
                 mr "He's really got horrible luck, huh?"
                 show mira hide
                 mt "Tell me about it. You don't understand how much of a scolding I would have given him on his last trial for murder if I hadn't passed out from the stress."
@@ -1362,7 +1642,7 @@ label continue_story3:
 
 label culprit_pc:
     $ pitaya_guilt = True
-    show pitaya shock
+    show pitaya surprise
     pc "Wh-WHAT?!"
     mt "..."
     mr "If I'm perfectly honest..."
@@ -1391,6 +1671,38 @@ label culprit_pc:
 label culprit_hd:
     show honey surprise
     hd "I...don't understand."
+    mr "Ditto. Neither do I."
+    mr "But like the Great Detective always says, once you eliminate the impossible, whatever's left, no matter how absurd, must be the truth! …Roughly paraphrased."
+    pc "I swear Mozzy, if you're basing your deductions off the one in your new lawyer game-"
+    mr "In any case! Let me explain why it couldn't have been anyone else."
+    mr "Mr Crim confirmed his alibi when he told us about the twins coming into the living room from the hallway."
+    mr "The twins are petty, but they've made their distaste for your necklace pretty clear."
+    mr "And Mr Strawberry may not be able to confirm his alibi, but this is his own house. Why on earth would he attempt to steal something here, of all places?"
+    mr "And to top it all off..."
+    mr "Mira happened to mention that you have a reputation for starting drama, pretending to get things stolen to frame other people."
+    mt "It seems that we reached the same conclusion, Mozzy."
+    ss "You...you knew, Mira?"
+    mt "Stirling, you really should pay more attention to context clues."
+    ss "Ngh...not my fault I'm socially inept!"
+    mr "So my question is not if you did this, but why?"
+    hd "..."
+    hd "I wanted to see Mira again."
+    mr "..."
+    mr "Are you kidding me."
+    hd "Mira is a dear friend and a brilliant woman! Of course I wanted to provide a case for her when we met again."
+    mt "Honey, you saw me three weeks ago."
+    hd "But that was so long ago! So I pretended to get the Melon Baller stolen, knowing that Stirling would call you for help."
+    hd "I planned this when we had more people coming but I didn't think we'd have such a small cast."
+    mr "Have I ever told you to be a normal person for one day and just give her a call?"
+    hd "Where's the fun in that?"
+    mt "Honey, please. You need to stop doing stuff like this, my hair's turning white because of you people."
+    mr "I thought your hair naturally had white streaks?"
+    mt "Anyone can have natural white streaks if they're stressed enough."
+    hd "She means yes."
+    ss "Well, glad that's how it happened. I was worried that I might have somehow accidentally stolen it!"
+    jp "...That makes like no sense."
+    sp "Leave him be, hes a blond in spirit."
+    mr "Again, you guys are also blond, what are you on about."
     jump good_end
 
 label culprit_pale:
@@ -1475,6 +1787,8 @@ label wrong_end:
 label good_end:
     mr_thought "Miss Dew apologised for making such a mess, but everyone was quick to forgive her."
     mr_thought "...Okay that's a lie but honestly Pitaya and the twins don't really forgive easily so it's a win!"
+    mr_thought "We stayed at Stirling's place for another week as both Honey and Stirling insisted on getting to know me better...although I think they just wanted more time with Mira."
+    mr_thought "Oh! Pitaya and I got to play the new game he found in Stirling's collection! He didn't want to play Brekkin though, so I played with the twins. The little gremlins somehow managed to defeat me. I'll get them next time!"
     mr_thought "And so ends the tale of \"The Melon Conspiracy\""
     mr_thought "..."
     mr_thought "Does this even count as a conspiracy?"
