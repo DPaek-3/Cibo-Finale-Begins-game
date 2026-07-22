@@ -292,6 +292,7 @@ label continue_story1:
 
 label enter_house:
     mr "Anyways, time to get a move on people!, no time to waste!"
+    show pitaya deadpan
     pc "oh my gosh you oblivious swiss cheese..."
     hide pitaya
     show mira surprise
@@ -299,14 +300,15 @@ label enter_house:
     scene bg stirling home
     show pitaya smile
     pc "Well people, we have our detective and everyone's favourite lawyer."
-    show smith aloof at left
+    show smith aloof at right
     with dissolve
     show pitaya damage
     "???" "...He looks like a dud."
     mr "how dare you!, you...you...gremlin?, sorry you're just extremely short."
-    show jazz aloof at right 
+    show jazz aloof at left 
     with dissolve
     "???" "And? We're literally fourteen."
+    show jazz smug
     "???" "If anything, you're the short one."
     mr "HEY!!"
     hide pitaya damage
@@ -442,10 +444,10 @@ label enter_house:
     mt  "Speaking of problems...I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
     hide mira default
-    show jazz aloof
+    show jazz disgust
     jp "Is he always like this?"
     mr "Hey, what's that supposed to mean?"
-    hide jazz aloof
+    hide jazz disgust
     show mira default
     mt  "So if we could start our investigation soon, that would be great."
     hide mira default
@@ -467,9 +469,9 @@ label enter_house:
     show stirling nervous
     ss "The Melon Baller. It's Honey's favourite necklace."
     hide stirling nervous
-    show jazz smug
+    show jazz disgust
     jp "Favourite? She's only had it for the past week."
-    hide jazz smug
+    hide jazz disgust
     show honey grumpy
     hd "Would it kill you kids to have some tact?"
     hd "Hmph. I'll show you my room. It's a bit of a mess since I was looking through everything, but you might be able to find some clues."
@@ -576,10 +578,10 @@ label continue_story2:
     mr "Oh, yeah. Ahem."
     mr "We're gonna interrogate all of y'all separately, okay? Just to make sure you guys don't interrupt each other while answering."
     hide mira default
-    show jazz guilty #read: angry
+    show jazz angry
     jp "You're not splitting us up."
-    hide jazz guilty
-    show smith guilty #read: angry
+    hide jazz angry
+    show smith angry
     sp "Yeah! We're ride or die besties, got it?"
     mr "...Okay, fine. You guys can be interrogated together. But no one else!"
     hide smith guilty
@@ -869,10 +871,10 @@ label pc_evidence:
                             pc "O-okay!"
                             jump pc_evidence
         "Nevermind":
-            show pitaya default
+            show pitaya smile
             mr "I don't know what I was going to say."
             mt  "Then let's move on."
-
+    
     jump interrogate
 
 label int_honey:
@@ -1059,43 +1061,64 @@ label hd_evidence:
 
 label int_twins:
     $ twin_int = True
+    show jazz aloof at left
+    show smith disgust at right
     jp "What do you want?"
     mt  "Just a routine inspection, nothing more. We need all the information we can get if we want to solve this case, so would you be willing to cooperate?"
+    show jazz guilty
+    show smith guilty
     jp "..."
     sp "..."
-    sp "Does...he have to be here too?"
+    show smith disgust
+    sp "Does...{i}he{/i} have to be here too?"
     mt  "Well, two heads are better than one."
+    show jazz disgust
     jp "But he's so...blond. I don't see what help he could be."
     mr_thought "Aren't you guys also blond?"
     mt  "Jazz, what did I say about saying stuff like that?"
+    show jazz guilty
     jp "...If you don't have anything nice to say, don't say anything at all."
     mt  "That's right."
     mt  "I know that you insult those close to you as a love language, but you do need to be mindful of what is banter and what is actually hurtful."
     mt  "That applies to you too, Smith. Do you understand?"
+    show smith guilty
     sp "...Yeah."
     mt  "Great. Let's begin."
+    show jazz default
+    show smith default
     int_box "INTERROGATE: the Twins"
     label twin_ask:
         menu:
             mr "What to ask...?"
             "Testimony, please?":
                 $ twin_testimony = True
+                show jazz smug
                 jp "Surely you don't think we were the ones who stole that tacky necklace."
+                show smith smug
                 sp "I mean, seriously, who wears a jewel THAT big?"
                 mr_thought "After hearing that insults are their love language, I genuinely can't tell if they hate Honey or not."
+                show jazz aloof
                 jp "I personally wouldn't steal something like that, so you better go find someone with horrible taste."
                 sp "Hey, maybe this \"detective\" stole it! He certainly fits the bill for horrible taste!"
                 mr "Hey! I don't have horrible taste!"
                 jump twin_ask
             "What is your alibi?":
+                show jazz disgust
+                show smith disgust
                 jp "Seriously? You still think we did it? Ugh."
+                show jazz aloof
                 jp "But whatever. I was with Smith the whole time. I never even went near Dew's room."
+                show smith smug
                 sp "I can say the same...for obvious reasons." 
                 sp "We were in the kitchen and the garden since lunch."
+                show smith aloof
                 sp "Besides, that watermelon scent is too strong for us. What reason would we have to go there?"
+                show jazz smug
                 jp "Is that all, you cretin?"
                 jump twin_ask
             "That's all":
+                show jazz aloof
+                show smith aloof
                 mr "Okay...thanks, guys."
                 mr_thought "I guess."
     menu:
@@ -1105,8 +1128,12 @@ label int_twins:
             mr "But I want more information on something."
             mt  "Well, then, go right ahead."
             mt  "Leave no stone of their testimony unturned and unveil the truth for all to see!"
+            show jazz disgust
             jp "Can we make fun of her for that?"
+            show smith damage
             sp "Are you insane!? No!"
+            show jazz aloof
+            show smith smug
             jump twin_evidence
         "No?": 
             mt  "Well then, we should move on."
@@ -1116,66 +1143,97 @@ label twin_evidence:
         mr "What evidence do I present?"
         "Stirling's earring":
             mr "Do either of you guys wear earrings?"
+            show smith aloof
             sp "No."
             mr "..."
             mr "Does anyone else wear earrings?"
+            show jazz disgust
             jp "Yeah, that punk loser named after a fruit does. So does Stirling."
+            show smith smug
             sp "And he wonders why people mistake him for a her."
             jump twin_evidence
         "Pitaya's testimony":
             if pc_testimony:
                 mr "Are you sure you were in the kitchen the whole time?"
+                show jazz aloof
                 jp "Didn't we literally say that we were also in the garden too?"
                 mr "No! I mean, I have evidence that you went other places too!"
                 mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
+                show jazz disgust
+                show smith shock
                 mr "The hallway...where the rooms are!"
                 sp "What?! No way, we didn't see him-"
+                show jazz angry
                 jp "Shut up!"
                 mt  "Too late."
+                show jazz shock
                 jp "M-Mira?"
                 mt  "I'm sorry, I'm aware that I'm being a bit harsh on you. But I do have to do my job."
                 mr "And it seems you two just admitted that you went to the living room!"
+                show jazz nervous
                 jp "W-you're forgetting something! We may have gone to the living room, but we didn't see that punk loser anywhere! "
+                show smith nervous
                 sp "Yeah! He's lying about seeing us come from the hallway!"
                 mt  "That can also be explained."
                 mt  "Pitaya was looking at the videogame collection."
+                show jazz smug
+                show smith smug
                 jp "Aha! More proof! He hates videogames!"
                 mt  "Indeed he does. I cannot explain why he was looking through the collection without speculation, but I do have proof that he was there. "
                 mt  "Tell me, when did Pitaya arrive here?"
+                show smith aloof
                 sp "This morning. Why?"
                 mt  "That's what I thought."
                 mt  "You see, he mentioned a certain lawyer game. I know for a fact that the game he was referring to was only bought after his last visit to Stirling." 
                 mt  "He wouldn't have had time to look through it this morning as he only just arrived. So the only way he could have known that Stirling bought that game..."
+                show jazz shock
+                show smith shock
                 mr "...Is if his alibi is true!"
                 mt  "Precisely. And if he was looking through the collection, he would probably be down on the ground, and anyone walking in wouldn't see him because he was covered by the couch."
                 mr "But if you're behind the couch like this..."
                 pc "What? Mozzy, what are you-"
                 mr "You can still see the door to the hallway!"
                 mr "What do you say to that?"
+                show jazz damage
+                show smith damage
+                with hpunch
                 jp "Argh!"
                 sp "Impossible...!"
+                show jazz angry
                 jp "You're telling us..."
+                show smith angry
                 sp "That you figured all of that out..."
                 "Jazz and Pale" "Just by one man's word?!"
                 mr "That's Mira for you!"
                 mt  "Well, to be honest, you also slipped up when you mentioned that the watermelon scent would be too strong for you."
+                show jazz damage
                 jp "...This is your fault."
+                show smith damage
                 sp "My fault?! Why is it my fault?!"
                 jp "You're the one that slipped up! Now they know that we were in that diva's room!"
                 mt  "I mean, we didn't quite know that yet. Thank you for the confirmation."
+                show jazz guilty
                 jp "...Miercoles."
-                sp "See?! You messed too!"
+                show smith angry
+                sp "See?! You messed up too!"
+                show smith smug
                 sp "Oh, and also, you said a naughty word!"
+                show jazz angry
                 jp "Nuh uh! I said \"Wednesday\"!"
                 sp "Yuh huh!"
                 jp "Nuh uh!"
                 mr "Will you two stop so we can carry on our investigation?"
+                show smith angry with hpunch
                 "Jazz and Pale" "CALLATE!"
                 mr "Yikes!"
                 mt  "Jazz. Smith."
+                show jazz guilty
+                show smith guilty
                 "Jazz and Pale" "Sorry."
                 jump twin_evidence
             else:
+                show jazz disgust
+                show smith disgust
                 mt  "What do you mean, Pitaya's testimony?"
                 mr "What? My gut instinct tells me that this is important! And that's why-"
                 mr "..."
@@ -1183,14 +1241,20 @@ label twin_evidence:
                 jump twin_evidence
         "Candles":
             mr "You said you never went near Ms. Dew's room, correct?"
+            show jazz aloof
             jp "Yeah...? I think I was pretty clear when I said that."
             mr "If that's the case...then how did you know it smelt like watermelon?"
+            show jazz shock
             jp "Ngh!"
+            show smith damage
             sp "Gh?!"
+            show jazz nervous
             jp "I-well, isn't it obvious? The smell was so strong that we could smell it from outside the hallway!"
+            show smith nervous
             sp "Y-yeah! It is quite strong, after all!"
             mr "Hm"
             mt  "I'll just let you know: the windows, as well as the door, were closed all day."
+            show jazz guilty
             jp "Who-who said we smelt watermelons today? We're just talking about what we smelt on...Wednesday! Yeah!"
             mr_thought "... No way for me to disprove that, but that was such an obvious lie that even I can catch it."
             jump twin_evidence
@@ -1379,6 +1443,11 @@ label ss_evidence:
             jump interrogate
 
 label interrogate:
+    hide pitaya
+    hide honey
+    hide stirling
+    hide jazz
+    hide smith
     menu:
         mr "Who should I interrogate?"
         "Pitaya":
@@ -1615,18 +1684,32 @@ label int_mira:
                 jump interrogate
 
 label continue_story3:
-    scene bg dining room
+    scene bg living room
     mr "Alright! I've got all the information I need!"
+    show mira smile
     mt "And I believe we can name a culprit now."
+    hide mira smile
+    show honey smile
     hd "Oh, that's wonderful!"
+    hide honey smile
+    show jazz aloof
     jp "Finally. Took you long enough. "
+    hide jazz aloof
+    show smith disgust
     sp "I still think you're a dud."
     mr "Hey!"
+    hide smith disgust
+    show stirling surprise
     ss "Al-already? I knew you were brilliant, Mira, but this is fast even for you!"
     mr_thought "Yeah, actually...I thought Mira would give me some time first. Was this case really so simple for her?"
+    hide stirling surprise
+    show honey default
     hd "So who is it? Tell me!"
+    hide honey default
+    show mira smile
     mt "Well, Mozzy? Go ahead."
     mr "Oh, okay..."
+    hide mira smile
     mr_thought "Let's look at all the clues and the testimony."
     mr_thought "There's a lot of ways this could have gone, but in this instance..."
     menu:
@@ -1642,28 +1725,48 @@ label continue_story3:
 
 label culprit_pc:
     $ pitaya_guilt = True
-    show pitaya surprise
+    show pitaya damage
     pc "Wh-WHAT?!"
+    hide pitaya damage
+    show mira serious
     mt "..."
+    hide mira serious
+    show pitaya damage
     mr "If I'm perfectly honest..."
     mr "I don't think you actually did it."
     mr "I mean, you basically confirmed your alibi when you said you saw the twins enter and when you told us about the new lawyer game."
     mr "But I genuinely can't tell who did!"
     mr "So...I'm pointing at you?"
     pc "..."
-    pc "Y'know what? I'll take that. "
+    show pitaya smile
+    pc "Y'know what? I'll take that."
+    show pitaya curious
     pc "So what you're saying is that...there is no culprit?"
     mr "I guess? Sorry to disappoint."
+    hide pitaya curious
+    show honey grumpy
     hd "Absolutely not! I cannot accept this!"
     mr "H-HUH?!"
     hd "Maybe you don't think so, but it's clear that Mira disagrees with you somehow!"
+    hide honey grumpy
+    show stirling determined
     ss "She's right! "
     ss "...Though I also don't think it was Pitaya. Come on, Mira, speak up!"
+    hide stirling determined
+    show mira hide
     mt "..."
+    hide mira hide
+    show jazz angry
     jp "Yeah! Not to mention, we found brass knuckles in her room! Who else would they belong to but that punkish loser named after a fruit?"
+    hide jazz angry
+    show pitaya angry
     pc "Oh, is that right, miss drama queen? "
     pc "Go right ahead then! Search my bags! I assure you, I'm innocent!"
+    hide pitaya angry
+    show honey grumpy
     hd "As a matter of fact, I believe I will."
+    hide honey grumpy
+    show stirling shock
     ss "Honey, WAIT FOR US-!"
     mr "Dang, she's fast!"
     jump wrong_end
@@ -1673,47 +1776,83 @@ label culprit_hd:
     hd "I...don't understand."
     mr "Ditto. Neither do I."
     mr "But like the Great Detective always says, once you eliminate the impossible, whatever's left, no matter how absurd, must be the truth! …Roughly paraphrased."
+    hide honey surprise
+    show pitaya deadpan
     pc "I swear Mozzy, if you're basing your deductions off the one in your new lawyer game-"
+    hide pitaya deadpan
+    show honey surprise
     mr "In any case! Let me explain why it couldn't have been anyone else."
     mr "Mr Crim confirmed his alibi when he told us about the twins coming into the living room from the hallway."
     mr "The twins are petty, but they've made their distaste for your necklace pretty clear."
     mr "And Mr Strawberry may not be able to confirm his alibi, but this is his own house. Why on earth would he attempt to steal something here, of all places?"
     mr "And to top it all off..."
     mr "Mira happened to mention that you have a reputation for starting drama, pretending to get things stolen to frame other people."
+    hide honey surprise
+    show mira smile
     mt "It seems that we reached the same conclusion, Mozzy."
+    hide mira smile
+    show stirling surprise
     ss "You...you knew, Mira?"
+    hide stirling surprise
+    show mira glad
     mt "Stirling, you really should pay more attention to context clues."
+    hide mira glad
+    show stirling awkward
     ss "Ngh...not my fault I'm socially inept!"
+    hide stirling awkward
+    show honey surprise
     mr "So my question is not if you did this, but why?"
     hd "..."
+    show honey default
     hd "I wanted to see Mira again."
     mr "..."
     mr "Are you kidding me."
+    show honey smile
     hd "Mira is a dear friend and a brilliant woman! Of course I wanted to provide a case for her when we met again."
+    hide honey smile
+    show mira serious
     mt "Honey, you saw me three weeks ago."
+    hide mira serious
+    show honey surprise
     hd "But that was so long ago! So I pretended to get the Melon Baller stolen, knowing that Stirling would call you for help."
     hd "I planned this when we had more people coming but I didn't think we'd have such a small cast."
     mr "Have I ever told you to be a normal person for one day and just give her a call?"
+    show honey smile
     hd "Where's the fun in that?"
+    hide honey smile
+    show mira serious
     mt "Honey, please. You need to stop doing stuff like this, my hair's turning white because of you people."
     mr "I thought your hair naturally had white streaks?"
+    show mira glad
     mt "Anyone can have natural white streaks if they're stressed enough."
+    hide mira glad
+    show honey smile
     hd "She means yes."
+    hide honey smile
+    show stirling smile
     ss "Well, glad that's how it happened. I was worried that I might have somehow accidentally stolen it!"
+    show jazz disgust at left
     jp "...That makes like no sense."
+    show smith smug at right
     sp "Leave him be, hes a blond in spirit."
     mr "Again, you guys are also blond, what are you on about."
     jump good_end
 
 label culprit_pale:
     $ twin_guilt = True
-    show twin guilty
+    show jazz damage
+    show smith damage
     jp "You stupid..."
     sp "Putrid..."
     jp "Yammering..."
     sp "Blumbering..."
-    "Jazz and Smith" "MEDDLING, NO GOOD, BASTARD!!"
+    "Jazz and Smith" "MEDDLING, NO GOOD, FOOL!!"
+    hide jazz damage
+    hide smith damage
+    show mira serious
     mt "..."
+    show jazz damage
+    show smith damage
     jp "How dare you accuse us?!"
     sp "Under what evidence, huh? I bet this is just a senseless accusation from a stupid FRAUD like you!"
     mr "Well, in case you forgot..."
@@ -1723,40 +1862,70 @@ label culprit_pale:
     mr "Rather suspicious, don't you think?"
     mr "And to top it all off..."
     mr "YOU TWO ARE THE PETTIEST KIDS I HAVE EVER MET!!! I wouldn't be surprised if you stole it just to spite Ms Dew."
+    show jazz disgust
     jp "Oh, no, we definitely considered that, just not with the necklace."
+    show smith shock
     sp "WHY WOULD YOU ADMIT THAT, YOU IDIOT?!"
+    show jazz angry
     jp "WELL CLEARLY THIS ASININE DETECTIVE IS DETERMINED TO PIN IT ON US, MIGHT AS WELL STOP HIDING HOW MUCH WE HATE THAT DIVA!!"
+    show smith angry
     sp "ARGH! EVER HEARD OF INNOCENT UNTIL PROVEN GUILTY?! "
     mr_thought "...Wow, they've completely given up on hiding it."
     jp "ACTUALLY, I HAVE!! So, if I may..."
+    show jazz disgust
     jp "I swear on my life, Smith didn't steal it, and neither did I!"
+    show smith smug
     sp "That's right! Stick that head of yours down the drain and try to find the intelligence that you clearly lost!"
     mr_thought "...Nevermind."
+    hide jazz disgust
+    hide smith smug
+    show honey grumpy
     hd "There is an easier way to confirm their guilt without having this back and forth debate."
     hd "Excuse me for a moment."
+    hide honey grumpy
+    show stirling shock
     ss "Hey, Honey, wait up!"
     jump wrong_end
 
 label culprit_ss:
     $ stirling_guilt = True
-    show stirling surprise
+    show stirling shock
     ss "What? Me?"
+    hide stirling shock
+    show mira serious
     mt "..."
+    hide mira serious
+    show stirling shock
     mr "Just at a glance, one would assume that you're innocent."
     mr "But I can see further! Your nervous behaviour...sure, it might have been because Mira can be a bit scary sometimes-"
+    hide stirling shock
+    show honey surprise
     hd "Mira? Really?"
+    hide honey surprise
+    show stirling shock
     mr "But the thing that really gave you away was your earring!"
     mr "You claimed that you must have left it behind while cleaning the room, but if you did, how come Ms Dew couldn't find it?"
     mr "Because surely being such good friends, if she found it, she would have returned it!"
+    show stirling awkward
     ss "...That's a good point. Can't really argue with that."
+    hide stirling awkward
+    show pitaya damage
     pc "WHAT?!"
+    show smith disgust at left
     sp "You can definitely argue with that! Why would you steal that necklace anyways?"
+    show jazz angry at right
     jp "It's not like it's your style either! And it looked really cheap anyways!"
+    hide pitaya damage
+    hide smith disgust
+    hide jazz angry
+    show honey surprise
     hd "..."
+    show honey grumpy
     hd "Well, I might as well check, just to make sure."
     jump wrong_end
 
 label wrong_end:
+    scene end
     mr_thought "Ms Dew charged on in front of us, and the rest of us quickly followed after her."
     mr_thought "Oddly enough, Mira stayed behind, never even saying a word."
 
@@ -1785,6 +1954,7 @@ label wrong_end:
     return
 
 label good_end:
+    scene good end
     mr_thought "Miss Dew apologised for making such a mess, but everyone was quick to forgive her."
     mr_thought "...Okay that's a lie but honestly Pitaya and the twins don't really forgive easily so it's a win!"
     mr_thought "We stayed at Stirling's place for another week as both Honey and Stirling insisted on getting to know me better...although I think they just wanted more time with Mira."
