@@ -246,7 +246,7 @@ label continue_story1:
     show mira smile
     mt  "I must say Mozzy, you have impeccable timing at times."
     mr "Let's...let's just go in."
-    scene garden
+    scene bg garden
     mr_thought "I fixed up my hat, and we walked through the gates."
     mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses"
     mr_thought "Suddenly, I heard a familiar voice shouting...a lot of things I won't repeat."
