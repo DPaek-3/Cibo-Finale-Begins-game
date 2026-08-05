@@ -248,7 +248,7 @@ label continue_story1:
     mr "Let's...let's just go in."
     scene bg garden
     mr_thought "I fixed up my hat, and we walked through the gates."
-    mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses"
+    mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses, and there was a glass gladiator dome. It was really well kept, clearly someone was obsessed with fighting the weeds."
     mr_thought "Suddenly, I heard a familiar voice shouting...a lot of things I won't repeat."
     show pitaya angry
     pc "That's it, you people deal with this yourself! I'm outta here!"
