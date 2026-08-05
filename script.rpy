@@ -394,7 +394,7 @@ label enter_house:
     mt  "...How old do you think I am? "
     mr "...twenty, right?"
     show mira serious
-    mt  "I'm thirty-eight."
+    mt  "I'm thirty-two."
     mr "Oh."
     mr "Well, in any case, thank you, good madam!"
     hide mira serious
