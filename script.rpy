@@ -1,7 +1,13 @@
 ﻿
 
+
+init python:
+    def voice_callback(event, **kwargs):
+        config.auto_voice = "audio/freesound_community-scribble-6144.mp3"
+
+define adv = Character(None, callback = voice_callback)
 define mr = Character("Mozzy", color = "#c7a600")
-define mr_thought = Character("Mozzy", what_italic=True, color = "#ffd919")
+define mr_thought = Character("Mozzy", what_italic=True, color = "#c7a600")
 define mt  = Character("Mira", color = "#603000")
 define pc = Character("Pitaya", color = "#c22640")
 define hd = Character("Honey", color = "#018e01")
@@ -45,6 +51,7 @@ label start:
             jump story
 
 label story:
+    play music "audio/inside_bus.mp3" fadeout 1
     scene bg bus
     with dissolve
 
@@ -78,6 +85,7 @@ label story:
             jump skip_tut
     
 label interrogate_tut:
+    stop music
     show mozzy excited
     mr "Alright!"
     mr "Bring it on!"
@@ -86,6 +94,7 @@ label interrogate_tut:
     show mira smile at default
     with move
     int_box "INTERROGATE: Mira Tisu"
+    play music "Interrogation_Theme.mp3"
     menu: 
         mt  "Well, Mozzy? Ask away."
         "What colour is the house?":
@@ -120,6 +129,7 @@ label interrogate_tut:
         jump question_list
 
     label question_list:
+        play music "Interrogation_Theme.mp3"
         menu:
             mt  "Any other questions?"
             "What colour is the house?":
@@ -140,6 +150,7 @@ label skip_tut:
     jump tutorial_end
 
 label tutorial_end:
+    play music "inside_bus.mp3" fadeout 1
     scene bg bus
     show mozzy default at left
     show mira default at right
@@ -148,6 +159,7 @@ label tutorial_end:
     mt  "This is where we get off."
     mr_thought "Mira and I thanked the bus driver and jumped off the bus."
     scene bg rich street
+    play music "audio/prettyjohn1-background-music-537170.mp3" fadeout 1
     with dissolve
     show mozzy default at left
     show mira default at right
@@ -157,19 +169,22 @@ label tutorial_end:
     mr "Of course!"
     show mozzy curious
     mr "But, uh, Mira...?"
-    show mira default #curious, but we don't have the time for that as of now
+    show mira default
     mt  "?"
     mr "How much time do I have?"
     show mira surprise
+    play sound "audio/freesound_community-ding-101492.mp3"
     mt  "!"
     show mira smile
     mt  "That's what you're worried about? Don't worry, take all the time you need. We're in no hurry."
     show mozzy excited
     mr "Phew! Thanks, Mira!"
     label hidden_object_tut:
+        play music "audio/apalonbeats-spy-detective-robbery-music-560412.mp3" fadeout 1
         call screen richstreet
     
     label Found:
+        stop music
         mr "There it is!"
         jump continue_story1
 
@@ -178,13 +193,14 @@ screen richstreet():
     modal True
 
    
-    imagebutton auto "houseST_%s.jpg":
+    imagebutton auto "houseST_%s.png":
         focus_mask True
         hovered SetVariable("screen_tooltip", "houseST_hover")
         unhovered SetVariable("screen_tooltip" ,"")
         action Jump ("Found")
 
 label continue_story1:
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     scene bg gates
     with dissolve 
     show mozzy excited at left
@@ -196,20 +212,23 @@ label continue_story1:
     mr "Well, what are we waiting for? Let's go!"
     show mira surprise
     mt  "Mozzy, wait-!"
+    stop music
     show mozzy shock 
+    play sound "audio/damage 1.mp3"
     mr "...!"
     mr "The gates...are locked!"
     mt  "Of course they are! Stirling kept them locked so that the thief couldn't get out."
     show mozzy damage
+    play sound "audio/damage 2.mp3"
     mr_thought "Can't a thief just climb over the gates though?"
     show mira default
     show mozzy default
     mt  "I'll let Stirling know that we're here."
-    "{i}(insert ringtone){/i}"
+    play sound "audio/dragon-studio-phone-ringing-382734.mp3"
     mt  "..."
     mt  "Hey Stirling. My partner and I are outside your gates. Do you mind letting us in?"
     mt  "..."
-    mt  "Investigative partner, Stirling. I'm not dating anyone at the moment. I still don't have time for that. Besides, he's far too young-"
+    mt  "{i}Investigative{/i} partner, Stirling. I'm not dating anyone at the moment. I still don't have time for that. Besides, he's far too young-"
     show mozzy damage
     mr "Hey! I'm 23!, I can definitely vote....legally."
     mr_thought "Mira simply ignored me."
@@ -242,12 +261,14 @@ label continue_story1:
     show mira default at right
     mr_thought "Lo and behold, just as I said those words, the gates opened."
     show mozzy damage
+    play sound "audio/damage 2.mp3"
     mr "Are you kidding me?"
     show mira smile
     mt  "I must say Mozzy, you have impeccable timing at times."
     mr "Let's...let's just go in."
-    scene bg garden
     mr_thought "I fixed up my hat, and we walked through the gates."
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
+    scene bg garden
     mr_thought "There was a really cool garden there. The fences were wrapped in ivy and roses, and there was a glass gladiator dome. It was really well kept, clearly someone was obsessed with fighting the weeds."
     mr_thought "Suddenly, I heard a familiar voice shouting...a lot of things I won't repeat."
     show pitaya angry
@@ -271,7 +292,9 @@ label continue_story1:
             jump gay
 
     label gay:
+        stop music
         show pitaya damage
+        play sound "damage 1.mp3"
         pc "W-W-What?!"
         mr_thought "Hehe, that always catches him off guard."
         jump enter_house
@@ -293,6 +316,7 @@ label continue_story1:
         jump enter_house
 
 label enter_house:
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     mr "Anyways, time to get a move on people!, no time to waste!"
     show pitaya deadpan
     pc "oh my gosh you oblivious swiss cheese..."
@@ -300,7 +324,7 @@ label enter_house:
     show mira surprise
     mt  "...my goodness."
     scene bg living room
-    mr_thought "We went into the house. Somehow, it was both simpler and fancier than the garden."
+    mr_thought "We went into the house."
     show mira surprise
     mt "Oh, Mozzy, take your shoes off. Stirling's half-Korean, so guests have to take their shoes off at the entrance."
     hide mira surprise
@@ -399,6 +423,7 @@ label enter_house:
     mr "Well, in any case, thank you, good madam!"
     hide mira serious
     show stirling shock
+    stop music
     ss "Huh? I-uh-I'm not-"
     mr "Huh? What's wrong?"
     hide stirling shock
@@ -417,6 +442,7 @@ label enter_house:
     mt  "Stirling's a man."
     mr "GAH!"
     show stirling nervous
+    play sound "damage 1.mp3"
     mr "ajkfbldashfircids I am SO sorry!"
     ss "It-it's fine...it happens a lot..."
     show stirling awkward
@@ -442,7 +468,7 @@ label enter_house:
     show honey surprise
     hd "..."
     show honey default
-    hd "I personally don't think you look like a girl Stirling...{nw}{w=.5}"
+    hd "I personally don't think you look like a girl Stirling...{w}"
     show honey smile
     extend "but I can see why people think so!"
     hide honey smile
@@ -450,6 +476,7 @@ label enter_house:
     ss "Well...I guess that's a me problem."
     hide stirling nervous
     show mira default
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     mt  "Speaking of problems...I brought Mozzy here to help with yours."
     mr "Please hold your applause, I know I'm glamorous!"
     hide mira default
@@ -530,8 +557,40 @@ screen honeysroom():
         hovered SetVariable("screen_tooltip", "door_hover")
         unhovered SetVariable("screen_tooltip" ,"")
         action Jump ("Leave")
+        
+    imagebutton auto "brass_knuckles_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "brass_knuckles_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Knuckles")
+
+    imagebutton auto "earring_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "earring_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Earring")
+
+    imagebutton auto "gem_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "gem_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Gem")
+    
+    imagebutton auto "graduation_banner_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "graduation_banner_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Banner")
+
+    imagebutton auto "stirling_picture_%s.png":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "stirling_picture_hover")
+        unhovered SetVariable("screen_tooltip" ,"")
+        action Jump ("Picture")
+
 
 label hidden_object:
+    stop music
     scene bg honey room
     show mozzy shock
     mr "W-wow! You weren't kidding when you said it was a mess!"
@@ -545,7 +604,8 @@ label hidden_object:
     hide mira default
     show honey grumpy
     hd "...Fine. If you say so."
-    
+    play music "audio/apalonbeats-spy-detective-robbery-music-560412.mp3"
+
     label honeys_room:
         call screen honeysroom
     
@@ -594,7 +654,42 @@ label hidden_object:
         mt "Why Honey has this though is beyond me."
         jump honeys_room
 
-        
+    label Earring:
+        scene bg honey room
+        mr "A strawberry stud...?"
+        mt "It must be Stirling's...but why is it here?"
+        jump honeys_room
+    
+    label Gem:
+        scene bg honey room
+        mt "This must be from the Melon Baller."
+        mr "Does Ms Dew have nothing but cheap jewellery? This also has glue on it."
+        mt "Watch your words, Mozzy. Honey is my friend in case you forgot."
+        jump honeys_room
+
+    label Banner:
+        scene bg honey room
+        mt "Is this my graduation banner? I'm sure I threw that out in the trash."
+        mr "For the memories, maybe?"
+        mt "We have a photobook of the graduation ceremony, I don't see a reason to keep the banner."
+        jump honeys_room   
+
+    label Picture:
+        scene bg honey room
+        mr "What is this...?"
+        mt "Don't touch it Mozzy, broken glass is very dangerous."
+        mr "I ate an entire necklace of it and was fine, Mira, didja forget?"
+        mt "Please don't remind me of that."
+        jump honeys_room
+    
+    label Knuckles:
+        scene bg honey room
+        mt "Brass knuckles? Must be Pitaya's."
+        mr "Weird. They don't smell like Pitaya."
+        mt "...Why do you know what Pitaya smells like?"
+        mr "He wore the same cologne everyday since high school."
+        jump honeys_room
+
     label Leave:
         scene bg honey room
         menu:
@@ -606,8 +701,7 @@ label hidden_object:
                 jump honeys_room
 
 label continue_story2:
-    "As of 4/8/2026, 8:31pm, we don't have the full evidence list. So, here are the ones we don't have:"
-    "Graduation banner, Brass knuckles, Stirling's smashed picture, Stirling's earring, Gem"
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     scene bg hallway
     mr "Phew, we're finally done."
     show honey default
@@ -616,6 +710,7 @@ label continue_story2:
     show mira default at right
     mt "Well-"
     mr "You have so much weird stuff in there, Ms Dew. Did you dig out that graduation banner from the trash?"
+    stop music
     show honey surprise
     show mira surprise
     hd "..."
@@ -644,6 +739,7 @@ label continue_story2:
     show stirling default
     mt "We need to do what a lawyer does best!"
     "Mozzy and Mira" "IT'S INTERROGATION TIME!"
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     scene bg living room
     with dissolve
     show pitaya smile
@@ -673,6 +769,7 @@ label continue_story2:
     show mira smile
     mt "Then let's begin."
     hide mira smile
+    stop music
     menu:
         mr "Who should I interrogate first?"
         "Pitaya":
@@ -700,6 +797,8 @@ label int_pitaya:
     mt  "But we're getting sidetracked. You two, lock in already."
     show pitaya deadpan
     pc "Mira, please, never use those words again."
+    show pitaya default
+    play music "audio/Interrogation_Theme.mp3" 
     int_box "INTERROGATE: Pitaya Crim"
     label pc_ask:
         menu:
@@ -726,6 +825,7 @@ label int_pitaya:
                 jump pc_ask
             "What's on the crime agenda this year?":
                 show pitaya default
+                stop music
                 pc "Tax evasion."
                 mr "...That's it?"
                 show pitaya deadpan
@@ -741,7 +841,7 @@ label int_pitaya:
             "That's all":
                 show pitaya default
                 mr "Okay...thank you Mr Crim."
-    
+    stop music
     mr "That's all we need for interrogating Pitaya."
     menu:
         mt  "Well, Mozzy? Can you find any contradictions?"
@@ -759,6 +859,7 @@ label int_pitaya:
             mt  "Well then, we should move on."
             jump interrogate
 label pc_evidence:
+    play music "audio/Interrogation_Theme.mp3"
     menu:
         mr "What evidence do I present?"
         "Brass knuckles":
@@ -776,6 +877,7 @@ label pc_evidence:
             pc "Nah, haven't beaten anyone up since we graduated."
             show pitaya default
             pc "And besides, I liked the feeling of my oppenent's skull crushing beneath my fist."
+            stop music
             mt  "..."
             mr "..."
             pc "..."
@@ -793,6 +895,8 @@ label pc_evidence:
             show pitaya smile
             mr "Okay, all done."
             pc "Great. Now, {w}"
+            stop music
+            play sound "damage 2.mp3"
             show pitaya nervous
             extend "WHAT THE HECK WAS THAT ALL ABOUT?!" with hpunch
             show pitaya curious
@@ -823,7 +927,9 @@ label pc_evidence:
             mr "That's the thing."
             mr "You don't like playing videogames. Not on your own, anyways."
             show pitaya surprise
-            pc "!"
+            stop music
+            play sound "audio/freesound_community-ding-101492.mp3"
+            pc "!" 
             mt  "That's right..."
             mt  "You only play if someone asks you to play with them, never on your own."
             mr "Yeah! So, my question to you, Mr Crim..."
@@ -857,6 +963,7 @@ label pc_evidence:
                     mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
                     mr "Someone like-"
                     mr "..."
+                    play sound "audio/freesound_community-ding-101492.mp3"
                     mr "!"
                     mr "Wait, Pitaya-"
                     mr "Were you looking through the games...for me?"
@@ -865,6 +972,7 @@ label pc_evidence:
                     hide pitaya damage
                     with dissolve
                     with hpunch
+                    play sound "damage 1.mp3"
                     mr "Y-yikes!"
                     mr_thought "Did he just fall to the floor?"
                     show pitaya embarrassed
@@ -873,6 +981,7 @@ label pc_evidence:
                     show pitaya smile
                     pc "That was...wow. That was impressive."
                     show pitaya nervous
+                    play music "audio/romantic_music.mp3" fadeout 1
                     pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
                     show pitaya smile
                     pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
@@ -881,6 +990,7 @@ label pc_evidence:
                     show pitaya smile
                     pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
                     mr "Pitaya..."
+                    stop music
                     mt  "As much as I don't want to interrupt this adorable moment..."
                     show pitaya surprise
                     mt  "The twins are glaring at you two. I think you need to start wrapping up."
@@ -903,7 +1013,7 @@ label pc_evidence:
                             show pitaya smile
                             pc "I swear, on our friendship, my alibi is true."
                             mr "Then...why were you looking through his videogames?"
-                            show pitaya embarrassed
+                            show pitaya damage
                             mr_thought "For some reason, Pitaya blushes and looks away."
                             mt  "I think that is a question you should ask another time."
                             jump pc_evidence
@@ -917,6 +1027,7 @@ label pc_evidence:
                             mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
                             mr "Someone like-"
                             mr "..."
+                            play sound "audio/freesound_community-ding-101492.mp3"
                             mr "!"
                             mr "Wait, Pitaya-"
                             mr "Were you looking through the games...for me?"
@@ -925,6 +1036,7 @@ label pc_evidence:
                             hide pitaya damage
                             with dissolve
                             with hpunch
+                            play sound "damage 1.mp3"
                             mr "Y-yikes!"
                             mr_thought "Did he just fall to the floor?"
                             show pitaya embarrassed
@@ -933,6 +1045,7 @@ label pc_evidence:
                             show pitaya smile
                             pc "That was...wow. That was impressive."
                             show pitaya nervous
+                            play music "audio/romantic_music.mp3" fadeout 1
                             pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
                             show pitaya smile
                             pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
@@ -941,9 +1054,11 @@ label pc_evidence:
                             show pitaya smile
                             pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
                             mr "Pitaya..."
+                            stop music
                             mt  "As much as I don't want to interrupt this adorable moment..."
                             show pitaya surprise
                             mt  "The twins are glaring at you two. I think you need to start wrapping up."
+                            play sound "audio/damage 2.mp3"
                             mr "Dangit!"
                             pc "O-okay!"
                             jump pc_evidence
@@ -965,6 +1080,7 @@ label int_honey:
     hd "...Oh. That's...a surprise."
     mr_thought "Is it?"
     show honey default
+    play music "audio/Interrogation_Theme.mp3" 
     int_box "INTERROGATE: Honey Dew"
     label hd_ask:
         menu:
@@ -996,6 +1112,7 @@ label int_honey:
             "That's all":
                 show honey default
                 mr "Right! Thank you for your help, Ms Dew!"
+    stop music
     menu: 
         mt  "Well, Mozzy? Can you find any contradictions?"
         "YES!":
@@ -1010,6 +1127,7 @@ label int_honey:
             mt  "Well then, we should move on."
             jump interrogate
 label hd_evidence:
+    play music "audio/Interrogation_Theme.mp3" 
     menu:
         mr "What evidence do I present?"
         "Hat":
@@ -1023,18 +1141,23 @@ label hd_evidence:
             hd "In any case, what do you want to know about the hat?"
             mr "Do you wear it often?"
             show honey smile
-            hd "Of course! It's such a precious item, and I love it so much!"
+            hd "Of course!"
+            play music "romantic_music.mp3"
+            hd "It's such a precious item, and I love it so much!"
             hd "It means so much to me, and it looks fabulous!"
             mt  "...I'm glad, Honey."
             mr "Cool!"
             show honey surprise
+            stop music
             mr "So where did you get such a cheap hat that looks so good?"
+            play sound "audio/damage 1.mp3"
             mt "Ng-?!"
             hd "What?"
             mr "There's a feather missing from the hat, and I can see a glue strip here. But it also looks like it would be a really good quality hat."
             mr "My question is where did you get such a cheap hat?"
             mt  "Mozzy, the truth is that I-"
             show honey damage
+            play sound "damage 2.mp3"
             hd "Oh, YOU WANNA FIGHT, BOY?! YOU WANT TO FIGHT ME?!" with hpunch
             mt  "Aaand here we go again. Oh boy."
             hd "MIRA BOUGHT THAT FOR ME, OKAY?! YOU THINK IT'S CHEAP BEING A UNIVERSITY STUDENT?! STIRLING MAY BE A NEPO BABY, AND MY PARENTS MAY BE PRETTY WELL OFF, BUT MIRA WAS DOING THE BEST SHE COULD TO GET HER LAW DEGREE!"
@@ -1091,6 +1214,7 @@ label hd_evidence:
             menu: 
                 mr_thought "Should I ask her why there's glue on this?"
                 "Yes":
+                    stop music
                     show honey surprise
                     hd "What."
                     mr "I was just curious, since you said you got this for a steal."
@@ -1103,6 +1227,7 @@ label hd_evidence:
                     mr "So I was just wondering if you got scammed or if you were lying about how valuable it is."
                     mt  "Mozzy, I think you need to stop-"
                     show honey damage
+                    play sound "audio/damage 1.mp3"
                     hd "CURSE YOU!" with hpunch
                     mr "Gah!?"
                     hd "FIRST, you DARE interrupt my time with Mira. THEN, you ask for my alibi even though I'M THE VICTIM. And NOW, YOU JUDGE ME FOR BUYING CHEAP JEWELLERY?!"
@@ -1161,6 +1286,7 @@ label int_twins:
     mt  "Great. Let's begin."
     show jazz default
     show smith default
+    play music "audio/Interrogation_Theme.mp3"
     int_box "INTERROGATE: the Twins"
     label twin_ask:
         menu:
@@ -1192,6 +1318,7 @@ label int_twins:
                 jp "Is that all, you cretin?"
                 jump twin_ask
             "That's all":
+                stop music
                 show jazz aloof
                 show smith aloof
                 mr "Okay...thanks, guys."
@@ -1206,6 +1333,7 @@ label int_twins:
             show jazz disgust
             jp "Can we make fun of her for that?"
             show smith damage
+            play sound "audio/damage 1.mp3"
             sp "Are you insane!? No!"
             show jazz aloof
             show smith smug
@@ -1214,6 +1342,7 @@ label int_twins:
             mt  "Well then, we should move on."
             jump interrogate
 label twin_evidence:
+    play music "Interrogation_Theme.mp3"
     menu:
         mr "What evidence do I present?"
         "Stirling's earring":
@@ -1234,6 +1363,7 @@ label twin_evidence:
                 jp "Didn't we literally say that we were also in the garden too?"
                 mr "No! I mean, I have evidence that you went other places too!"
                 mr "Mr Crim told us that he was in the living room, and at one point, you two walked in from the hallway."
+                stop music
                 show jazz disgust
                 show smith shock
                 mr "The hallway...where the rooms are!"
@@ -1270,7 +1400,9 @@ label twin_evidence:
                 mr "You can still see the door to the hallway!"
                 mr "What do you say to that?"
                 show jazz damage with hpunch
+                play sound "damage 1.mp3"
                 show smith damage with hpunch
+                play sound "damage 1.mp3"
                 jp "Argh!"
                 sp "Impossible...!"
                 show jazz angry
@@ -1283,6 +1415,7 @@ label twin_evidence:
                 show jazz damage
                 jp "...This is your fault."
                 show smith damage with hpunch
+                play sound "damage 2.mp3"
                 sp "My fault?! Why is it my fault?!"
                 jp "You're the one that slipped up! Now they know that we were in that diva's room!"
                 mt  "I mean, we didn't quite know that yet. Thank you for the confirmation."
@@ -1298,6 +1431,7 @@ label twin_evidence:
                 jp "Nuh uh!"
                 mr "Will you two stop so we can carry on our investigation?"
                 show smith angry
+                play sound "audio/damage 2.mp3"
                 "Jazz and Smith" "CALLATE!" with hpunch
                 mr "Yikes!"
                 mt  "Jazz. Smith."
@@ -1318,9 +1452,12 @@ label twin_evidence:
             show jazz aloof
             jp "Yeah...? I think I was pretty clear when I said that."
             mr "If that's the case...then how did you know it smelt like watermelon?"
+            stop music
             show jazz shock
+            play sound "audio/damage 1.mp3"
             jp "Ngh!" with hpunch
             show smith damage
+            play sound "audio/damage 1.mp3"
             sp "Gh?!" with hpunch
             show jazz nervous
             jp "I-well, isn't it obvious? The smell was so strong that we could smell it from outside the hallway!"
@@ -1353,6 +1490,7 @@ label int_stirling:
     mt "Are you sure you're alright, Stirling?"
     show stirling smile
     ss "What? Oh! Yeah, of course, why wouldn't I be? Let's just start the interrogation now, yeah?"
+    play music "audio/Interrogation_Theme.mp3"
     int_box "INTERROGATE: Stirling Strawberry"
     label ss_ask:
         menu:
@@ -1374,6 +1512,7 @@ label int_stirling:
                 ss "I'm sorry, I don't really have an alibi. I was in my room the whole time, but no one can confirm that."
                 jump ss_ask
             "Why are you so nervous?":
+                stop music
                 show stirling nervous
                 ss "Whaat? Nervous? Who, me? Nah, I'm not nervous!"
                 mr "..."
@@ -1408,7 +1547,7 @@ label int_stirling:
                                                                         ss "I don't want to say it! Alright?"
                                                                         menu:
                                                                             "Why?":
-                                                                                show stirling shuteye
+                                                                                show stirling stress
                                                                                 ss "Stop! Why are you like this?"
                                                                                 menu:
                                                                                     "Why?":
@@ -1416,7 +1555,8 @@ label int_stirling:
                                                                                         ss "Gh-"
                                                                                         menu:
                                                                                             "Why?":
-                                                                                                show stirling shuteye
+                                                                                                play sound "damage 1.mp3"
+                                                                                                show stirling angry
                                                                                                 ss "BECAUSE THIS IS THE FIRST TIME I'VE EVER BEEN QUESTIONED AND MIRA'S SO SERIOUS IT'S KINDA SCARY OKAY?!" with hpunch
                                                                                                 mt "..."
                                                                                                 mr "..."
@@ -1469,10 +1609,13 @@ label int_stirling:
             mt "Well then, let's move on."
             jump interrogate
 label ss_evidence:
+    play music "audio/Interrogation_Theme.mp3"
     menu:
         mr "What evidence do I present?"
         "Stirling's earring":
+            stop music
             show stirling surprise
+            play sound "audio/freesound_community-ding-101492.mp3"
             ss "!"
             show stirling default
             ss "Where did you find that? I've been looking for it everywhere!"
@@ -1487,6 +1630,7 @@ label ss_evidence:
         "Mira's plushie":
             show stirling surprise
             ss "I didn't know you had merch, Mira."
+            stop music
             mt "...I don't."
             show stirling awkward
             ss "...Oh. Then what's this?"
@@ -1511,6 +1655,7 @@ label ss_evidence:
                         show stirling nervous
                         ss "Ah, no... I haven't really had many big roles. I guess I'm not cut out for it yet."
                         mt "Really? I always thought you were rather good."
+                        play music "romantic_music.mp3"
                         show stirling smile
                         ss "Aw, thanks Mira!"
                         show stirling nervous
@@ -1521,6 +1666,7 @@ label ss_evidence:
                         ss "Well, in any case, glad you're coming!"
                         jump ss_evidence
                     "Not interested":
+                        play sound "damage 1.mp3"
                         show stirling damage 1 with hpunch
                         show stirling damage 2
                         ss "Gah!"
@@ -1538,6 +1684,7 @@ label ss_evidence:
                 mt "I'm a lawyer. Why would I want merch?"
                 show stirling nervous
                 ss "I mean, have you seen your tags on the internet-?"
+                stop music
                 mt "NO AND I HAVE NO PLANS WHATSOEVER TO EVER CHECK."
                 show stirling stress
                 ss "O-oh, yeah, fair enough, Honey would murder half the community if she ever saw what they post-"
@@ -1553,6 +1700,7 @@ label ss_evidence:
             ss "I mean, it wasn't murder, so it should be alright, right?"
             mt "The rule doesn't just apply to murder cases, it's for all cases!"
             show stirling surprise
+            stop music
             ss "...Whoops."
             show stirling nervous
             ss "Um. No one has to know?"
@@ -1572,6 +1720,7 @@ label ss_evidence:
             jump interrogate
 
 label interrogate:
+    stop music
     hide pitaya
     hide honey
     hide stirling
@@ -1611,6 +1760,7 @@ label int_mira:
     show mira smile
     int_box "INTERROGATE: Mira Tisu"
     label mira_ask:
+        play music "audio/Interrogation_Theme.mp3"
         menu:
             mt "Who do you need me to talk about?"
             "Honey Dew":
@@ -1632,6 +1782,7 @@ label int_mira:
                 show mira surprise
                 mt "...Maybe not towards outsiders though."
                 label ask_about_hd:
+                    play music "audio/Interrogation_Theme.mp3"
                     show mira default
                     menu:
                         mt "Anything else?"
@@ -1646,19 +1797,24 @@ label int_mira:
                             jump ask_about_hd
                         "Ask about her loyalty":
                             $ hd_hospital = True
+                            play music "romantic_music.mp3"
                             mr "How can you prove that she is as loyal as you say she is?"
                             mt "Well...I can't prove it because it's more of a feeling."
                             show mira smile
                             mt "She and Stirling were both there when I got stabbed once-"
+                            play sound "damage 2.mp3"
+                            stop music
                             mr "Woah can we cycle back to the stabbing?!"
                             show mira default
                             mt "-I woke up in the hospital with hysterical crying from..."
                             show mira surprise
                             mt "...Stirling, surprisingly. Honey never cries aloud anyways-"
                             mr "So...are we ignoring the stabbed comment or...?"
+                            play music "audio/Interrogation_Theme.mp3"
                             jump ask_about_hd
                         "Ask about the hospital" if hd_hospital:
                             mr "Okay..."
+                            stop music
                             mr "CAN WE NOW CIRCLE BACK TO THE STABBING?!" with hpunch
                             mt "Fine, just because you asked so nicely."
                             show mira hide
@@ -1669,6 +1825,7 @@ label int_mira:
                             mt "I don't remember why I got stabbed, I was just...stabbed."
                             mr "And you don't know who did it?"
                             mt "I..."
+                            play sound "damage 1.mp3"
                             show mira damage
                             mt "Gh-!" with hpunch
                             mr "M-Mira? Are you okay?"
@@ -1693,11 +1850,13 @@ label int_mira:
                 show mira smile
                 mt "Ah, and he's incredibly loyal as well! It's quite easy to tell, he wears his heart on his sleeve."
                 label ask_about_ss:
+                    play music "audio/Interrogation_Theme.mp3"
                     menu:
                         mt "Anything else?"
                         "Ask about his loyalty":
                             $ ss_hospital = True
                             show mira smile
+                            play music "romantic_music.mp3"
                             mt "There was a time during our last years of university when I suffered from major blood loss."
                             mt "He and Honey were both there when I woke up at the hospital. I could already tell that he had been crying heavily, but somehow he managed to cry even more when I woke up."
                             show mira sadly
@@ -1705,7 +1864,9 @@ label int_mira:
                             mt "That's something I haven't had in a while."
                             mr "Why were you losing blood though?"
                             show mira default
+                            stop music
                             mt "Oh. I was stabbed."
+                            play sound "damage 2.mp3"
                             mr "WHAT?!" with hpunch
                             mt "In the neck."
                             mr "THAT'S EVEN WORSE!!!"
@@ -1713,6 +1874,7 @@ label int_mira:
                             mt "Um...I don't quite remember how though, so I ask that you don't ask any further."
                             jump ask_about_ss
                         "Ask about the tragedy":
+                            stop music
                             show mira sadly
                             mt "Ahh...that's a rather sensitive topic. I don't think I should talk about it."
                             mt "But just so you can tell how severe it was...there's a reason why Stirling is the one taking care of the twins now."
@@ -1722,6 +1884,7 @@ label int_mira:
                             jump ask_about_ss
                         "Ask about the hospital" if ss_hospital:
                             mr "Okay..."
+                            stop music
                             mr "CAN WE NOW CIRCLE BACK TO THE STABBING?!" with hpunch
                             mt "Fine, just because you asked so nicely."
                             show mira hide
@@ -1732,6 +1895,7 @@ label int_mira:
                             mt "I don't remember why I got stabbed, I was just...stabbed."
                             mr "And you don't know who did it?"
                             mt "I..."
+                            play sound "damage 1.mp3"
                             show mira damage
                             mt "Gh-!" with hpunch
                             mr "M-Mira? Are you okay?"
@@ -1755,6 +1919,7 @@ label int_mira:
                 mt "I hope they grow to be kinder. It's not exactly a good thing to act like they do."
                 label ask_about_twins:
                     show mira default
+                    play music "audio/Interrogation_Theme.mp3"
                     menu:
                         mt "Anything else?"
                         "Ask about their insults":
@@ -1767,6 +1932,7 @@ label int_mira:
                             mt "That one was actually quite fun."
                             jump ask_about_twins
                         "Ask about their parents":
+                            stop music
                             show mira serious
                             mt "Ahh...that's a rather sensitive topic. I don't think I should talk about it."
                             mt "But just so you can tell how severe it was...there's a reason why Stirling is the one taking care of the twins now."
@@ -1781,6 +1947,7 @@ label int_mira:
                 show mira surprise
                 mt "Pitaya...? I can't really tell you much about him."
                 mt "I mean, Stirling knows him better than I do. They are cousins after all."
+                stop music
                 mr "Wait, does that mean STIRLING'S the glimmerous cousin Pitaya always talked about?!"
                 show mira default
                 mt "Ah, that's right, you two seemed like you knew each other. May I ask how?"
@@ -1808,12 +1975,14 @@ label int_mira:
                 mt "I'm a criminal lawyer in this universe, of course not."
                 jump mira_ask
             "Nevermind":
+                stop music
                 mr "That's all I need. Thank you, Ms Tisu."
                 show mira smile
                 mt "Anytime, Mozzy."
                 jump interrogate
 
 label continue_story3:
+    play music "audio/u_x93vaamn3r-floopergang-246070.mp3"
     scene bg living room
     mr "Alright! I've got all the information I need!"
     show mira smile
@@ -1855,6 +2024,7 @@ label continue_story3:
 
 label culprit_pc:
     $ pitaya_guilt = True
+    stop music
     show pitaya damage
     pc "Wh-WHAT?!"
     hide pitaya damage
@@ -1903,6 +2073,7 @@ label culprit_pc:
     jump wrong_end
 
 label culprit_hd:
+    stop music
     show honey surprise
     hd "I...don't understand."
     mr "Ditto. Neither do I."
@@ -1939,6 +2110,7 @@ label culprit_hd:
     mr "..."
     mr "Are you kidding me."
     show honey smile
+    play music "romantic_music.mp3"
     hd "Mira is a dear friend and a brilliant woman! Of course I wanted to provide a case for her when we met again."
     hide honey smile
     show mira serious
@@ -1970,6 +2142,7 @@ label culprit_hd:
     jump good_end
 
 label culprit_pale:
+    stop music
     $ twin_guilt = True
     show jazz damage at left
     show smith angry at right
@@ -1978,6 +2151,7 @@ label culprit_pale:
     jp "Yammering..."
     sp "Blumbering..."
     "Jazz and Smith" "MEDDLING, NO GOOD," 
+    play sound "damage 1.mp3"
     extend " FOOL!!" with hpunch
     hide jazz damage
     hide smith damage
@@ -1998,6 +2172,7 @@ label culprit_pale:
     show jazz disgust
     jp "Oh, no, we definitely considered that, just not with the necklace."
     show smith shock
+    play sound "damage 2.mp3"
     sp "WHY WOULD YOU ADMIT THAT, YOU IDIOT?!"
     show jazz angry
     jp "WELL CLEARLY THIS ASININE DETECTIVE IS DETERMINED TO PIN IT ON US, MIGHT AS WELL STOP HIDING HOW MUCH WE HATE THAT DIVA!!"
@@ -2021,8 +2196,10 @@ label culprit_pale:
     jump wrong_end
 
 label culprit_ss:
+    stop music
     $ stirling_guilt = True
     show stirling shock
+    play sound "damage 1.mp3"
     ss "What? Me?"
     hide stirling shock
     show mira serious
@@ -2067,11 +2244,11 @@ label wrong_end:
         mr_thought "He denied putting it there, but the evidence is clear."
     
     if twin_guilt:
-        mr_thought "We searched through their bags, and we found the Melon Baller stuffed in a game pouch."
+        mr_thought "We searched through their room, and we found the Melon Baller stuffed in a game pouch."
         mr_thought "They denied putting it there, but the evidence is clear."
 
     if stirling_guilt:
-        mr_thought "We searched through his room, and we found the Melon Baller stuffed in a pillow."
+        mr_thought "We searched through Stirling's room, and we found the Melon Baller stuffed in a pillow."
         mr_thought "He denied putting it there, but the evidence is clear."
 
     mr_thought "Luckily, Miss Dew was just glad that she got the necklace back, and insisted that we just forget about the incident."
@@ -2082,7 +2259,7 @@ label wrong_end:
     mr_thought "And so ends the tale of \"The Disappearance of the Melon Baller\""
     mr_thought "..."
     mr_thought "The name is a work in progress."
-    "{b}Fin?{/b}"
+    "{b}NOT GUILTY.{/b}"
 
     return
 
@@ -2095,6 +2272,6 @@ label good_end:
     mr_thought "And so ends the tale of \"The Melon Conspiracy\""
     mr_thought "..."
     mr_thought "Does this even count as a conspiracy?"
-    "{b}Fin.{/b}"
+    "{b}GUILTY.{/b}"
 
     return
