@@ -6,14 +6,15 @@ init python:
         config.auto_voice = "audio/freesound_community-scribble-6144.mp3"
 
 define adv = Character(None, callback = voice_callback)
-define mr = Character("Mozzy", color = "#c7a600")
-define mr_thought = Character("Mozzy", what_italic=True, color = "#c7a600")
-define mt  = Character("Mira", color = "#603000")
-define pc = Character("Pitaya", color = "#c22640")
-define hd = Character("Honey", color = "#018e01")
-define ss = Character("Stirling", color = "#ff70ba")
-define jp = Character("Jazz", color = "#ff1919")
-define sp = Character("Smith", color = "#82f046")
+define mr = Character("Mozzy", color = "#c7a600", window_background = "gui/mozzy_textbox.png")
+define mr_thought = Character("Mozzy", what_italic=True, color = "#c7a600", window_background = "gui/mozzy_textbox.png")
+define mt  = Character("Mira", color = "#603000", window_background = "gui/mira_textbox.png")
+define pc = Character("Pitaya", color = "#c22640", window_background = "gui/pitaya_textbox.png")
+define hd = Character("Honey", color = "#018e01", window_background = "gui/honey_textbox.png")
+define ss = Character("Stirling", color = "#ff70ba", window_background = "gui/stirling_textbox.png")
+define jp = Character("Jazz", color = "#ff1919", window_background = "gui/jazz_textbox.png")
+define sp = Character("Smith", color = "#82f046", window_background = "gui/smith_textbox.png")
+define u = Character("???", window_background = "gui/unknown_textbox.png")
 define int_box = Character(None, what_xalign=0.5, what_text_align=0.5)
 default twin_int = False
 default ss_int = False
@@ -335,13 +336,13 @@ label enter_house:
     show smith aloof at right
     with dissolve
     show pitaya damage
-    "???" "...He looks like a dud."
+    u "...He looks like a dud."
     mr "how dare you!, you...you...gremlin?, sorry you're just extremely short."
     show jazz aloof at left 
     with dissolve
-    "???" "And? We're literally fourteen."
+    u "And? We're literally fourteen."
     show jazz smug
-    "???" "If anything, you're the short one."
+    u "If anything, you're the short one."
     mr "HEY!!"
     hide pitaya damage
     show mira hide
@@ -361,7 +362,7 @@ label enter_house:
     hide jazz smug
     hide smith smug
     show stirling grumpy
-    "???" "Hey, I heard that!"
+    u "Hey, I heard that!"
     hide stirling grumpy
     show jazz aloof
     jp "Oh, you're here? Whoops." 
@@ -369,7 +370,7 @@ label enter_house:
     mr_thought "And I went to school with Pitaya."
     hide jazz aloof
     show honey default
-    "???" "Stirling, I would love to come to your defense, {w}" 
+    u "Stirling, I would love to come to your defense, {w}" 
     show honey smile
     extend "but to be honest, I do think Mira deserves better."
     hide honey smile
@@ -377,22 +378,22 @@ label enter_house:
     ss "So someone like you?"
     hide stirling grumpy
     show honey surprise
-    "???" "..."
+    u "..."
     show honey smile
-    "???" "Oh, no. But certainly not you, you're too childish."
+    u "Oh, no. But certainly not you, you're too childish."
     hide honey smile
     show stirling angry
     ss "Too childish-it's called being optimistic!"
     hide stirling angry
     show honey smile
-    "???" "My apologies, I was only teasing you, silly."
+    u "My apologies, I was only teasing you, silly."
     hide honey smile
     show stirling grumpy
     ss "Why are you like thiiis?"
     hide stirling grumpy
     show honey default
-    "???" "Well, someone has to be a responsible adult when dear Mira's not around."
-    "???" "I can hardly compare with her, but I do my best!"
+    u "Well, someone has to be a responsible adult when dear Mira's not around."
+    u "I can hardly compare with her, but I do my best!"
     mr_thought "Wow, these guys really like Mira, huh?"
     hide honey smile
     show mira smile
