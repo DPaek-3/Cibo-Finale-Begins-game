@@ -13,7 +13,7 @@ define pc = Character("Pitaya", color = "#c22640", window_background = "gui/pita
 define hd = Character("Honey", color = "#018e01", window_background = "gui/honey_textbox.png")
 define ss = Character("Stirling", color = "#ff70ba", window_background = "gui/stirling_textbox.png")
 define jp = Character("Jazz", color = "#ff1919", window_background = "gui/jazz_textbox.png")
-define sp = Character("Smith", color = "#82f046", window_background = "gui/smith_textbox.png")
+define sp = Character("Smith", color = "#3fab05", window_background = "gui/smith_textbox.png")
 define u = Character("???", window_background = "gui/unknown_textbox.png")
 define int_box = Character(None, what_xalign=0.5, what_text_align=0.5)
 default twin_int = False
@@ -257,6 +257,7 @@ label continue_story1:
     mr "..."
     mt  "..."
     mr "Your friend is taking a while."
+    play sound "audio/freesound_community-gate-heavy-openclose-wav-103288.mp3"
     scene bg gates open
     show mozzy default at left
     show mira default at right
@@ -1396,11 +1397,14 @@ label twin_evidence:
                 show smith shock
                 mr "...Is if his alibi is true!"
                 mt  "Precisely. And if he was looking through the collection, he would probably be down on the ground, and anyone walking in wouldn't see him because he was covered by the couch."
+                scene still couch
                 mr "But if you're behind the couch like this..."
                 pc "What? Mozzy, what are you-"
                 mr "You can still see the door to the hallway!"
                 mr "What do you say to that?"
-                show jazz damage with hpunch
+                scene bg living room
+                show smith shock at right
+                show jazz damage at left with hpunch
                 play sound "damage 1.mp3"
                 show smith damage with hpunch
                 play sound "damage 1.mp3"
