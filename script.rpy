@@ -17,6 +17,7 @@ define sp = Character("Smith", color = "#3fab05", window_background = "gui/smith
 define u = Character("???", window_background = "gui/unknown_textbox.png")
 define int_box = Character(None, what_xalign=0.5, what_text_align=0.5)
 default twin_int = False
+default called_out = False
 default ss_int = False
 default hd_int = False
 default pc_int = False
@@ -923,147 +924,155 @@ label pc_evidence:
             pc "They're {i}too{/i} soft to be comfortable, if you get what I mean."
             jump pc_evidence
         "Pitaya's Testimony":
-            mr "Why were you looking at the game collection?"
-            show pitaya smile
-            pc "What do you mean? I was bored, that's all."
-            mr "That's the thing."
-            mr "You don't like playing videogames. Not on your own, anyways."
-            show pitaya surprise
-            stop music
-            play sound "audio/freesound_community-ding-101492.mp3"
-            pc "!" 
-            mt  "That's right..."
-            mt  "You only play if someone asks you to play with them, never on your own."
-            mr "Yeah! So, my question to you, Mr Crim..."
-            mr "...is why were  looking at Mr Strawberry's game collection on your own?"
-            if failed_gaydar:
-                mr "Could it be...that you are lying about your alibi?"
-                pc "..."
-                show pitaya nervous
-                pc "Th-that's it?"
-                mr "...Huh?"
+            if pc_testimony:
+                mr "Why were you looking at the game collection?"
                 show pitaya smile
-                pc "Man, I was worried...you were so confident too."
-                mr "W-did I get it wrong?"
-                show pitaya default
-                pc "Nothing to worry about man, nothing to worry about!"
-                show pitaya smile
-                pc "I swear, on our friendship, my alibi is true."
-                mr "Then...why were you looking through his videogames?"
-                show pitaya embarrassed
-                mr_thought "For some reason, Pitaya blushes and looks away."
-                mt  "I think that is a question you should ask another time."
-                jump pc_evidence
-            else:
-                if successful_gaydar:
-                    mr "Could it be...that you were looking for someone else?"
+                pc "What do you mean? I was bored, that's all."
+                mr "That's the thing."
+                mr "You don't like playing videogames. Not on your own, anyways."
+                show pitaya surprise
+                stop music
+                play sound "audio/freesound_community-ding-101492.mp3"
+                pc "!" 
+                mt  "That's right..."
+                mt  "You only play if someone asks you to play with them, never on your own."
+                mr "Yeah! So, my question to you, Mr Crim..."
+                mr "...is why were you looking at Mr Strawberry's game collection on your own?"
+                if failed_gaydar:
+                    mr "Could it be...that you are lying about your alibi?"
                     pc "..."
                     show pitaya nervous
-                    pc "Wh-what do you mean? Looking for someone in a videogame collection?"
-                    mr "NOT WHAT I MEANT!"
-                    show pitaya surprise
-                    mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
-                    mr "Someone like-"
-                    mr "..."
-                    play sound "audio/freesound_community-ding-101492.mp3"
-                    mr "!"
-                    mr "Wait, Pitaya-"
-                    mr "Were you looking through the games...for me?"
-                    show pitaya damage
-                    pc "Gh-?!"
-                    hide pitaya damage
-                    with dissolve
-                    with hpunch
-                    play sound "damage 1.mp3"
-                    mr "Y-yikes!"
-                    mr_thought "Did he just fall to the floor?"
+                    pc "Th-that's it?"
+                    mr "...Huh?"
+                    show pitaya smile
+                    pc "Man, I was worried...you were so confident too."
+                    mr "W-did I get it wrong?"
+                    show pitaya default
+                    pc "Nothing to worry about man, nothing to worry about!"
+                    show pitaya smile
+                    pc "I swear, on our friendship, my alibi is true."
+                    mr "Then...why were you looking through his videogames?"
                     show pitaya embarrassed
-                    with dissolve
-                    pc "Y-yeah. Yeah, I was."
-                    show pitaya smile
-                    pc "That was...wow. That was impressive."
-                    show pitaya nervous
-                    play music "audio/romantic_music.mp3" fadeout 1
-                    pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
-                    show pitaya smile
-                    pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
-                    show pitaya nervous
-                    pc "So, yeah. Here I am. And for the record..."
-                    show pitaya smile
-                    pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
-                    mr "Pitaya..."
-                    stop music
-                    mt  "As much as I don't want to interrupt this adorable moment..."
-                    show pitaya surprise
-                    mt  "The twins are glaring at you two. I think you need to start wrapping up."
-                    mr "Dangit!"
-                    pc "O-okay!"
+                    mr_thought "For some reason, Pitaya blushes and looks away."
+                    mt  "I think that is a question you should ask another time."
+                    jump pc_evidence
                 else:
-                    menu:
-                        mr "Could it be..."
-                        "That you are lying about your alibi?":
-                            $ failed_gaydar = True
-                            pc "..."
-                            show pitaya nervous
-                            pc "Th-that's it?"
-                            mr "...Huh?"
-                            show pitaya smile
-                            pc "Man, I was worried...you were so confident too."
-                            mr "W-did I get it wrong?"
-                            show pitaya default
-                            pc "Nothing to worry about man, nothing to worry about!"
-                            show pitaya smile
-                            pc "I swear, on our friendship, my alibi is true."
-                            mr "Then...why were you looking through his videogames?"
-                            show pitaya damage
-                            mr_thought "For some reason, Pitaya blushes and looks away."
-                            mt  "I think that is a question you should ask another time."
-                            jump pc_evidence
-                        "That you were looking for someone else?":
-                            $ successful_gaydar = True
-                            pc "..."
-                            show pitaya nervous
-                            pc "Wh-what do you mean? Looking for someone in a videogame collection?"
-                            mr "NOT WHAT I MEANT!"
-                            show pitaya surprise
-                            mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
-                            mr "Someone like-"
-                            mr "..."
-                            play sound "audio/freesound_community-ding-101492.mp3"
-                            mr "!"
-                            mr "Wait, Pitaya-"
-                            mr "Were you looking through the games...for me?"
-                            show pitaya damage
-                            pc "Gh-?!"
-                            hide pitaya damage
-                            with dissolve
-                            with hpunch
-                            play sound "damage 1.mp3"
-                            mr "Y-yikes!"
-                            mr_thought "Did he just fall to the floor?"
-                            show pitaya embarrassed
-                            with dissolve
-                            pc "Y-yeah. Yeah, I was."
-                            show pitaya smile
-                            pc "That was...wow. That was impressive."
-                            show pitaya nervous
-                            play music "audio/romantic_music.mp3" fadeout 1
-                            pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
-                            show pitaya smile
-                            pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
-                            show pitaya nervous
-                            pc "So, yeah. Here I am. And for the record..."
-                            show pitaya smile
-                            pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
-                            mr "Pitaya..."
-                            stop music
-                            mt  "As much as I don't want to interrupt this adorable moment..."
-                            show pitaya surprise
-                            mt  "The twins are glaring at you two. I think you need to start wrapping up."
-                            play sound "audio/damage 2.mp3"
-                            mr "Dangit!"
-                            pc "O-okay!"
-                            jump pc_evidence
+                    if successful_gaydar:
+                        mr "Could it be...that you were looking for someone else?"
+                        pc "..."
+                        show pitaya nervous
+                        pc "Wh-what do you mean? Looking for someone in a videogame collection?"
+                        mr "NOT WHAT I MEANT!"
+                        show pitaya surprise
+                        mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
+                        mr "Someone like-"
+                        mr "..."
+                        play sound "audio/freesound_community-ding-101492.mp3"
+                        mr "!"
+                        mr "Wait, Pitaya-"
+                        mr "Were you looking through the games...for me?"
+                        show pitaya damage
+                        pc "Gh-?!"
+                        hide pitaya damage
+                        with dissolve
+                        with hpunch
+                        play sound "damage 1.mp3"
+                        mr "Y-yikes!"
+                        mr_thought "Did he just fall to the floor?"
+                        show pitaya embarrassed
+                        with dissolve
+                        pc "Y-yeah. Yeah, I was."
+                        show pitaya smile
+                        pc "That was...wow. That was impressive."
+                        show pitaya nervous
+                        play music "audio/romantic_music.mp3" fadeout 1
+                        pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                        show pitaya smile
+                        pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                        show pitaya nervous
+                        pc "So, yeah. Here I am. And for the record..."
+                        show pitaya smile
+                        pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
+                        mr "Pitaya..."
+                        stop music
+                        mt  "As much as I don't want to interrupt this adorable moment..."
+                        show pitaya surprise
+                        mt  "The twins are glaring at you two. I think you need to start wrapping up."
+                        mr "Dangit!"
+                        pc "O-okay!"
+                    else:
+                        menu:
+                            mr "Could it be..."
+                            "That you are lying about your alibi?":
+                                $ failed_gaydar = True
+                                pc "..."
+                                show pitaya nervous
+                                pc "Th-that's it?"
+                                mr "...Huh?"
+                                show pitaya smile
+                                pc "Man, I was worried...you were so confident too."
+                                mr "W-did I get it wrong?"
+                                show pitaya default
+                                pc "Nothing to worry about man, nothing to worry about!"
+                                show pitaya smile
+                                pc "I swear, on our friendship, my alibi is true."
+                                mr "Then...why were you looking through his videogames?"
+                                show pitaya damage
+                                mr_thought "For some reason, Pitaya blushes and looks away."
+                                mt  "I think that is a question you should ask another time."
+                                jump pc_evidence
+                            "That you were looking for someone else?":
+                                $ successful_gaydar = True
+                                pc "..."
+                                show pitaya nervous
+                                pc "Wh-what do you mean? Looking for someone in a videogame collection?"
+                                mr "NOT WHAT I MEANT!"
+                                show pitaya surprise
+                                mr "I mean, you were looking at the videogames, so you could share new ones with someone who DOES love videogames."
+                                mr "Someone like-"
+                                mr "..."
+                                play sound "audio/freesound_community-ding-101492.mp3"
+                                mr "!"
+                                mr "Wait, Pitaya-"
+                                mr "Were you looking through the games...for me?"
+                                show pitaya damage
+                                pc "Gh-?!"
+                                hide pitaya damage
+                                with dissolve
+                                with hpunch
+                                play sound "damage 1.mp3"
+                                mr "Y-yikes!"
+                                mr_thought "Did he just fall to the floor?"
+                                show pitaya embarrassed
+                                with dissolve
+                                pc "Y-yeah. Yeah, I was."
+                                show pitaya smile
+                                pc "That was...wow. That was impressive."
+                                show pitaya nervous
+                                play music "audio/romantic_music.mp3" fadeout 1
+                                pc "Yeah, I, uh, wanted to spend time with you, and I knew that Stirling had a few games that you also like, so I checked to see if there was anything you haven't played yet."
+                                show pitaya smile
+                                pc "'Cause, man, you're fun to be around! You're not weird like most people I know."
+                                show pitaya nervous
+                                pc "So, yeah. Here I am. And for the record..."
+                                show pitaya smile
+                                pc "Playing those lawyer games with you are always fun. You're great at doing the voices!"
+                                mr "Pitaya..."
+                                stop music
+                                mt  "As much as I don't want to interrupt this adorable moment..."
+                                show pitaya surprise
+                                mt  "The twins are glaring at you two. I think you need to start wrapping up."
+                                play sound "audio/damage 2.mp3"
+                                mr "Dangit!"
+                                pc "O-okay!"
+                                jump pc_evidence
+            else:
+                show pitaya curious
+                pc "I haven't given my testimony yet though?"
+                mt "Mozzy, try to avoid rushing ahead, alright?"
+                show pitaya smile
+                mr "O-okay..."
+                jump pc_evidence
         "Nevermind":
             show pitaya smile
             mr "I don't know what I was going to say."
@@ -1360,6 +1369,7 @@ label twin_evidence:
             jump twin_evidence
         "Pitaya's testimony":
             if pc_testimony:
+                $ called_out = True
                 mr "Are you sure you were in the kitchen the whole time?"
                 show jazz aloof
                 jp "Didn't we literally say that we were also in the garden too?"
@@ -1473,6 +1483,44 @@ label twin_evidence:
             show jazz guilty
             jp "Who-who said we smelt watermelons today? We're just talking about what we smelt on...Wednesday! Yeah!"
             mr_thought "... No way for me to disprove that, but that was such an obvious lie that even I can catch it."
+            jump twin_evidence
+        "Honey's room" if called_out:
+            mr "So...now that we know you were in Ms Dew's room, do you have anything to add?"
+            show jazz disgust
+            show smith disgust
+            jp "Even if we did, why would we tell {i}you{/i}?"
+            mt "..."
+            show smith guilty
+            sp "...Fine."
+            show jazz angry
+            jp "Wh-hey!"
+            show smith disgust
+            sp "Look, we might as well. This cheesehead isn't going to let us go otherwise."
+            show jazz aloof
+            jp "True."
+            show jazz disgust
+            show smith aloof
+            jp "Don't tell anyone, but we went to Honey's room to see her necklace."
+            mr "Didn't you say it was tacky? Why'd you go look at it?"
+            show jazz angry
+            jp "It still is! When Honey said she was going to leave the Melon Baller on the mannequin in her room, Smith and I thought it was the perfect opportunity to see if it really was as valuable as she said it was."
+            show smith smug
+            sp "Or if she was just cheap."
+            show smith guilty
+            sp "But...it wasn't there."
+            show jazz disgust
+            jp "We didn't want anyone to think we stole it, so we kept mum until she realised it later."
+            mr "Wait, what time was this?"
+            show jazz aloof
+            jp "I dunno, like half an hour after lunch."
+            mr "Maybe Ms Dew just hadn't returned to her room yet?"
+            show smith aloof
+            sp "Maybe...we definitely heard someone go in and out though."
+            show jazz smug
+            jp "The going in was Stirling, remember? We saw him go to his room."
+            show smith smug
+            sp "Oh yeah. What a hermit, huh? Inviting all these guests and then hiding in his room."
+            mr_thought "...That was actually pretty helpful."
             jump twin_evidence
         "Nevermind":
             mr "I don't know what I was going to say."
@@ -1677,11 +1725,14 @@ label ss_evidence:
                         ss "Gah!"
                         mr_thought "Why'd you react like you just got punched?! I didn't even move!"
                         mt "Oh god..."
+                        scene bg handkerchief
                         mt "Here."
                         mr_thought "She hands him a handkerchief."
                         ss "Oh, Mira, I can't, I'd get so much blood on it."
                         mt "I'm a woman and a criminal lawyer, I know how to get blood out. Just stop bleeding on your floor."
                         ss "Thanks Mira, you're the best."
+                        scene bg living room
+                        show stirling damage 2
                         jump ss_evidence
             else:
                 mt "I wish I knew."
