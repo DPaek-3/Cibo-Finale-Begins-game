@@ -2306,7 +2306,8 @@ label wrong_end:
     if stirling_guilt:
         mr_thought "We searched through Stirling's room, and we found the Melon Baller stuffed in a pillow."
         mr_thought "He denied putting it there, but the evidence is clear."
-
+        
+    scene bg bad end
     mr_thought "Luckily, Miss Dew was just glad that she got the necklace back, and insisted that we just forget about the incident."
     mr_thought "We stayed at Stirling's place for another week as both Honey and Stirling insisted on getting to know me better...although I think they just wanted more time with Mira."
     mr_thought "Speaking of Mira, I saw her talking with Honey in the garden on the day we found the Melon Baller. She looked really disappointed, but also unsurprised."
